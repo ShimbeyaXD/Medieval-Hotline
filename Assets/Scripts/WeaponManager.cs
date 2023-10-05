@@ -9,15 +9,16 @@ public class WeaponManager : MonoBehaviour
 
     bool hasWeapon = false;
 
-    Weapon weapon;
+    SlotMelee slotMelee;
     WeaponProjectile weaponProjectile;
     FollowMouse followMouse;
     Sprite gunSprite;
+    Sprite rangeSprite;
 
 
     void Start()
     {
-        weapon = FindObjectOfType<Weapon>();
+        slotMelee = FindObjectOfType<SlotMelee>();
         followMouse = FindObjectOfType<FollowMouse>();
     }
 
@@ -35,13 +36,26 @@ public class WeaponManager : MonoBehaviour
         {
             hasWeapon = true;
 
-            weaponProjectile = ray.collider.gameObject.GetComponent<WeaponProjectile>();
-
-            gunSprite = ray.collider.gameObject.GetComponent<SpriteRenderer>().sprite;
-
             Debug.Log("ray detected something");
 
-            weapon.AddWeapon(gunSprite);
+            if (ray.collider.gameObject.CompareTag("Melee"))
+            {
+                weaponProjectile = ray.collider.gameObject.GetComponent<WeaponProjectile>();
+
+                gunSprite = ray.collider.gameObject.GetComponent<SpriteRenderer>().sprite;
+
+                slotMelee.AddWeapon(gunSprite);
+            }
+            else if (ray.collider.gameObject.CompareTag("Range"))
+            {
+                rangeSprite = ray.collider.gameObject.GetComponent<SpriteRenderer>().sprite;
+
+
+
+
+            }
+
+
 
             Destroy(ray.collider.gameObject);
         }
@@ -58,7 +72,7 @@ public class WeaponManager : MonoBehaviour
 
         hasWeapon = false;
 
-        weapon.RemoveWeapon();
+        slotMelee.RemoveWeapon();
 
         GameObject newProjectile = Instantiate(throwingProjectile, transform.position, transform.rotation);
 

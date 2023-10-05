@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class SlotMelee : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
 
