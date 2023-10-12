@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SlotMelee : MonoBehaviour
+public class MeleeWeapon : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
 
@@ -8,6 +8,7 @@ public class SlotMelee : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     public void AddWeapon(Sprite gunSprite)
     {
         spriteRenderer.sprite = gunSprite;

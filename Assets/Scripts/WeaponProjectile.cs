@@ -27,7 +27,9 @@ public class WeaponProjectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("hit wall");
         midAir = false;
+        rigidbody.isKinematic = true;
         rigidbody.velocity = Vector3.zero;
     }
 }

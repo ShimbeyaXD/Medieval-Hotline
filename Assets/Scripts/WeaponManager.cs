@@ -7,9 +7,14 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] float throwPower = 70;
     [SerializeField] LayerMask gunLayer;
 
-    bool hasWeapon = false;
+    [SerializeField] Vector3 meleePosition;
+    [SerializeField] Vector3 rangePosition;
 
-    SlotMelee slotMelee;
+    bool hasWeapon = false;
+    bool hasMelee = false;
+
+    MeleeWeapon meleeWeapon;
+    RangeWeapon rangeWeapon;
     WeaponProjectile weaponProjectile;
     FollowMouse followMouse;
     Sprite gunSprite;
@@ -18,7 +23,8 @@ public class WeaponManager : MonoBehaviour
 
     void Start()
     {
-        slotMelee = FindObjectOfType<SlotMelee>();
+        meleeWeapon = FindObjectOfType<MeleeWeapon>();
+        rangeWeapon = FindObjectOfType<RangeWeapon>();
         followMouse = FindObjectOfType<FollowMouse>();
     }
 
@@ -36,26 +42,26 @@ public class WeaponManager : MonoBehaviour
         {
             hasWeapon = true;
 
+            weaponProjectile = ray.collider.gameObject.GetComponent<WeaponProjectile>();
+
             Debug.Log("ray detected something");
 
             if (ray.collider.gameObject.CompareTag("Melee"))
             {
-                weaponProjectile = ray.collider.gameObject.GetComponent<WeaponProjectile>();
+                hasMelee = true;
 
                 gunSprite = ray.collider.gameObject.GetComponent<SpriteRenderer>().sprite;
 
-                slotMelee.AddWeapon(gunSprite);
+                meleeWeapon.AddWeapon(gunSprite);
             }
             else if (ray.collider.gameObject.CompareTag("Range"))
             {
+                hasMelee = false;
+
                 rangeSprite = ray.collider.gameObject.GetComponent<SpriteRenderer>().sprite;
 
-
-
-
+                rangeWeapon.AddWeapon(rangeSprite);
             }
-
-
 
             Destroy(ray.collider.gameObject);
         }
@@ -68,16 +74,33 @@ public class WeaponManager : MonoBehaviour
 
     void WeaponThrow()
     {
-        Debug.Log("threw " + gunSprite.name);
-
         hasWeapon = false;
 
-        slotMelee.RemoveWeapon();
+        Sprite projectileSprite;
 
         GameObject newProjectile = Instantiate(throwingProjectile, transform.position, transform.rotation);
 
-        newProjectile.GetComponent<SpriteRenderer>().sprite = gunSprite;
+        if (hasMelee) { meleeWeapon.RemoveWeapon(); projectileSprite = gunSprite; newProjectile.tag = "Melee"; }
+        else { rangeWeapon.RemoveWeapon(); projectileSprite = rangeSprite; newProjectile.tag = "Range"; }
+
+        newProjectile.GetComponent<SpriteRenderer>().sprite = projectileSprite;
 
         newProjectile.GetComponent<Rigidbody2D>().AddForce(followMouse.MousePosition() * throwPower);
+    }
+
+    public bool HasMelee()
+    {
+        return hasMelee;
+    }
+
+    public bool HasWeapon()
+    {
+        return hasWeapon;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(meleePosition, 0.1f);
+        Gizmos.DrawSphere(rangePosition, 0.1f);
     }
 }
