@@ -3,7 +3,8 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [SerializeField] GameObject arrow;
-    [SerializeField] GameObject rangeWeaponPosition;
+    [SerializeField] GameObject rangeWeapon;
+    [SerializeField] float shootForce = 4000;
 
     BoxCollider2D boxCollider;
     WeaponManager weaponManager;
@@ -25,10 +26,13 @@ public class Attack : MonoBehaviour
             }
             else
             {
-                //Instantiate(arrow, )
+                Vector3 direction = rangeWeapon.transform.position - transform.position;
 
-                // Shooting
-                Debug.Log("isshooting");
+                float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
+
+                GameObject newProjectile = Instantiate(arrow, rangeWeapon.transform.position, Quaternion.Euler(0,0, 270 + angle));
+
+                newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
             }
 
         }
