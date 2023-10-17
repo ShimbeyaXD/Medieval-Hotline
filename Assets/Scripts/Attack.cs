@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class MeleeAttack : MonoBehaviour
+public class Attack : MonoBehaviour
 {
+    [SerializeField] GameObject arrow;
+    [SerializeField] GameObject rangeWeaponPosition;
+
     BoxCollider2D boxCollider;
     WeaponManager weaponManager;
 
@@ -22,6 +25,8 @@ public class MeleeAttack : MonoBehaviour
             }
             else
             {
+                //Instantiate(arrow, )
+
                 // Shooting
                 Debug.Log("isshooting");
             }
