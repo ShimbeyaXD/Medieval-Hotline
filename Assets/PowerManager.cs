@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.Experimental.GraphView;
 
 public class PowerManager : MonoBehaviour
 {
     private float maxHolyness = 100f;
-    private float currentHolyness;
+   [SerializeField] private float currentHolyness;
 
     [SerializeField] Slider holyometer;
 
@@ -25,6 +26,7 @@ public class PowerManager : MonoBehaviour
     private void Update()
     {
         HereMyBOIIIii();
+        if(currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; }
     }
 
     public void addHoliness(float holynessToAdd) 
@@ -44,15 +46,22 @@ public class PowerManager : MonoBehaviour
 
     IEnumerator HolynessFade() 
     {
-        while (alive) 
+        while (alive)
         {
-            while (currentHolyness > 0)
+            if (currentHolyness > 0)
             {
-                currentHolyness -= Time.deltaTime;
+                currentHolyness -= (Time.deltaTime * 2.69f);
+                holyometer.value = currentHolyness;
             }
+            yield return new WaitForEndOfFrame();
         }
 
-        yield return null;
+        while(!alive)
+        {
+            yield return null;
+        }
+
+
         
     }
 
