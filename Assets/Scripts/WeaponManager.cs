@@ -6,6 +6,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] float pickupDistance = 1;
     [SerializeField] float throwPower = 70;
     [SerializeField] LayerMask gunLayer;
+    [SerializeField] GameObject weaponObject;
 
     [SerializeField] Vector3 meleePosition;
     [SerializeField] Vector3 rangePosition;
@@ -19,6 +20,7 @@ public class WeaponManager : MonoBehaviour
     FollowMouse followMouse;
     Sprite gunSprite;
     Sprite rangeSprite;
+    Attack attack;
 
 
     void Start()
@@ -26,6 +28,7 @@ public class WeaponManager : MonoBehaviour
         meleeWeapon = FindObjectOfType<MeleeWeapon>();
         rangeWeapon = FindObjectOfType<RangeWeapon>();
         followMouse = FindObjectOfType<FollowMouse>();
+        attack = FindObjectOfType<Attack>();
     }
 
     void Update()
@@ -42,6 +45,8 @@ public class WeaponManager : MonoBehaviour
         {
             hasWeapon = true;
 
+            weaponObject = ray.collider.gameObject;
+
             weaponProjectile = ray.collider.gameObject.GetComponent<WeaponProjectile>();
 
             Debug.Log("ray detected something");
@@ -57,6 +62,8 @@ public class WeaponManager : MonoBehaviour
             else if (ray.collider.gameObject.CompareTag("Range"))
             {
                 hasMelee = false;
+
+                attack.ResetArrows();
 
                 rangeSprite = ray.collider.gameObject.GetComponent<SpriteRenderer>().sprite;
 
@@ -86,6 +93,11 @@ public class WeaponManager : MonoBehaviour
         newProjectile.GetComponent<SpriteRenderer>().sprite = projectileSprite;
 
         newProjectile.GetComponent<Rigidbody2D>().AddForce(followMouse.MousePosition() * throwPower);
+    }
+
+    public GameObject RangedObject()
+    {
+        return weaponObject;
     }
 
     public bool HasMelee()

@@ -23,13 +23,26 @@ public class WeaponProjectile : MonoBehaviour
         {
             transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0,0,0); 
+            rigidbody.velocity = Vector3.zero;
+            Debug.Log("freeze");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("hit wall");
-        midAir = false;
-        rigidbody.isKinematic = true;
-        rigidbody.velocity = Vector3.zero;
+        Debug.Log("hit");
+        if (gameObject.tag == "Range")
+        {
+            Debug.Log("should destroy ranged object");
+            Destroy(gameObject);
+        }
+        else
+        {
+            midAir = false;
+            rigidbody.isKinematic = true;
+        }
     }
 }

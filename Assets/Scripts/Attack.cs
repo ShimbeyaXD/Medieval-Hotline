@@ -5,9 +5,12 @@ public class Attack : MonoBehaviour
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject rangeWeapon;
     [SerializeField] float shootForce = 4000;
+    [SerializeField] int maxArrows = 5;
+    [SerializeField] int currentArrows = 5;
 
     BoxCollider2D boxCollider;
     WeaponManager weaponManager;
+    RangedWeapon rangedWeapon;
 
     void Start()
     {
@@ -26,17 +29,27 @@ public class Attack : MonoBehaviour
             }
             else
             {
-                Vector3 direction = rangeWeapon.transform.position - transform.position;
+                if (currentArrows-- >= 0)
+                {
+                    Debug.Log(currentArrows);
 
-                float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
+                    Vector3 direction = rangeWeapon.transform.position - transform.position;
 
-                GameObject newProjectile = Instantiate(arrow, rangeWeapon.transform.position, Quaternion.Euler(0,0, 270 + angle));
+                    float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
 
-                newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
+                    GameObject newProjectile = Instantiate(arrow, rangeWeapon.transform.position, Quaternion.Euler(0, 0, 270 + angle));
+
+                    newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
+                }
             }
-
         }
     }
+
+    public void ResetArrows()
+    {
+        currentArrows = 5;
+    }
+
 
     public void EnableMelee()
     {
