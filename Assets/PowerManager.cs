@@ -48,7 +48,7 @@ public class PowerManager : MonoBehaviour
     {
         while (alive)
         {
-            if (currentHolyness > 0)
+            if (currentHolyness > 0 && currentHolyness < maxHolyness)
             {
                 currentHolyness -= (Time.deltaTime * 2.69f);
                 holyometer.value = currentHolyness;

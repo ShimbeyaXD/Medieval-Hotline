@@ -527,6 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 517b6f34a53eeae43af7b9f61a13481e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHolyness: 0
   holyometer: {fileID: 1273949454}
 --- !u!4 &643241024
 Transform:
@@ -680,7 +681,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 770957488}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
