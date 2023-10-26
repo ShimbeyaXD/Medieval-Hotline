@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05b9beef396b6443bf4fb76a393ffb1, type: 3}
+  m_Name: TestDialogue
+  m_EditorClassIdentifier: 
+  dialogueSegments:
+  - dialogueText: hello i like interstate highways
+    dialogueDisplayTime: 0.09
+    dialogueChoices: []
+  - dialogueText: 'heh '
+    dialogueDisplayTime: 0.05
+    dialogueChoices: []
+  - dialogueText: and i drink the water from the pavement
+    dialogueDisplayTime: 0.09
+    dialogueChoices:
+    - dialogueChoice: That sucks
+      followOnDialogue: {fileID: 11400000, guid: 4d2c1a1297bc90e498d936587eac4987, type: 2}
+    - dialogueChoice: yummy can i join
+      followOnDialogue: {fileID: 11400000, guid: ae333cee6db69c94eb16c6c6b1364e03, type: 2}
+    - dialogueChoice: eww ill leave now
+      followOnDialogue: {fileID: 11400000, guid: 50298ac60e9bce64c87554f677b2edc9, type: 2}
