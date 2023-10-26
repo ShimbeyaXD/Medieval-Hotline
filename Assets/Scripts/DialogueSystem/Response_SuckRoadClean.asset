@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05b9beef396b6443bf4fb76a393ffb1, type: 3}
+  m_Name: Response_SuckRoadClean
+  m_EditorClassIdentifier: 
+  dialogueSegments:
+  - dialogueText: oh really?
+    dialogueDisplayTime: 0.03
+    dialogueChoices: []
+  - dialogueText: yeah sure lets suck this road clean
+    dialogueDisplayTime: 0.04
+    dialogueChoices:
+    - dialogueChoice: u go first
+      followOnDialogue: {fileID: 11400000, guid: 4a24ea23971350b459d548e630860573, type: 2}
+    - dialogueChoice: ...
+      followOnDialogue: {fileID: 11400000, guid: 8fa544cb93243c94ea27bef13dfa08f2, type: 2}

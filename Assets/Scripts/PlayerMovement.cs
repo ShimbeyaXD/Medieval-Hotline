@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 3;
+    [SerializeField] float movementSpeed = 3.5f;
 
     float horizontal;
     float vertical;
@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
 
-        rigidbody2D.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
+        transform.position += new Vector3(horizontal * movementSpeed, vertical * movementSpeed, 0);
     }
 
     void Move()

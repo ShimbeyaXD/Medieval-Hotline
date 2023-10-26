@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8296248494767656118}
   - component: {fileID: 5627666000433561759}
   - component: {fileID: -1842700719567324650}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ThrowingProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,3 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpeed: 720
+  colliderHeight: 1
+  colliderWidth: 1
