@@ -7,6 +7,10 @@ TagManager:
   - Melee
   - Range
   - Hazard
+  - Axe
+  - Sword
+  - CrossBow
+  - Cross
   layers:
   - Default
   - TransparentFX

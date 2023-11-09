@@ -34,7 +34,7 @@ public class WeaponProjectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("hit");
-        if (gameObject.tag == "Range")
+        if (gameObject.tag == "CrossBow")
         {
             Debug.Log("should destroy ranged object");
             Destroy(gameObject);

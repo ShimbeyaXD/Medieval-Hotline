@@ -4,36 +4,32 @@ public class Attack : MonoBehaviour
 {
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject rangeWeapon;
+    [SerializeField] BoxCollider2D boxCollider;
     [SerializeField] float shootForce = 4000;
     [SerializeField] int maxArrows = 5;
-    [SerializeField] int currentArrows = 5;
-
-    BoxCollider2D boxCollider;
-    WeaponManager weaponManager;
-    RangedWeapon rangedWeapon;
+    
+    NewWeaponManager newWeaponManager;
+    FollowMouse followMouse;
+    public int CurrentArrows { get; set; } = 5;
 
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
         boxCollider.enabled = false;
-        weaponManager = FindObjectOfType<WeaponManager>();
+        newWeaponManager = FindObjectOfType<NewWeaponManager>();
+        followMouse = FindObjectOfType<FollowMouse>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && weaponManager.HasWeapon()) 
+        if (Input.GetMouseButtonDown(0) && newWeaponManager.HasWeapon) 
         {
-            if (weaponManager.HasMelee() )
+            if (newWeaponManager.HasCrossbow)
             {
-                EnableMelee();
-            }
-            else
-            {
-                if (currentArrows-- >= 0)
+                if (CurrentArrows-- > 0)
                 {
-                    Debug.Log(currentArrows);
+                    Debug.Log(CurrentArrows);
 
-                    Vector3 direction = rangeWeapon.transform.position - transform.position;
+                    Vector3 direction = followMouse.MousePosition();
 
                     float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
 
@@ -42,21 +38,21 @@ public class Attack : MonoBehaviour
                     newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
                 }
             }
+            else { EnableMelee(); }
         }
     }
 
     public void ResetArrows()
     {
-        currentArrows = 5;
+        CurrentArrows = 5;
     }
-
 
     public void EnableMelee()
     {
         boxCollider.enabled = true;
     }
 
-    public void DisableMelee()
+    public void DisableMelee() // trigger from animation events
     {
         boxCollider.enabled = false;
     }

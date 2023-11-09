@@ -7,16 +7,20 @@ public class PlayerMovement : MonoBehaviour
     float horizontal;
     float vertical;
 
-    Rigidbody2D rigidbody2D;
+    Rigidbody2D rigidbody;
+    Animator myAnimator;
 
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = transform.GetChild(0).transform.GetChild(1).GetComponent<Animator>();
     }
 
     void Update()
     {
         Move();
+        Debug.Log(myAnimator);
+
 
         transform.position += new Vector3(horizontal * movementSpeed, vertical * movementSpeed, 0);
     }
@@ -25,5 +29,18 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+
+        Vector2 movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (movementVector.magnitude <= Mathf.Epsilon)
+        {
+            myAnimator.SetBool("isWalking", false);
+            Debug.Log("not walking");
+        }
+        else
+        {
+            myAnimator.SetBool("isWalking", true);
+            Debug.Log("is walking");
+        }
     }
 }

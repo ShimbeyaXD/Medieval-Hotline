@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowMouse : MonoBehaviour
 {
     Vector2 mousePosition;
-    
+
     void Update()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

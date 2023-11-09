@@ -20,6 +20,6 @@ public class PlayerLook : MonoBehaviour
 
         float AngleDeg = (180 / Mathf.PI) * AngleRad;
 
-        this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
+        this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg + 180);
     }
 }

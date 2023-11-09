@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4825065901013856853}
   - component: {fileID: 7493160423454039443}
   - component: {fileID: 1613645707928522747}
+  - component: {fileID: 3827947305084419330}
   - component: {fileID: 3637049671094559410}
   m_Layer: 0
   m_Name: Arrow
@@ -118,8 +119,43 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.4}
-  m_Size: {x: 0.85, y: 2.15}
+  m_Offset: {x: -0.03, y: -1.27}
+  m_Size: {x: 2.08, y: 3.45}
+  m_Direction: 0
+--- !u!70 &3827947305084419330
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500120906234883092}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.04, y: -0.75}
+  m_Size: {x: 0.81, y: 2.25}
   m_Direction: 0
 --- !u!50 &3637049671094559410
 Rigidbody2D:
