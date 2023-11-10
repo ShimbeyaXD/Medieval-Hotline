@@ -42,7 +42,7 @@ public class WeaponProjectile : MonoBehaviour
         else
         {
             midAir = false;
-            rigidbody.isKinematic = true;
+            rigidbody.bodyType = RigidbodyType2D.Static;
         }
     }
 }

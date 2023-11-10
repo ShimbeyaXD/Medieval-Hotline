@@ -43,7 +43,12 @@ public class NewWeaponManager : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButton(1) && HasWeapon) WeaponThrow();
-        if (Input.GetKeyDown(KeyCode.E) && !HasWeapon) WeaponPickup();
+        if (Input.GetKeyDown(KeyCode.E) && !HasWeapon)
+        {
+
+            // aloha
+        }
+        WeaponPickup();
     }
 
     void WeaponPickup()
@@ -63,7 +68,7 @@ public class NewWeaponManager : MonoBehaviour
 
                 torsoAnimator.SetBool("HoldingSword", true);
 
-                ChangeSprite();
+                ChangeSprite(ray.collider.gameObject);
 
                 Debug.Log(ray.collider.name);
                 break;
@@ -73,7 +78,7 @@ public class NewWeaponManager : MonoBehaviour
 
                 HasWeapon = true;
 
-                ChangeSprite();
+                ChangeSprite(ray.collider.gameObject);
 
                 Debug.Log(ray.collider.name);
                 break;
@@ -85,7 +90,7 @@ public class NewWeaponManager : MonoBehaviour
 
                 HasCrossbow = true;
 
-                ChangeSprite();
+                ChangeSprite(ray.collider.gameObject);
 
                 Debug.Log(ray.collider.name);
                 break;
@@ -95,7 +100,7 @@ public class NewWeaponManager : MonoBehaviour
 
                 HasWeapon = true;
 
-                ChangeSprite();
+                ChangeSprite(ray.collider.gameObject);
 
                 Debug.Log(ray.collider.name);
                 break;
@@ -106,9 +111,11 @@ public class NewWeaponManager : MonoBehaviour
         }
     }
 
-    void ChangeSprite()
+    void ChangeSprite(GameObject weapon)
     {
         weaponRenderer.sprite = weaponSprite;
+
+        Destroy(weapon);
     }
 
     void WeaponThrow()
