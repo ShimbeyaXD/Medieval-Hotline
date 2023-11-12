@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupDistance: 1.72
-  throwPower: 140
+  throwPower: 1400
   gunLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -316,9 +316,6 @@ MonoBehaviour:
   axe: {fileID: 21300000, guid: ccef6d851732e4143af801ba7cc3f2d8, type: 3}
   crossBow: {fileID: 21300000, guid: 042542a0c61707f41bfe1daf7347895b, type: 3}
   holyCross: {fileID: 21300000, guid: f4cc79d051df3b342a3e2c59cd16643e, type: 3}
-  gunlayer:
-    serializedVersion: 2
-    m_Bits: 64
   torsoAnimator: {fileID: 98149463897639950}
   legAnimator: {fileID: 7866991480278462563}
   weaponAnimator: {fileID: 8275043861069973231}

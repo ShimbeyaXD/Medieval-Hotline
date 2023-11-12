@@ -172,5 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpeed: 720
+  gunLayer:
+    serializedVersion: 2
+    m_Bits: 64
   colliderHeight: 1
   colliderWidth: 1

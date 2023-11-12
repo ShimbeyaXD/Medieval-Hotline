@@ -3,7 +3,6 @@ using UnityEngine;
 public class WeaponProjectile : MonoBehaviour
 {
     [SerializeField] float spinSpeed = 40;
-    [SerializeField] LayerMask gunLayer;
 
     [Header("Collider Height/Length")]
     [SerializeField] float colliderHeight = 1;
@@ -13,9 +12,12 @@ public class WeaponProjectile : MonoBehaviour
     FollowMouse followMouse;
 
     bool midAir = true;
+    int layer;
 
     void OnEnable()
     {
+        layer = LayerMask.NameToLayer("Gun");
+
         rigidbody = GetComponent<Rigidbody2D>();
         followMouse = FindObjectOfType<FollowMouse>();
     }
@@ -45,8 +47,8 @@ public class WeaponProjectile : MonoBehaviour
         else
         {
             midAir = false;
-            gameObject.layer = gunLayer;
-            //rigidbody.bodyType = RigidbodyType2D.Static;
+            gameObject.layer = layer;
+            rigidbody.bodyType = RigidbodyType2D.Static;
         }
     }
 }
