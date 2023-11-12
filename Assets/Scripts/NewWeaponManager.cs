@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class NewWeaponManager : MonoBehaviour
@@ -20,8 +17,9 @@ public class NewWeaponManager : MonoBehaviour
     [SerializeField] Animator torsoAnimator;
     [SerializeField] Animator legAnimator;
     [SerializeField] Animator weaponAnimator;
-
     [SerializeField] SpriteRenderer weaponRenderer;
+
+    string projectileTag;
 
     Sprite weaponSprite;
     FollowMouse followMouse;
@@ -45,10 +43,10 @@ public class NewWeaponManager : MonoBehaviour
         if (Input.GetMouseButton(1) && HasWeapon) WeaponThrow();
         if (Input.GetKeyDown(KeyCode.E) && !HasWeapon)
         {
+            WeaponPickup();
 
             // aloha
         }
-        WeaponPickup();
     }
 
     void WeaponPickup()
@@ -57,16 +55,14 @@ public class NewWeaponManager : MonoBehaviour
 
         if (ray.collider == null) return;
 
-        Debug.Log("hit something");
-
         switch (ray.collider.tag)
         {
             case "Sword":
                 weaponSprite = sword;
-
                 HasWeapon = true;
+                projectileTag = "Sword";
 
-                torsoAnimator.SetBool("HoldingSword", true);
+                torsoAnimator.SetBool("HoldingMelee", true);
 
                 ChangeSprite(ray.collider.gameObject);
 
@@ -75,20 +71,21 @@ public class NewWeaponManager : MonoBehaviour
 
             case "Axe":
                 weaponSprite = axe;
-
                 HasWeapon = true;
+                projectileTag = "Axe";
+
+                torsoAnimator.SetBool("HoldingMelee", true);
 
                 ChangeSprite(ray.collider.gameObject);
 
                 Debug.Log(ray.collider.name);
                 break;
 
-            case "CrossBow":
+            case "CrossBow": 
                 weaponSprite = crossBow;
-
                 HasWeapon = true;
-
                 HasCrossbow = true;
+                projectileTag = "CrossBow";
 
                 ChangeSprite(ray.collider.gameObject);
 
@@ -97,8 +94,10 @@ public class NewWeaponManager : MonoBehaviour
 
             case "Cross":
                 weaponSprite = holyCross;
-
                 HasWeapon = true;
+                projectileTag = "Cross";
+
+                torsoAnimator.SetBool("HoldingMelee", true);
 
                 ChangeSprite(ray.collider.gameObject);
 
@@ -120,8 +119,9 @@ public class NewWeaponManager : MonoBehaviour
 
     void WeaponThrow()
     {
-        if (HasCrossbow) attack.CurrentArrows = 5; 
+        if (HasCrossbow) attack.CurrentArrows = 5;
 
+        torsoAnimator.SetBool("HoldingMelee", false);
         HasWeapon = false;
         HasCrossbow = false;
         weaponRenderer.sprite = null;
@@ -130,7 +130,9 @@ public class NewWeaponManager : MonoBehaviour
         GameObject newProjectile = Instantiate(throwingProjectile, transform.position, transform.rotation);
 
         newProjectile.GetComponent<SpriteRenderer>().sprite = weaponSprite;
-
-        newProjectile.GetComponent<Rigidbody2D>().AddForce(followMouse.MousePosition() * throwPower);
+        newProjectile.gameObject.tag = projectileTag;
+        //newProjectile.gameObject.layer = projectileLayer;
+        //newProjectile.GetComponent<Rigidbody2D>().AddForce(followMouse.MousePosition() * throwPower);
+        newProjectile.GetComponent<WeaponProjectile>().Velocity(throwPower);
     }
 }

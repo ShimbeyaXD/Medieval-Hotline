@@ -117,11 +117,11 @@ GameObject:
   - component: {fileID: 8469019716099702473}
   - component: {fileID: 8443390339507390410}
   - component: {fileID: 1266825672160810858}
+  - component: {fileID: 5143206368437755687}
   - component: {fileID: 3987361085510668607}
   - component: {fileID: 3561740284517859434}
   - component: {fileID: 6967533776143097741}
   - component: {fileID: 1767330878381990139}
-  - component: {fileID: 2012538285968161775}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -217,6 +217,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.65, y: 5.01}
   m_EdgeRadius: 0
+--- !u!70 &5143206368437755687
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375415280249971910}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.44, y: 2.73}
+  m_Direction: 0
 --- !u!114 &3987361085510668607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +294,6 @@ MonoBehaviour:
   boxCollider: {fileID: 1266825672160810858}
   shootForce: 4000
   maxArrows: 5
-  currentArrows: 5
 --- !u!114 &1767330878381990139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,31 +316,13 @@ MonoBehaviour:
   axe: {fileID: 21300000, guid: ccef6d851732e4143af801ba7cc3f2d8, type: 3}
   crossBow: {fileID: 21300000, guid: 042542a0c61707f41bfe1daf7347895b, type: 3}
   holyCross: {fileID: 21300000, guid: f4cc79d051df3b342a3e2c59cd16643e, type: 3}
+  gunlayer:
+    serializedVersion: 2
+    m_Bits: 64
   torsoAnimator: {fileID: 98149463897639950}
   legAnimator: {fileID: 7866991480278462563}
   weaponAnimator: {fileID: 8275043861069973231}
   weaponRenderer: {fileID: 954011840420135419}
---- !u!114 &2012538285968161775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1375415280249971910}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f9d128b280fe0b40968f291e3f518b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  throwingProjectile: {fileID: 6952808158290722028, guid: 3848073c196e90446827c06d93ce64ba, type: 3}
-  pickupDistance: 1
-  throwPower: 200
-  gunLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  weaponObject: {fileID: 0}
-  meleePosition: {x: -0.03, y: -1.22, z: 0}
-  rangePosition: {x: -2.24, y: 0, z: 0}
 --- !u!1 &4429123837053910101
 GameObject:
   m_ObjectHideFlags: 0

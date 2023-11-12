@@ -3,18 +3,21 @@ using UnityEngine;
 public class WeaponProjectile : MonoBehaviour
 {
     [SerializeField] float spinSpeed = 40;
+    [SerializeField] LayerMask gunLayer;
 
     [Header("Collider Height/Length")]
     [SerializeField] float colliderHeight = 1;
     [SerializeField] float colliderWidth = 1;
 
     Rigidbody2D rigidbody;
+    FollowMouse followMouse;
 
     bool midAir = true;
 
     void OnEnable()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        followMouse = FindObjectOfType<FollowMouse>();
     }
 
     void Update()
@@ -23,26 +26,27 @@ public class WeaponProjectile : MonoBehaviour
         {
             transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0,0,0); 
-            rigidbody.velocity = Vector3.zero;
-            Debug.Log("freeze");
-        }
+    }
+
+    public void Velocity(float throwPower)
+    {
+        rigidbody.AddForce(followMouse.MousePosition().normalized * throwPower);
+        midAir = true;
+
+        Debug.Log("THrowpower is " + throwPower);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("hit");
         if (gameObject.tag == "CrossBow")
         {
-            Debug.Log("should destroy ranged object");
             Destroy(gameObject);
         }
         else
         {
             midAir = false;
-            rigidbody.bodyType = RigidbodyType2D.Static;
+            gameObject.layer = gunLayer;
+            //rigidbody.bodyType = RigidbodyType2D.Static;
         }
     }
 }
