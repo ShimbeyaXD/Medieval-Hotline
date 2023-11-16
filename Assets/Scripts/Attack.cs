@@ -7,9 +7,11 @@ public class Attack : MonoBehaviour
     [SerializeField] BoxCollider2D boxCollider;
     [SerializeField] float shootForce = 4000;
     [SerializeField] int maxArrows = 5;
+    [SerializeField] GameObject weaponObject;
     
     NewWeaponManager newWeaponManager;
     FollowMouse followMouse;
+
     public int CurrentArrows { get; set; } = 5;
 
     void Start()
@@ -50,6 +52,8 @@ public class Attack : MonoBehaviour
     public void EnableMelee()
     {
         boxCollider.enabled = true;
+        newWeaponManager.SetAttackAnimator();
+        weaponObject.SetActive(false);
     }
 
     public void DisableMelee() // trigger from animation events
