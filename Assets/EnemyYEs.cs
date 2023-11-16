@@ -9,6 +9,7 @@ public class EnemyYEs : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] float speed = 2f;
+    [SerializeField] LayerMask projectileLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,7 @@ public class EnemyYEs : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.gameObject.layer == projectileLayer)
         {
             Debug.Log("it");
             TakeDamage();
@@ -51,7 +52,7 @@ public class EnemyYEs : MonoBehaviour
 
     private void Death()
     {
+        FindObjectOfType<BloodManager>().SpawnBlood(transform);
         gameObject.SetActive(false);                                                    
-                                                                                                                        Application.Quit();
     }
 }

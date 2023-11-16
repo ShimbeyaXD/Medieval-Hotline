@@ -158,7 +158,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2.2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -249,8 +249,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.44, y: 2.73}
+  m_Offset: {x: -0.04607743, y: -0.009215474}
+  m_Size: {x: 1.1266733, y: 2.3429496}
   m_Direction: 0
 --- !u!114 &3987361085510668607
 MonoBehaviour:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8144d82033fb861478a6e2126c2cb99b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.05
+  movementSpeed: 12
 --- !u!114 &6967533776143097741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +294,7 @@ MonoBehaviour:
   boxCollider: {fileID: 1266825672160810858}
   shootForce: 4000
   maxArrows: 5
+  weaponObject: {fileID: 7012760005686822359}
 --- !u!114 &1767330878381990139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,6 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCollider: {fileID: 1266825672160810858}
+  weaponObject: {fileID: 7012760005686822359}
 --- !u!1 &7012760005686822359
 GameObject:
   m_ObjectHideFlags: 0

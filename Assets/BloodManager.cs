@@ -10,7 +10,7 @@ public class BloodManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnBlood(gameObject.transform);
+        //SpawnBlood(gameObject.transform);
     }
     public void SpawnBlood(Transform pos) 
     { 

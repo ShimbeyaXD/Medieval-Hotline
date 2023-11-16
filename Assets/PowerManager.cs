@@ -49,7 +49,7 @@ public class PowerManager : MonoBehaviour
         {
             if (currentHolyness > 0 && currentHolyness < maxHolyness)
             {
-                currentHolyness -= (Time.deltaTime * 2.69f);
+                currentHolyness -= (Time.deltaTime);
                 holyometer.value = currentHolyness;
             }
             yield return new WaitForEndOfFrame();

@@ -44,9 +44,4 @@ public class InitiateDialogue : MonoBehaviour
         dialogueInteract.StartDialogue();
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, direction);
-    }
 }
