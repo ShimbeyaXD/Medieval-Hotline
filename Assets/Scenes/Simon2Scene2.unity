@@ -132,8 +132,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 43249281}
+  - component: {fileID: 43249282}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BloodManger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,6 +156,27 @@ Transform:
   - {fileID: 1587156781}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &43249282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43249280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 308f604538e79ca4b8bd1a0126998a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boodSprites:
+  - {fileID: 21300000, guid: 745b51b14e1855d478c276ad13fbba16, type: 3}
+  - {fileID: 21300000, guid: 31dff35044102e841a986fc6be894e23, type: 3}
+  - {fileID: 21300000, guid: 0a78e9d1b56446d4388e504126d2eead, type: 3}
+  - {fileID: 21300000, guid: a109e20d7c0a87f4a886b0b276213071, type: 3}
+  - {fileID: 21300000, guid: 59b55e87d17c60c4b93269bd7dec4fdb, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &195817377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +1031,7 @@ Transform:
   m_GameObject: {fileID: 780252185}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
