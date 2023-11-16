@@ -62,7 +62,7 @@ public class NewWeaponManager : MonoBehaviour
                 HasWeapon = true;
                 projectileTag = "Sword";
 
-                torsoAnimator.SetBool("HoldingMelee", true);
+                //torsoAnimator.SetBool("HoldingMelee", true);
 
                 ChangeSprite(ray.collider.gameObject);
 
@@ -74,7 +74,7 @@ public class NewWeaponManager : MonoBehaviour
                 HasWeapon = true;
                 projectileTag = "Axe";
 
-                torsoAnimator.SetBool("HoldingMelee", true);
+                //torsoAnimator.SetBool("HoldingMelee", true);
 
                 ChangeSprite(ray.collider.gameObject);
 
@@ -97,7 +97,7 @@ public class NewWeaponManager : MonoBehaviour
                 HasWeapon = true;
                 projectileTag = "Cross";
 
-                torsoAnimator.SetBool("HoldingMelee", true);
+                //torsoAnimator.SetBool("HoldingMelee", true);
 
                 ChangeSprite(ray.collider.gameObject);
 
@@ -134,5 +134,10 @@ public class NewWeaponManager : MonoBehaviour
         //newProjectile.gameObject.layer = projectileLayer;
         //newProjectile.GetComponent<Rigidbody2D>().AddForce(followMouse.MousePosition() * throwPower);
         newProjectile.GetComponent<WeaponProjectile>().Velocity(throwPower);
+    }
+
+    public void SetAttackAnimator()
+    {
+        torsoAnimator.SetTrigger("Attack");
     }
 }

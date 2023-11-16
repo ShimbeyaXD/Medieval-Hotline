@@ -16,21 +16,32 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = transform.GetChild(0).transform.GetChild(1).GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+    }
+
+    void FixedUpdate()
     {
         Move();
         Debug.Log(myAnimator);
 
 
-        transform.position += new Vector3(horizontal * movementSpeed, vertical * movementSpeed, 0);
+       
+       
     }
 
     void Move()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+       
 
         Vector2 movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        movementVector = movementVector.normalized;
+
+
+        rigidbody.velocity = new Vector3(movementVector.x * movementSpeed, movementVector.y * movementSpeed, 0);
 
         if (movementVector.magnitude <= Mathf.Epsilon)
         {

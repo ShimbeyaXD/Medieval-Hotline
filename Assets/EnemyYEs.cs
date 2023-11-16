@@ -34,6 +34,15 @@ public class EnemyYEs : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("it");
+            TakeDamage();
+        }
+    }
+
     public void TakeDamage() 
     {
         FindObjectOfType<PowerManager>().addHoliness(20f);
