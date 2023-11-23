@@ -8,6 +8,7 @@ public class NewWeaponManager : MonoBehaviour
     [SerializeField] LayerMask gunLayer;
     [SerializeField] GameObject throwingProjectile;
     [SerializeField] Image weaponImage;
+    [SerializeField] Sprite holdingWeaponSprite;
 
     [Header("Weapons")]
     [SerializeField] Sprite sword;
@@ -15,11 +16,18 @@ public class NewWeaponManager : MonoBehaviour
     [SerializeField] Sprite crossBow;
     [SerializeField] Sprite holyCross;
 
+    [Header("Weapon Icons")]
+    [SerializeField] Sprite swordImage;
+    [SerializeField] Sprite axeImage;
+    [SerializeField] Sprite crossBowImage;
+    [SerializeField] Sprite holyCrossImage;
+
     [Header("Animators")]
     [SerializeField] Animator torsoAnimator;
     [SerializeField] Animator legAnimator;
     [SerializeField] Animator weaponAnimator;
     [SerializeField] SpriteRenderer weaponRenderer;
+    [SerializeField] SpriteRenderer torsoRenderer;
 
     string projectileTag;
 
@@ -60,54 +68,59 @@ public class NewWeaponManager : MonoBehaviour
         switch (ray.collider.tag)
         {
             case "Sword":
-                weaponSprite = sword;
-                weaponImage.sprite = sword;
+                //weaponSprite = sword;
+                //ChangeSprite(ray.collider.gameObject);
+
+                torsoAnimator.SetBool("HoldingMelee", true);
+
+                weaponImage.enabled = true;
+                weaponImage.sprite = swordImage; 
+
                 HasWeapon = true;
                 projectileTag = "Sword";
 
-                //torsoAnimator.SetBool("HoldingMelee", true);
-
-                ChangeSprite(ray.collider.gameObject);
-
-                Debug.Log(ray.collider.name);
                 break;
 
             case "Axe":
-                weaponSprite = axe;
-                weaponImage.sprite = axe;
+                //weaponSprite = axe;
+                //ChangeSprite(ray.collider.gameObject);
+
+                torsoAnimator.SetBool("HoldingMelee", true);
+
+                torsoRenderer.sprite = holdingWeaponSprite;
+
+                weaponImage.enabled = true;
+                weaponImage.sprite = axeImage;
                 HasWeapon = true;
                 projectileTag = "Axe";
 
-                //torsoAnimator.SetBool("HoldingMelee", true);
-
-                ChangeSprite(ray.collider.gameObject);
-
-                Debug.Log(ray.collider.name);
                 break;
 
-            case "CrossBow": 
+            case "CrossBow":
                 weaponSprite = crossBow;
-                weaponImage.sprite = crossBow;
+                ChangeSprite(ray.collider.gameObject);
+
+                weaponImage.enabled = true;
+                weaponImage.sprite = crossBowImage;
                 HasWeapon = true;
                 HasCrossbow = true;
                 projectileTag = "CrossBow";
 
-                ChangeSprite(ray.collider.gameObject);
-
-                Debug.Log(ray.collider.name);
                 break;
 
             case "Cross":
-                weaponSprite = holyCross;
-                weaponImage.sprite = holyCross;
+                //weaponSprite = holyCross;
+                //ChangeSprite(ray.collider.gameObject);
+
+                torsoAnimator.SetBool("HoldingMelee", true);
+
+                torsoRenderer.sprite = holdingWeaponSprite;
+
+                weaponImage.enabled = true;
+                weaponImage.sprite = holyCrossImage;
                 HasWeapon = true;
                 projectileTag = "Cross";
 
-                //torsoAnimator.SetBool("HoldingMelee", true);
-
-                ChangeSprite(ray.collider.gameObject);
-
-                Debug.Log(ray.collider.name);
                 break;
 
             default:
@@ -130,6 +143,8 @@ public class NewWeaponManager : MonoBehaviour
         torsoAnimator.SetBool("HoldingMelee", false);
         HasWeapon = false;
         HasCrossbow = false;
+        weaponImage.sprite = null;
+        weaponImage.enabled = false;
         weaponRenderer.sprite = null;
         
 

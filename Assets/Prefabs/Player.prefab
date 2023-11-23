@@ -204,7 +204,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.72, y: 0}
+  m_Offset: {x: -2.5340555, y: -0.081789255}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -215,7 +215,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.65, y: 5.01}
+  m_Size: {x: 3.278111, y: 2.7199006}
   m_EdgeRadius: 0
 --- !u!70 &5143206368437755687
 CapsuleCollider2D:
@@ -313,14 +313,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   throwingProjectile: {fileID: 6952808158290722028, guid: 3848073c196e90446827c06d93ce64ba, type: 3}
+  weaponImage: {fileID: 0}
+  holdingWeaponSprite: {fileID: 21300000, guid: b91125f61c2acc14ba52332f80264c80, type: 3}
   sword: {fileID: 21300000, guid: 436ef08b1bc44ca45af6ebc7776f2882, type: 3}
   axe: {fileID: 21300000, guid: ccef6d851732e4143af801ba7cc3f2d8, type: 3}
   crossBow: {fileID: 21300000, guid: 042542a0c61707f41bfe1daf7347895b, type: 3}
   holyCross: {fileID: 21300000, guid: f4cc79d051df3b342a3e2c59cd16643e, type: 3}
+  swordImage: {fileID: 21300000, guid: 20127382b3dae7142be1b734161ee4a6, type: 3}
+  axeImage: {fileID: 21300000, guid: 4cb8f10c343a54341a25c500fc8db20d, type: 3}
+  crossBowImage: {fileID: 21300000, guid: 1bfa41d3163e8814e9c67c3a667aee16, type: 3}
+  holyCrossImage: {fileID: 21300000, guid: 141013fff7529b74081da0a5e83d6a06, type: 3}
   torsoAnimator: {fileID: 98149463897639950}
   legAnimator: {fileID: 7866991480278462563}
   weaponAnimator: {fileID: 8275043861069973231}
   weaponRenderer: {fileID: 954011840420135419}
+  torsoRenderer: {fileID: 619883244761040781}
 --- !u!1 &4429123837053910101
 GameObject:
   m_ObjectHideFlags: 0
