@@ -10,10 +10,10 @@ public class NewWeaponManager : MonoBehaviour
     [SerializeField] Image weaponImage;
 
     [Header("Weapons")]
-    [SerializeField] Image sword;
-    [SerializeField] Image axe;
-    [SerializeField] Image crossBow;
-    [SerializeField] Image holyCross;
+    [SerializeField] Sprite sword;
+    [SerializeField] Sprite axe;
+    [SerializeField] Sprite crossBow;
+    [SerializeField] Sprite holyCross;
 
     [Header("Animators")]
     [SerializeField] Animator torsoAnimator;
@@ -60,8 +60,8 @@ public class NewWeaponManager : MonoBehaviour
         switch (ray.collider.tag)
         {
             case "Sword":
-                weaponSprite = sword.sprite;
-                weaponImage = sword;
+                weaponSprite = sword;
+                weaponImage.sprite = sword;
                 HasWeapon = true;
                 projectileTag = "Sword";
 
@@ -73,8 +73,8 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "Axe":
-                weaponSprite = axe.sprite;
-                weaponImage = axe;
+                weaponSprite = axe;
+                weaponImage.sprite = axe;
                 HasWeapon = true;
                 projectileTag = "Axe";
 
@@ -86,8 +86,8 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "CrossBow": 
-                weaponSprite = crossBow.sprite;
-                weaponImage = crossBow;
+                weaponSprite = crossBow;
+                weaponImage.sprite = crossBow;
                 HasWeapon = true;
                 HasCrossbow = true;
                 projectileTag = "CrossBow";
@@ -98,8 +98,8 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "Cross":
-                weaponSprite = holyCross.sprite;
-                weaponImage = holyCross;
+                weaponSprite = holyCross;
+                weaponImage.sprite = holyCross;
                 HasWeapon = true;
                 projectileTag = "Cross";
 
