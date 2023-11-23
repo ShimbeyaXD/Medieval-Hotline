@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NewWeaponManager : MonoBehaviour
 {
@@ -6,12 +7,13 @@ public class NewWeaponManager : MonoBehaviour
     [SerializeField] float throwPower = 100;
     [SerializeField] LayerMask gunLayer;
     [SerializeField] GameObject throwingProjectile;
+    [SerializeField] Image weaponImage;
 
     [Header("Weapons")]
-    [SerializeField] Sprite sword;
-    [SerializeField] Sprite axe;
-    [SerializeField] Sprite crossBow;
-    [SerializeField] Sprite holyCross;
+    [SerializeField] Image sword;
+    [SerializeField] Image axe;
+    [SerializeField] Image crossBow;
+    [SerializeField] Image holyCross;
 
     [Header("Animators")]
     [SerializeField] Animator torsoAnimator;
@@ -58,7 +60,8 @@ public class NewWeaponManager : MonoBehaviour
         switch (ray.collider.tag)
         {
             case "Sword":
-                weaponSprite = sword;
+                weaponSprite = sword.sprite;
+                weaponImage = sword;
                 HasWeapon = true;
                 projectileTag = "Sword";
 
@@ -70,7 +73,8 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "Axe":
-                weaponSprite = axe;
+                weaponSprite = axe.sprite;
+                weaponImage = axe;
                 HasWeapon = true;
                 projectileTag = "Axe";
 
@@ -82,7 +86,8 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "CrossBow": 
-                weaponSprite = crossBow;
+                weaponSprite = crossBow.sprite;
+                weaponImage = crossBow;
                 HasWeapon = true;
                 HasCrossbow = true;
                 projectileTag = "CrossBow";
@@ -93,7 +98,8 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "Cross":
-                weaponSprite = holyCross;
+                weaponSprite = holyCross.sprite;
+                weaponImage = holyCross;
                 HasWeapon = true;
                 projectileTag = "Cross";
 

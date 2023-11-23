@@ -1,5 +1,3 @@
-using Cinemachine.Utility;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +10,7 @@ public class BloodManager : MonoBehaviour
     {
         //SpawnBlood(gameObject.transform);
     }
+
     public void SpawnBlood(Transform pos) 
     { 
        int i = Random.Range(0, boodSprites.Count);
@@ -23,7 +22,7 @@ public class BloodManager : MonoBehaviour
         {
             sp.sprite = boodSprites[i];
             Instantiate(blood, pos.position, Quaternion.identity);
-            blood.layer = targetLayer;
+            blood.layer = targetLayer; 
         }
         else 
         {
