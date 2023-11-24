@@ -39,7 +39,7 @@ public class EnemyYEs : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.gameObject.layer == projectileLayer)
         {
-            Debug.Log("it");
+            Debug.Log(other.name);
             TakeDamage();
         }
     }

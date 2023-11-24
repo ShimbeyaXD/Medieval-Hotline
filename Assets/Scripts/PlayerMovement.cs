@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        movementVector = movementVector.normalized;
+        //movementVector = movementVector.normalized;
 
 
         rigidbody.velocity = new Vector3(movementVector.x * movementSpeed, movementVector.y * movementSpeed, 0);

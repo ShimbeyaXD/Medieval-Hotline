@@ -12,22 +12,30 @@ public class BloodManager : MonoBehaviour
     }
 
     public void SpawnBlood(Transform pos) 
-    { 
+    {
        int i = Random.Range(0, boodSprites.Count);
         
        GameObject blood = new GameObject("Blood") ;
        SpriteRenderer sp = blood.AddComponent<SpriteRenderer>();
-
+        sp.sprite = boodSprites[i];
+        sp.sortingOrder = -50;
+        /*
         if (sp != null ) 
         {
-            sp.sprite = boodSprites[i];
-            Instantiate(blood, pos.position, Quaternion.identity);
-            blood.layer = targetLayer; 
+           
+            if(blood.layer == LayerMask.NameToLayer("Blood")) 
+            {
+                Instantiate(blood, pos.position, Quaternion.identity);
+                Debug.Log("Blood instantiated");
+            }
+            else { Debug.Log("Wrong Layer"); }
+            
         }
         else 
         {
             Debug.Log("No spriteRenderer Found");
         }
+        */
 
     }
 }
