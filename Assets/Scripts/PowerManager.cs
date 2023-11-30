@@ -28,7 +28,7 @@ public class PowerManager : MonoBehaviour
         if(currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; }
     }
 
-    public void addHoliness(float holynessToAdd) 
+    public void AddHoliness(float holynessToAdd) 
     { 
         currentHolyness += holynessToAdd;
         holyometer.value = currentHolyness;
@@ -39,7 +39,7 @@ public class PowerManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            addHoliness(20f);
+            AddHoliness(20f);
         }
     }
 
