@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 3561740284517859434}
   - component: {fileID: 6967533776143097741}
   - component: {fileID: 1767330878381990139}
+  - component: {fileID: 5079720855406137778}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -159,7 +160,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 2.2
-  m_AngularDrag: 0.05
+  m_AngularDrag: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -168,7 +169,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
@@ -328,6 +329,24 @@ MonoBehaviour:
   weaponAnimator: {fileID: 8275043861069973231}
   weaponRenderer: {fileID: 954011840420135419}
   torsoRenderer: {fileID: 619883244761040781}
+--- !u!114 &5079720855406137778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375415280249971910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3ef22c5bb6a334f9ff5b11b627287a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupDistance: 1
+  artifactLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  artifactImage: {fileID: 0}
+  artifactSprite: {fileID: 21300000, guid: 39136de93c364004db655640dab2986e, type: 3}
 --- !u!1 &4429123837053910101
 GameObject:
   m_ObjectHideFlags: 0
