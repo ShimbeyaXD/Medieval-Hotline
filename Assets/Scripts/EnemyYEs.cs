@@ -1,4 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyYEs : MonoBehaviour
 {
@@ -12,6 +17,7 @@ public class EnemyYEs : MonoBehaviour
 
     [Header("Layermasks")]
     [SerializeField] LayerMask arrowLayer;
+
     [SerializeField] LayerMask projectileLayer;
 
     // Start is called before the first frame update
@@ -42,22 +48,25 @@ public class EnemyYEs : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.gameObject.layer == arrowLayer || other.gameObject.layer == projectileLayer)
         {
-            Debug.Log(other.name);
             TakeDamage();
+
+            Debug.Log(other.name);
+
         }
     }
 
     public void TakeDamage() 
     {
-        FindObjectOfType<PowerManager>().addHoliness(20f);
         FindObjectOfType<FollowTarget>().StartShake(killShakeAmount, killShakeDuration);
         Debug.Log(FindObjectOfType<FollowTarget>());
+        FindObjectOfType<PowerManager>().AddHoliness(20f);
         Death();
     }
 
     private void Death()
     {
         FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform);
+
         gameObject.SetActive(false);                                                    
     }
 }
