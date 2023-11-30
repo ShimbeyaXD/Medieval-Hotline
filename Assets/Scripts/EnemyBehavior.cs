@@ -34,7 +34,9 @@ public class EnemyBehavior : MonoBehaviour
     {
         Vector2 directionToTarget = (target.position - transform.position).normalized;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, detectionAndSightRange);
+        int layerMask = ~(1 << gameObject.layer);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, detectionAndSightRange, layerMask);
 
         if (hit.collider != null)
         {
