@@ -16,6 +16,7 @@ public class BloodManager : MonoBehaviour
        int i = Random.Range(0, boodSprites.Count);
         
        GameObject blood = new GameObject("Blood") ;
+        blood.transform.position = pos.position;
        SpriteRenderer sp = blood.AddComponent<SpriteRenderer>();
         sp.sprite = boodSprites[i];
         sp.sortingOrder = -50;
