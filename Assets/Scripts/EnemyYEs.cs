@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 
 public class EnemyYEs : MonoBehaviour
@@ -28,10 +29,10 @@ public class EnemyYEs : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-       
-       transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
-        Look();
+    {       
+        
+       //transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
+        //Look();
     }
 
     void Look()

@@ -164,6 +164,28 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &171590202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171590191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43331a71d757ffd46889eb11f7e76c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 547788697}
+  speed: 2
+  killShakeAmount: 0.2
+  killShakeDuration: 0.2
+  arrowLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  projectileLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &171702424
 GameObject:
   m_ObjectHideFlags: 0
@@ -8766,58 +8788,6 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: -100}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0, y: 1}
---- !u!1 &1179820279
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1179820281}
-  - component: {fileID: 1179820280}
-  m_Layer: 0
-  m_Name: BloodManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1179820280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179820279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308f604538e79ca4b8bd1a0126998a03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boodSprites:
-  - {fileID: 21300000, guid: 745b51b14e1855d478c276ad13fbba16, type: 3}
-  - {fileID: 21300000, guid: 31dff35044102e841a986fc6be894e23, type: 3}
-  - {fileID: 21300000, guid: 0a78e9d1b56446d4388e504126d2eead, type: 3}
-  - {fileID: 21300000, guid: a109e20d7c0a87f4a886b0b276213071, type: 3}
-  - {fileID: 21300000, guid: 59b55e87d17c60c4b93269bd7dec4fdb, type: 3}
-  targetLayer:
-    m_Bits: 2048
---- !u!4 &1179820281
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179820279}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!223 &1209035749 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 5621628043974191642, guid: 7d56b6d54021a4c49abfc08a3fc41d69, type: 3}
@@ -10121,7 +10091,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: enemy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3211926483095227674, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -10131,6 +10102,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5758338468230608986, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 171590197}
+    - targetCorrespondingSourceObject: {fileID: 5758338468230608986, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 171590202}
   m_SourcePrefab: {fileID: 100100000, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
 --- !u!1 &2010898524
 GameObject:
@@ -10415,6 +10389,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a7e237e4f9f1804bb36e4611fc6736a, type: 3}
+--- !u!1001 &5626779439127824521
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2228265541550416940, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_Name
+      value: BloodManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143712393862856718, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f18c1f256d4cb5e45ad677b6d08000e6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -10438,5 +10469,5 @@ SceneRoots:
   - {fileID: 1739473273}
   - {fileID: 387794079}
   - {fileID: 2200901495019718651}
-  - {fileID: 1179820281}
+  - {fileID: 5626779439127824521}
   - {fileID: 1254872847}
