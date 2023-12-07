@@ -3,12 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 
 public class EnemyYEs : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField] Transform player;
     [SerializeField] float speed = 2f;
+
+    [Header("Camera Shake")]
+    [SerializeField] float killShakeAmount = 5;
+    [SerializeField] float killShakeDuration = 2;
+
+    [Header("Layermasks")]
+    [SerializeField] LayerMask arrowLayer;
+
     [SerializeField] LayerMask projectileLayer;
 
     [SerializeField] GameObject weapon;
@@ -21,10 +31,10 @@ public class EnemyYEs : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-       
-       transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
-        Look();
+    {       
+        
+       //transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
+        //Look();
     }
 
     void Look()
@@ -39,22 +49,27 @@ public class EnemyYEs : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") || other.gameObject.layer == projectileLayer)
+        if (other.CompareTag("Player") || other.gameObject.layer == arrowLayer || other.gameObject.layer == projectileLayer)
         {
-            Debug.Log("it");
             TakeDamage();
+
+            Debug.Log(other.name);
+
         }
     }
 
     public void TakeDamage() 
     {
+        FindObjectOfType<FollowTarget>().StartShake(killShakeAmount, killShakeDuration);
+        Debug.Log(FindObjectOfType<FollowTarget>());
         FindObjectOfType<PowerManager>().AddHoliness(20f);
         Death();
     }
 
     private void Death()
     {
-        FindObjectOfType<BloodManager>().SpawnBlood(transform);
+        FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform);
+
         gameObject.SetActive(false);                                                    
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class WeaponProjectile : MonoBehaviour
 {
     [SerializeField] float spinSpeed = 40;
+    [SerializeField] LayerMask enemyLayer;
 
     [Header("Collider Height/Length")]
     [SerializeField] float colliderHeight = 1;
@@ -40,10 +41,16 @@ public class WeaponProjectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            other.gameObject.GetComponent<EnemyYEs>().TakeDamage();
+        }
+
         if (gameObject.tag == "CrossBow")
         {
             Destroy(gameObject);
         }
+
         else
         {
             midAir = false;

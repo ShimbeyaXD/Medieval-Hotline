@@ -54,8 +54,6 @@ public class NewWeaponManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && !HasWeapon)
         {
             WeaponPickup();
-
-            // aloha
         }
     }
 
@@ -68,7 +66,7 @@ public class NewWeaponManager : MonoBehaviour
         switch (ray.collider.tag)
         {
             case "Sword":
-                //weaponSprite = sword;
+                weaponSprite = sword;
                 //ChangeSprite(ray.collider.gameObject);
 
                 torsoAnimator.SetBool("HoldingMelee", true);
@@ -79,10 +77,11 @@ public class NewWeaponManager : MonoBehaviour
                 HasWeapon = true;
                 projectileTag = "Sword";
 
+                Destroy(ray.collider.gameObject);
                 break;
 
             case "Axe":
-                //weaponSprite = axe;
+                weaponSprite = axe;
                 //ChangeSprite(ray.collider.gameObject);
 
                 torsoAnimator.SetBool("HoldingMelee", true);
@@ -94,11 +93,12 @@ public class NewWeaponManager : MonoBehaviour
                 HasWeapon = true;
                 projectileTag = "Axe";
 
+                Destroy(ray.collider.gameObject);
                 break;
 
             case "CrossBow":
                 weaponSprite = crossBow;
-                ChangeSprite(ray.collider.gameObject);
+                //ChangeSprite(ray.collider.gameObject);
 
                 weaponImage.enabled = true;
                 weaponImage.sprite = crossBowImage;
@@ -106,10 +106,11 @@ public class NewWeaponManager : MonoBehaviour
                 HasCrossbow = true;
                 projectileTag = "CrossBow";
 
+                Destroy(ray.collider.gameObject);
                 break;
 
             case "Cross":
-                //weaponSprite = holyCross;
+                weaponSprite = holyCross;
                 //ChangeSprite(ray.collider.gameObject);
 
                 torsoAnimator.SetBool("HoldingMelee", true);
@@ -121,19 +122,13 @@ public class NewWeaponManager : MonoBehaviour
                 HasWeapon = true;
                 projectileTag = "Cross";
 
+                Destroy(ray.collider.gameObject);
                 break;
 
             default:
                 Debug.Log("something went wrong");
                 break;
         }
-    }
-
-    void ChangeSprite(GameObject weapon)
-    {
-        weaponRenderer.sprite = weaponSprite;
-
-        Destroy(weapon);
     }
 
     void WeaponThrow()

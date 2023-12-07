@@ -24,12 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
-        Debug.Log(myAnimator);
-
-
-       
-       
+        Move();       
     }
 
     void Move()
@@ -46,12 +41,10 @@ public class PlayerMovement : MonoBehaviour
         if (movementVector.magnitude <= Mathf.Epsilon)
         {
             myAnimator.SetBool("isWalking", false);
-            Debug.Log("not walking");
         }
         else
         {
             myAnimator.SetBool("isWalking", true);
-            Debug.Log("is walking");
         }
     }
 }
