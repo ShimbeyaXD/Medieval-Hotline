@@ -8,24 +8,21 @@ public class Artifact : MonoBehaviour
     [SerializeField] Image artifactImage;
     [SerializeField] Sprite artifactSprite;
 
-    void WeaponPickup()
+    public bool LevelCleared { get; private set; }
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        RaycastHit2D ray = Physics2D.BoxCast(transform.position, new Vector2(2, 2), 0, Vector2.up, pickupDistance, artifactLayer);
-
-        if (ray.collider == null) return;
-
-        switch (ray.collider.tag)
+        if (other.gameObject.CompareTag("Artifact"))
         {
-            case "Artifact":
-
-                artifactImage.sprite = artifactSprite;
-
-                break;
-            default:
-
-                Debug.Log("something went wrong");
-                break;
+            PickupArtifact();
+            other.gameObject.SetActive(false);
         }
+    }
+
+    void PickupArtifact()
+    {
+        LevelCleared = true;
+        artifactImage.sprite = artifactSprite;
     }
 
 }

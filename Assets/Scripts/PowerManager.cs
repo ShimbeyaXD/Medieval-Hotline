@@ -10,6 +10,7 @@ public class PowerManager : MonoBehaviour
    [SerializeField] private float currentHolyness;
 
     [SerializeField] Slider holyometer;
+    [SerializeField] Animator animator;
 
     bool alive = true;
 
@@ -24,14 +25,16 @@ public class PowerManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(currentHolyness);
         HereMyBOIIIii();
         if(currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; }
     }
 
     public void AddHoliness(float holynessToAdd) 
-    { 
+    {
         currentHolyness += holynessToAdd;
         holyometer.value = currentHolyness;
+        animator.SetTrigger("Add");
     }
 
 

@@ -10,6 +10,13 @@ public class NewWeaponManager : MonoBehaviour
     [SerializeField] Image weaponImage;
     [SerializeField] Sprite holdingWeaponSprite;
 
+    [Header("Character Sprites")]
+    [SerializeField] Sprite characterIdle;
+    [SerializeField] Sprite characterSword;
+    [SerializeField] Sprite characterAxe;
+    [SerializeField] Sprite characterCrossBow;
+    [SerializeField] Sprite characterHolyCross;
+
     [Header("Weapons")]
     [SerializeField] Sprite sword;
     [SerializeField] Sprite axe;
@@ -66,10 +73,10 @@ public class NewWeaponManager : MonoBehaviour
         switch (ray.collider.tag)
         {
             case "Sword":
+                torsoRenderer.sprite = characterSword;
+
                 weaponSprite = sword;
                 //ChangeSprite(ray.collider.gameObject);
-
-                torsoAnimator.SetBool("HoldingMelee", true);
 
                 weaponImage.enabled = true;
                 weaponImage.sprite = swordImage; 
@@ -81,12 +88,10 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "Axe":
+                torsoRenderer.sprite = characterAxe;
+
                 weaponSprite = axe;
                 //ChangeSprite(ray.collider.gameObject);
-
-                torsoAnimator.SetBool("HoldingMelee", true);
-
-                torsoRenderer.sprite = holdingWeaponSprite;
 
                 weaponImage.enabled = true;
                 weaponImage.sprite = axeImage;
@@ -97,6 +102,8 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "CrossBow":
+                torsoRenderer.sprite = characterCrossBow;
+
                 weaponSprite = crossBow;
                 //ChangeSprite(ray.collider.gameObject);
 
@@ -110,12 +117,10 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "Cross":
+                torsoRenderer.sprite = characterHolyCross;
+
                 weaponSprite = holyCross;
                 //ChangeSprite(ray.collider.gameObject);
-
-                torsoAnimator.SetBool("HoldingMelee", true);
-
-                torsoRenderer.sprite = holdingWeaponSprite;
 
                 weaponImage.enabled = true;
                 weaponImage.sprite = holyCrossImage;
@@ -135,7 +140,7 @@ public class NewWeaponManager : MonoBehaviour
     {
         if (HasCrossbow) attack.CurrentArrows = 5;
 
-        torsoAnimator.SetBool("HoldingMelee", false);
+        torsoRenderer.sprite = characterIdle;
         HasWeapon = false;
         HasCrossbow = false;
         weaponImage.sprite = null;
