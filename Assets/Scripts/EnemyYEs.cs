@@ -59,7 +59,7 @@ public class EnemyYEs : MonoBehaviour
     {
         FindObjectOfType<FollowTarget>().StartShake(killShakeAmount, killShakeDuration);
         FindObjectOfType<PowerManager>().AddHoliness(20f);
-        powerManager.KillCount =+ 1;
+        powerManager.KillCount = powerManager.KillCount + 1;
         Death();
     }
 

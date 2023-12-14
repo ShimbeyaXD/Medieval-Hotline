@@ -28,7 +28,8 @@ public class PowerManager : MonoBehaviour
 
     private void Update()
     {
-        killText.text = "Kills: " + KillCount.ToString();
+        Debug.Log(KillCount);
+        killText.text = "Kills: " + KillCount;
 
         HereMyBOIIIii();
         if(currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; }
