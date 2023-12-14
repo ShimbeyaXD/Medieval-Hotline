@@ -24,5 +24,4 @@ public class Artifact : MonoBehaviour
         LevelCleared = true;
         artifactImage.sprite = artifactSprite;
     }
-
 }
