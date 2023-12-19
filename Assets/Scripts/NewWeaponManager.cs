@@ -10,13 +10,6 @@ public class NewWeaponManager : MonoBehaviour
     [SerializeField] Image weaponImage;
     [SerializeField] Sprite holdingWeaponSprite;
 
-    [Header("Character Sprites")]
-    [SerializeField] Sprite characterIdle;
-    [SerializeField] Sprite characterSword;
-    [SerializeField] Sprite characterAxe;
-    [SerializeField] Sprite characterCrossBow;
-    [SerializeField] Sprite characterHolyCross;
-
     [Header("Weapons")]
     [SerializeField] Sprite sword;
     [SerializeField] Sprite axe;
@@ -73,7 +66,7 @@ public class NewWeaponManager : MonoBehaviour
         switch (ray.collider.tag)
         {
             case "Sword":
-                torsoRenderer.sprite = characterSword;
+                torsoAnimator.SetBool("Sword", true);
 
                 weaponSprite = sword;
                 //ChangeSprite(ray.collider.gameObject);
@@ -88,7 +81,7 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "Axe":
-                torsoRenderer.sprite = characterAxe;
+                torsoAnimator.SetBool("Axe", true);
 
                 weaponSprite = axe;
                 //ChangeSprite(ray.collider.gameObject);
@@ -102,7 +95,7 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "CrossBow":
-                torsoRenderer.sprite = characterCrossBow;
+                torsoAnimator.SetBool("Crossbow", true);
 
                 weaponSprite = crossBow;
                 //ChangeSprite(ray.collider.gameObject);
@@ -117,7 +110,7 @@ public class NewWeaponManager : MonoBehaviour
                 break;
 
             case "Cross":
-                torsoRenderer.sprite = characterHolyCross;
+                torsoAnimator.SetBool("Cross", true);
 
                 weaponSprite = holyCross;
                 //ChangeSprite(ray.collider.gameObject);
@@ -140,13 +133,17 @@ public class NewWeaponManager : MonoBehaviour
     {
         if (HasCrossbow) attack.CurrentArrows = 5;
 
-        torsoRenderer.sprite = characterIdle;
+        torsoAnimator.SetBool("Sword", false);
+        torsoAnimator.SetBool("Axe", false);
+        torsoAnimator.SetBool("Cross", false);
+        torsoAnimator.SetBool("Crossbow", false);
+        torsoAnimator.SetBool("Glock", false);
+
         HasWeapon = false;
         HasCrossbow = false;
         weaponImage.sprite = null;
         weaponImage.enabled = false;
         weaponRenderer.sprite = null;
-        
 
         GameObject newProjectile = Instantiate(throwingProjectile, transform.position, transform.rotation);
 

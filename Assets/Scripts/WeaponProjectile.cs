@@ -13,6 +13,7 @@ public class WeaponProjectile : MonoBehaviour
     Rigidbody2D rigidbody;
     FollowMouse followMouse;
 
+    Vector2 playerPosition;
     bool midAir = true;
     int layer;
 
@@ -39,7 +40,7 @@ public class WeaponProjectile : MonoBehaviour
 
     public void Velocity(float throwPower)
     {
-        rigidbody.AddForce(followMouse.MousePosition().normalized * throwPower);
+        rigidbody.AddForce(-transform.right * throwPower);
         midAir = true;
 
         Debug.Log("THrowpower is " + throwPower);

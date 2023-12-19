@@ -28,7 +28,6 @@ public class PowerManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(KillCount);
         killText.text = "Kills: " + KillCount;
 
         HereMyBOIIIii();
