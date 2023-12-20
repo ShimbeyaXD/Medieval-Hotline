@@ -28,10 +28,13 @@ public class BloodManager : MonoBehaviour
 
     void SpawnCorpse(Transform pos)
     {
+
         GameObject corpse = new GameObject("Corpse");
         corpse.transform.position = pos.position;
         SpriteRenderer sp = corpse.AddComponent<SpriteRenderer>();
         sp.sprite = corpseSprite;
-        sp.sortingOrder = numInSortingLayer--;
+        int newCorpsSortingLayer = numInSortingLayer;
+        newCorpsSortingLayer =- 1;
+        sp.sortingOrder = newCorpsSortingLayer;
     }
 }

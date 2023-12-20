@@ -317,15 +317,10 @@ MonoBehaviour:
   throwingProjectile: {fileID: 6952808158290722028, guid: 3848073c196e90446827c06d93ce64ba, type: 3}
   weaponImage: {fileID: 0}
   holdingWeaponSprite: {fileID: 21300000, guid: b91125f61c2acc14ba52332f80264c80, type: 3}
-  characterIdle: {fileID: 21300000, guid: 312503040c585e64b9ac8e0be773e36d, type: 3}
-  characterSword: {fileID: 21300000, guid: 53ba295d9bb40684db82c9069d763aeb, type: 3}
-  characterAxe: {fileID: 21300000, guid: 19d4468672ebe474ab3a7ff193f64697, type: 3}
-  characterCrossBow: {fileID: 21300000, guid: eddb1537e96a0c345bb1d3d761e8907a, type: 3}
-  characterHolyCross: {fileID: 21300000, guid: 5cb1dcd4823bf6e4c9f4ce5628905ee0, type: 3}
-  sword: {fileID: 21300000, guid: 436ef08b1bc44ca45af6ebc7776f2882, type: 3}
-  axe: {fileID: 21300000, guid: ccef6d851732e4143af801ba7cc3f2d8, type: 3}
-  crossBow: {fileID: 21300000, guid: 042542a0c61707f41bfe1daf7347895b, type: 3}
-  holyCross: {fileID: 21300000, guid: 658e37acf0eec7243bb28c5c0efe1761, type: 3}
+  sword: {fileID: 21300000, guid: 0fe5cef9d12f3b84f92f692b4ac06f68, type: 3}
+  axe: {fileID: 21300000, guid: e7c9a10cd827bce4da51213d4072faf0, type: 3}
+  crossBow: {fileID: 21300000, guid: 49e059f0404f66f4eaff50e2caa43fd3, type: 3}
+  holyCross: {fileID: 21300000, guid: 0a781a0bba5e45d4da64f0c1a6e1c2c7, type: 3}
   swordImage: {fileID: 21300000, guid: 345f42654f4523f489a17edebdf40c89, type: 3}
   axeImage: {fileID: 21300000, guid: 6d8eac618907db84e812e1d8214ce27f, type: 3}
   crossBowImage: {fileID: 21300000, guid: 6a81f8af8bea564429984e4ce15fa65f, type: 3}
@@ -352,7 +347,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   artifactImage: {fileID: 0}
-  artifactSprite: {fileID: 21300000, guid: 39136de93c364004db655640dab2986e, type: 3}
+  artifactSprite: {fileID: 21300000, guid: 65b5a18566d0e9441875101286e41dc1, type: 3}
 --- !u!114 &7257305399288384896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +364,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   detectionDistance: 2
+  continueButton: {fileID: 0}
 --- !u!1 &4429123837053910101
 GameObject:
   m_ObjectHideFlags: 0
