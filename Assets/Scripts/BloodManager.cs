@@ -34,7 +34,7 @@ public class BloodManager : MonoBehaviour
         SpriteRenderer sp = corpse.AddComponent<SpriteRenderer>();
         sp.sprite = corpseSprite;
         int newCorpsSortingLayer = numInSortingLayer;
-        newCorpsSortingLayer =- 1;
+        newCorpsSortingLayer++;
         sp.sortingOrder = newCorpsSortingLayer;
     }
 }

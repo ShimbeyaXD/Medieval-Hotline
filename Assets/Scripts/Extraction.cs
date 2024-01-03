@@ -12,6 +12,8 @@ public class Extraction : MonoBehaviour
     RoundTimer roundTimer;
     PowerManager powerManager;
 
+    public bool LevelEnded { get; private set; }
+
     void Start()
     {
         continueButton.gameObject.SetActive(false);
@@ -29,12 +31,9 @@ public class Extraction : MonoBehaviour
 
             if (ray.collider != null)
             {
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                Debug.Log("Change scene");
+                LevelEnded = true;
                 continueButton.gameObject.SetActive(true);
                 powerManager.ShowKillText();
-
-                // Change scene
             }
         }
     }
