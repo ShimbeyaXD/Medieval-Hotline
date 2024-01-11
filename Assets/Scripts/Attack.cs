@@ -24,32 +24,34 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && newWeaponManager.HasWeapon) 
+        if (Input.GetMouseButtonDown(0) && newWeaponManager.AnyWeapon)
         {
-            if (newWeaponManager.HasCrossbow)
+            if (newWeaponManager.HasWeapon)
+            {
+                EnableMelee();
+            }
+            if (newWeaponManager.HasCrossbow) 
             {
                 if (CurrentArrows-- > 0)
                 {
-                    Shoot(arrow);
+                    ShootArrow(arrow);
                 }
             }
             if (newWeaponManager.HasGlock)
             {
-                if (CurrentArrows-- > 0) 
-                { 
-                    Shoot(bullet); 
+                if (CurrentArrows-- > 0)
+                {
+                    ShootArrow(bullet);
                 }
             }
-            
-            else { EnableMelee(); }
         }
     }
 
-    void Shoot(GameObject projectile)
+    void ShootArrow(GameObject projectile)
     {
         Debug.Log(CurrentArrows);
 
-        Vector3 direction = followMouse.MousePosition();
+        Vector3 direction = followMouse.MousePosition() - (Vector2)transform.position;
 
         float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
 

@@ -1,3 +1,4 @@
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +36,8 @@ public class NewWeaponManager : MonoBehaviour
     FollowMouse followMouse;
     Animator myAnimator;
     Attack attack;
+    
+    public bool AnyWeapon { get; private set; }
 
     public bool HasWeapon { get; private set; }
 
@@ -52,8 +55,10 @@ public class NewWeaponManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(1) && HasWeapon) WeaponThrow();
-        if (Input.GetKeyDown(KeyCode.E) && !HasWeapon)
+        if (HasCrossbow || HasGlock || HasWeapon) AnyWeapon = true;
+
+        if (Input.GetMouseButton(1) && AnyWeapon) WeaponThrow();
+        if (Input.GetKeyDown(KeyCode.E) && !AnyWeapon)
         {
             WeaponPickup();
         }
@@ -61,7 +66,7 @@ public class NewWeaponManager : MonoBehaviour
 
     void WeaponPickup()
     {
-        RaycastHit2D ray = Physics2D.BoxCast(transform.position, new Vector2(2, 2), 0, Vector2.up, pickupDistance, gunLayer);
+        RaycastHit2D ray = Physics2D.BoxCast(transform.position, new Vector2(3, 3), 0, Vector2.up, pickupDistance, gunLayer);
 
         if (ray.collider == null) return;
 
@@ -104,7 +109,6 @@ public class NewWeaponManager : MonoBehaviour
 
                 weaponImage.enabled = true;
                 weaponImage.sprite = crossBowImage;
-                HasWeapon = true;
                 HasCrossbow = true;
                 projectileTag = "CrossBow";
 
@@ -143,6 +147,9 @@ public class NewWeaponManager : MonoBehaviour
 
         HasWeapon = false;
         HasCrossbow = false;
+        HasGlock = false;
+        AnyWeapon = false;
+
         weaponImage.sprite = null;
         weaponImage.enabled = false;
         weaponRenderer.sprite = null;
@@ -170,6 +177,9 @@ public class NewWeaponManager : MonoBehaviour
 
         torsoAnimator.SetBool("Glock", true);
         Debug.Log("GLOCK");
+
         HasGlock = true;
+        HasWeapon = false;
+        HasCrossbow = false;
     }
 }
