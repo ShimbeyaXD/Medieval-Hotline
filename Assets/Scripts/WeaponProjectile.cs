@@ -4,6 +4,7 @@ public class WeaponProjectile : MonoBehaviour
 {
     [SerializeField] float spinSpeed = 40;
     [SerializeField] LayerMask enemyLayer;
+    [SerializeField] ParticleSystem destroyParticle;
 
     [Header("Collider Height/Length")]
     [SerializeField] float colliderHeight = 1;
@@ -12,6 +13,7 @@ public class WeaponProjectile : MonoBehaviour
     Rigidbody2D rigidbody;
     FollowMouse followMouse;
 
+    Vector2 playerPosition;
     bool midAir = true;
     int layer;
 
@@ -31,9 +33,14 @@ public class WeaponProjectile : MonoBehaviour
         }
     }
 
+    public void AssignParticle(ParticleSystem particles)
+    {
+        destroyParticle = particles;
+    }
+
     public void Velocity(float throwPower)
     {
-        rigidbody.AddForce(followMouse.MousePosition().normalized * throwPower);
+        rigidbody.AddForce(-transform.right * throwPower);
         midAir = true;
 
         Debug.Log("THrowpower is " + throwPower);
@@ -48,6 +55,7 @@ public class WeaponProjectile : MonoBehaviour
 
         if (gameObject.tag == "CrossBow")
         {
+            destroyParticle.Play();
             Destroy(gameObject);
         }
 

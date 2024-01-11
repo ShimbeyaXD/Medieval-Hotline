@@ -10,20 +10,40 @@ public class EnemyYEs : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] float speed = 2f;
+
     [SerializeField] LayerMask projectileLayer;
 
     // Start is called before the first frame update
+
+
+    [Header("Camera Shake")]
+    [SerializeField] float killShakeAmount = 5;
+    [SerializeField] float killShakeDuration = 2;
+
+    [Header("Layermasks")]
+    [SerializeField] LayerMask arrowLayer;
+    [SerializeField] LayerMask projectileLayer;
+
+    [SerializeField] GameObject weapon;
+
+    PowerManager powerManager;
+
     void Start()
     {
-
+        powerManager = FindObjectOfType<PowerManager>();
     }
 
-    // Update is called once per frame
     void Update()
+
     {
        
        transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
         Look();
+
+    {       
+       //transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
+       //Look();
+
     }
 
     void Look()
@@ -38,16 +58,27 @@ public class EnemyYEs : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.CompareTag("Player") || other.gameObject.layer == projectileLayer)
+
+        if (other.CompareTag("Player"))
+
         {
             Debug.Log("it");
             TakeDamage();
+
+
+            Debug.Log(other.name);
         }
     }
 
     public void TakeDamage() 
     {
+
+        FindObjectOfType<FollowTarget>().StartShake(killShakeAmount, killShakeDuration);
+
         FindObjectOfType<PowerManager>().AddHoliness(20f);
+        powerManager.KillCount = powerManager.KillCount + 1;
         Death();
     }
 

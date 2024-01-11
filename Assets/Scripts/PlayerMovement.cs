@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,11 +10,13 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rigidbody;
     Animator myAnimator;
+    Extraction extraction;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         myAnimator = transform.GetChild(0).transform.GetChild(1).GetComponent<Animator>();
+        extraction = GetComponent<Extraction>();
     }
 
     private void Update()
@@ -24,17 +27,13 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (extraction.LevelEnded) return;
         Move();       
     }
 
     void Move()
     {
-       
-
         Vector2 movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-        //movementVector = movementVector.normalized;
-
 
         rigidbody.velocity = new Vector3(movementVector.x * movementSpeed, movementVector.y * movementSpeed, 0);
 

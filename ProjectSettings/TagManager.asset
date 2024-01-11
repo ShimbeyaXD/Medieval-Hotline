@@ -12,6 +12,7 @@ TagManager:
   - CrossBow
   - Cross
   - Artifact
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Blood
   - Artifact
   - Exit
-  - 
+  - Wall
   - 
   - 
   - 
