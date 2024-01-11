@@ -40,6 +40,8 @@ public class NewWeaponManager : MonoBehaviour
 
     public bool HasCrossbow { get; private set; }
 
+    public bool HasGlock { get; private set; }
+
     public int Bloon { get; private set; }
 
     void Start()
@@ -157,5 +159,17 @@ public class NewWeaponManager : MonoBehaviour
     public void SetAttackAnimator()
     {
         torsoAnimator.SetTrigger("Attack");
+    }
+
+    public void Glock()
+    {
+        torsoAnimator.SetBool("Sword", false);
+        torsoAnimator.SetBool("Axe", false);
+        torsoAnimator.SetBool("Cross", false);
+        torsoAnimator.SetBool("Crossbow", false);
+
+        torsoAnimator.SetBool("Glock", true);
+        Debug.Log("GLOCK");
+        HasGlock = true;
     }
 }

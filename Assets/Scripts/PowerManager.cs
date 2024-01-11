@@ -11,6 +11,8 @@ public class PowerManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI killText;
     [SerializeField] private float currentHolyness;
 
+    NewWeaponManager weaponManager;
+
     public int KillCount { get; set; }
 
     private float maxHolyness = 100f;
@@ -19,6 +21,8 @@ public class PowerManager : MonoBehaviour
 
    void Start() 
    {
+        weaponManager = FindAnyObjectByType<NewWeaponManager>();
+
         KillCount = 0;
         currentHolyness = 0f;
         holyometer.value = currentHolyness;
@@ -31,7 +35,7 @@ public class PowerManager : MonoBehaviour
         killText.text = "Kills: " + KillCount;
 
         HereMyBOIIIii();
-        if(currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; }
+        if(currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; SliderFull(); }
     }
 
     public void AddHoliness(float holynessToAdd) 
@@ -47,6 +51,11 @@ public class PowerManager : MonoBehaviour
         {
             AddHoliness(20f);
         }
+    }
+    
+    void SliderFull()
+    {
+        weaponManager.Glock();
     }
 
     IEnumerator HolynessFade() 

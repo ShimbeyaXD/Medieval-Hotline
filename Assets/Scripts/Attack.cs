@@ -3,6 +3,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [SerializeField] GameObject arrow;
+    [SerializeField] GameObject bullet;
     [SerializeField] GameObject rangeWeapon;
     [SerializeField] BoxCollider2D boxCollider;
     [SerializeField] float shootForce = 4000;
@@ -29,19 +30,32 @@ public class Attack : MonoBehaviour
             {
                 if (CurrentArrows-- > 0)
                 {
-                    Debug.Log(CurrentArrows);
-
-                    Vector3 direction = followMouse.MousePosition();
-
-                    float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
-
-                    GameObject newProjectile = Instantiate(arrow, rangeWeapon.transform.position, Quaternion.Euler(0, 0, 270 + angle));
-
-                    newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
+                    Shoot(arrow);
                 }
             }
+            if (newWeaponManager.HasGlock)
+            {
+                if (CurrentArrows-- > 0) 
+                { 
+                    Shoot(bullet); 
+                }
+            }
+            
             else { EnableMelee(); }
         }
+    }
+
+    void Shoot(GameObject projectile)
+    {
+        Debug.Log(CurrentArrows);
+
+        Vector3 direction = followMouse.MousePosition();
+
+        float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
+
+        GameObject newProjectile = Instantiate(projectile, rangeWeapon.transform.position, Quaternion.Euler(0, 0, 270 + angle));
+
+        newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
     }
 
     public void ResetArrows()
