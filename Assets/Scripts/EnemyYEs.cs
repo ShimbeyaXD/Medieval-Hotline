@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Rendering;
 
+// WHo named thing monstrostity
 public class EnemyYEs : MonoBehaviour
 {
-    [Header("General")]
     [SerializeField] Transform player;
     [SerializeField] float speed = 2f;
 
@@ -24,15 +23,19 @@ public class EnemyYEs : MonoBehaviour
 
     PowerManager powerManager;
 
+    [SerializeField] LayerMask projectileLayer;
+
+    // Start is called before the first frame update
     void Start()
     {
         powerManager = FindObjectOfType<PowerManager>();
     }
 
     void Update()
-    {       
-       //transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
-       //Look();
+    {
+       
+       transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
+        Look();
     }
 
     void Look()
@@ -47,8 +50,9 @@ public class EnemyYEs : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.gameObject.layer == projectileLayer)
         {
+            Debug.Log("it");
             TakeDamage();
 
             Debug.Log(other.name);
@@ -65,8 +69,7 @@ public class EnemyYEs : MonoBehaviour
 
     private void Death()
     {
-        FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform);
-
+        FindObjectOfType<BloodManager>().SpawnBlood(transform);
         gameObject.SetActive(false);                                                    
     }
 }
