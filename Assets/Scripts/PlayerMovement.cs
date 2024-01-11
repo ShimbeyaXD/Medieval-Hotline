@@ -47,4 +47,9 @@ public class PlayerMovement : MonoBehaviour
             myAnimator.SetBool("isWalking", true);
         }
     }
+
+    public void Death() 
+    { 
+      gameObject.SetActive(false);
+    }
 }
