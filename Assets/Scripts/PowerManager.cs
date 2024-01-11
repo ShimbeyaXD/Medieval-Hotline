@@ -6,40 +6,34 @@ using UnityEngine.UI;
 
 public class PowerManager : MonoBehaviour
 {
-    [SerializeField] Slider holyometer;
-    [SerializeField] Animator animator;
-    [SerializeField] TextMeshProUGUI killText;
-    [SerializeField] private float currentHolyness;
-
-    public int KillCount { get; set; }
-
     private float maxHolyness = 100f;
+   [SerializeField] private float currentHolyness;
+
+    [SerializeField] Slider holyometer;
 
     bool alive = true;
 
+
    void Start() 
    {
-        KillCount = 0;
         currentHolyness = 0f;
         holyometer.value = currentHolyness;
-        killText.gameObject.SetActive(false);
         StartCoroutine(HolynessFade());
+
    }
 
     private void Update()
     {
-        killText.text = "Kills: " + KillCount;
-
         HereMyBOIIIii();
         if(currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; }
     }
 
     public void AddHoliness(float holynessToAdd) 
-    {
+    { 
         currentHolyness += holynessToAdd;
         holyometer.value = currentHolyness;
-        animator.SetTrigger("Add");
     }
+
 
     void HereMyBOIIIii() 
     {
@@ -64,11 +58,13 @@ public class PowerManager : MonoBehaviour
         while(!alive)
         {
             yield return null;
-        }  
+        }
+
+
+        
     }
 
-    public void ShowKillText()
-    {
-        killText.gameObject.SetActive(true);
-    }
+    
+
+    
 }

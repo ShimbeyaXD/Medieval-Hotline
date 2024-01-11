@@ -37,13 +37,6 @@ public class SceneLoader : MonoBehaviour
         return sceneIndex >= 0 && sceneIndex < SceneManager.sceneCountInBuildSettings;
     }
 
-    public void LoadNextLevel()
-    {
-        //transitionAnim.SetTrigger("Load(CloseScene)");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //LoadSceneWithDelay(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
     public void LoadMainMenu()
     {
         transitionAnim.SetTrigger("Load(CloseScene)");
