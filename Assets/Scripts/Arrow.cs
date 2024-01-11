@@ -13,13 +13,8 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            other.gameObject.GetComponent<EnemyYEs>().TakeDamage();
-        }
-
         Debug.Log("Arrow hit");
-        animator.SetTrigger("Hit");
         rigidbody.bodyType = RigidbodyType2D.Static;
+        animator.SetTrigger("Hit");
     }
 }
