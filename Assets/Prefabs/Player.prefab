@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 1767330878381990139}
   - component: {fileID: 5079720855406137778}
   - component: {fileID: 7257305399288384896}
+  - component: {fileID: 698454624390147535}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -160,7 +161,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2.2
+  m_LinearDrag: 1
   m_AngularDrag: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -292,6 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 500120906234883092, guid: 062a10ab7fd543e479848cbad782003a, type: 3}
+  bullet: {fileID: 8341464496572696164, guid: 693af315bd0e63b4086d051a5d4b48dc, type: 3}
   rangeWeapon: {fileID: 7012760005686822359}
   boxCollider: {fileID: 1266825672160810858}
   shootForce: 4000
@@ -317,14 +319,16 @@ MonoBehaviour:
   throwingProjectile: {fileID: 6952808158290722028, guid: 3848073c196e90446827c06d93ce64ba, type: 3}
   weaponImage: {fileID: 0}
   holdingWeaponSprite: {fileID: 21300000, guid: b91125f61c2acc14ba52332f80264c80, type: 3}
-  sword: {fileID: 21300000, guid: 0fe5cef9d12f3b84f92f692b4ac06f68, type: 3}
-  axe: {fileID: 21300000, guid: e7c9a10cd827bce4da51213d4072faf0, type: 3}
-  crossBow: {fileID: 21300000, guid: 49e059f0404f66f4eaff50e2caa43fd3, type: 3}
+  sword: {fileID: 21300000, guid: 436ef08b1bc44ca45af6ebc7776f2882, type: 3}
+  axe: {fileID: 21300000, guid: ccef6d851732e4143af801ba7cc3f2d8, type: 3}
+  crossBow: {fileID: 21300000, guid: 042542a0c61707f41bfe1daf7347895b, type: 3}
   holyCross: {fileID: 21300000, guid: 0a781a0bba5e45d4da64f0c1a6e1c2c7, type: 3}
+  glock: {fileID: 21300000, guid: 2ee7a69ec6844fa4484f2adfa1d47bea, type: 3}
   swordImage: {fileID: 21300000, guid: 345f42654f4523f489a17edebdf40c89, type: 3}
   axeImage: {fileID: 21300000, guid: 6d8eac618907db84e812e1d8214ce27f, type: 3}
   crossBowImage: {fileID: 21300000, guid: 6a81f8af8bea564429984e4ce15fa65f, type: 3}
   holyCrossImage: {fileID: 21300000, guid: a3ea5910e4ddb0547a0a442bcbd7e579, type: 3}
+  glockImage: {fileID: 21300000, guid: c2560e8f9078bec44af81ebe5e505a2e, type: 3}
   torsoAnimator: {fileID: 98149463897639950}
   legAnimator: {fileID: 7866991480278462563}
   weaponAnimator: {fileID: 8275043861069973231}
@@ -365,6 +369,18 @@ MonoBehaviour:
     m_Bits: 8192
   detectionDistance: 2
   continueButton: {fileID: 0}
+--- !u!114 &698454624390147535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375415280249971910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f570ebc6c11e10489c04e10e02dce21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4429123837053910101
 GameObject:
   m_ObjectHideFlags: 0
