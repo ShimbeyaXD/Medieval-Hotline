@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class FollowTarget : MonoBehaviour
 {
@@ -7,9 +8,12 @@ public class FollowTarget : MonoBehaviour
 
     public Transform target; 
     public float smoothSpeed = 0.125f;
+    public float maxValue = 1;
     public Vector3 offset;
 
     bool followCamera = true;
+
+    public bool IsShaking { get; private set; }
 
     void FixedUpdate()
     {
@@ -33,12 +37,13 @@ public class FollowTarget : MonoBehaviour
 
     public void StartShake(float direction, float magnitude)
     {
-        StartCoroutine(Shake(direction, magnitude));
+        if (!IsShaking) { StartCoroutine(Shake(direction, magnitude)); }        
     }
 
     public IEnumerator Shake(float direction, float magnitude)
     {
         followCamera = false;
+        IsShaking = true;
 
         Vector3 originalPos = transform.position;
 
@@ -49,10 +54,14 @@ public class FollowTarget : MonoBehaviour
             float xOffset = Random.Range(-0.5f, 0.5f) * magnitude;
             float yOffset = Random.Range(-0.5f, 0.5f) * magnitude;
 
-            transform.localPosition += new Vector3(xOffset, yOffset, originalPos.z);
+            xOffset = Mathf.Clamp(xOffset, -maxValue, maxValue);
+            yOffset = Mathf.Clamp(yOffset, -maxValue, maxValue);
+
+            transform.localPosition += new Vector3(xOffset, yOffset, 0);
 
             elapsedTime += Time.deltaTime;
 
+            IsShaking = false;
             yield return null;
         }
 

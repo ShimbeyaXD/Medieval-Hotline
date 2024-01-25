@@ -20,6 +20,7 @@ public class BloodManager : MonoBehaviour
         int i = Random.Range(0, boodSprites.Count);
 
         GameObject blood = new GameObject("Blood");
+        blood.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
         blood.transform.position = pos.position;
         SpriteRenderer sp = blood.AddComponent<SpriteRenderer>();
         sp.sprite = boodSprites[i];
@@ -28,9 +29,9 @@ public class BloodManager : MonoBehaviour
 
     void SpawnCorpse(Transform pos)
     {
-
         GameObject corpse = new GameObject("Corpse");
         corpse.transform.position = pos.position;
+        corpse.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
         SpriteRenderer sp = corpse.AddComponent<SpriteRenderer>();
         sp.sprite = corpseSprite;
         int newCorpsSortingLayer = numInSortingLayer;

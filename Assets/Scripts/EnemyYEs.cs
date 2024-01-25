@@ -23,10 +23,12 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] GameObject weapon;
 
     PowerManager powerManager;
+    FollowTarget followTarget;
 
     void Start()
     {
         powerManager = FindObjectOfType<PowerManager>();
+        followTarget = FindObjectOfType<FollowTarget>();
     }
 
     void Update()
@@ -57,7 +59,8 @@ public class EnemyYEs : MonoBehaviour
 
     public void TakeDamage() 
     {
-        FindObjectOfType<FollowTarget>().StartShake(killShakeAmount, killShakeDuration);
+        followTarget.StartShake(killShakeAmount, killShakeDuration);
+
         FindObjectOfType<PowerManager>().AddHoliness(20f);
         powerManager.KillCount = powerManager.KillCount + 1;
         Death();

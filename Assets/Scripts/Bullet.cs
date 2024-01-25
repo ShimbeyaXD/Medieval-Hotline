@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Rigidbody2D rigidbody;
+
+    void OnEnable()
     {
-        
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            other.gameObject.GetComponent<EnemyYEs>().TakeDamage();
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        Debug.Log("Bullet hit");
     }
 }

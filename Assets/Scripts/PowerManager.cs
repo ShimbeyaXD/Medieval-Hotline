@@ -10,6 +10,7 @@ public class PowerManager : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] TextMeshProUGUI killText;
     [SerializeField] private float currentHolyness;
+    [SerializeField] Image glockImage;
 
     NewWeaponManager weaponManager;
 
@@ -27,6 +28,7 @@ public class PowerManager : MonoBehaviour
         currentHolyness = 0f;
         holyometer.value = currentHolyness;
         killText.gameObject.SetActive(false);
+        glockImage.gameObject.SetActive(false);
         StartCoroutine(HolynessFade());
    }
 
@@ -35,7 +37,17 @@ public class PowerManager : MonoBehaviour
         killText.text = "Kills: " + KillCount;
 
         HereMyBOIIIii();
-        if(currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; SliderFull(); }
+        if (currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; SliderFull(); }
+        if (weaponManager.HasGlock)
+        {
+            holyometer.transform.parent.gameObject.SetActive(false);
+            glockImage.gameObject.SetActive(true);
+        }
+        else if (!weaponManager.HasGlock)
+        {
+            holyometer.transform.parent.gameObject.SetActive(true);
+            glockImage.gameObject.SetActive(false);
+        }
     }
 
     public void AddHoliness(float holynessToAdd) 
@@ -56,6 +68,7 @@ public class PowerManager : MonoBehaviour
     void SliderFull()
     {
         weaponManager.Glock();
+        currentHolyness = 0;
     }
 
     IEnumerator HolynessFade() 

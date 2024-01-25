@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class WeaponProjectile : MonoBehaviour
@@ -21,7 +22,7 @@ public class WeaponProjectile : MonoBehaviour
     {
         layer = LayerMask.NameToLayer("Gun");
 
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponentInParent<Rigidbody2D>();
         followMouse = FindObjectOfType<FollowMouse>();
     }
 
@@ -53,16 +54,16 @@ public class WeaponProjectile : MonoBehaviour
             other.gameObject.GetComponent<EnemyYEs>().TakeDamage();
         }
 
-        if (gameObject.tag == "CrossBow")
+        if (transform.GetChild(0).tag == "CrossBow" || transform.GetChild(0).tag == "Glock")
         {
             destroyParticle.Play();
-            Destroy(gameObject);
+            Destroy(transform.GetChild(0).gameObject);
         }
 
         else
         {
             midAir = false;
-            gameObject.layer = layer;
+            transform.GetChild(0).gameObject.layer = layer;
             rigidbody.bodyType = RigidbodyType2D.Static;
         }
     }

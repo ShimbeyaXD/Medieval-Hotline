@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7627172714316893909}
   - component: {fileID: -9051570784721769217}
   - component: {fileID: 8212901101780307719}
+  - component: {fileID: 8190965662810000418}
   m_Layer: 9
   m_Name: Bullet
   m_TagString: Hazard
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 2e18f615c9b084944a1c3c1febfd3917, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -148,3 +149,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
+--- !u!114 &8190965662810000418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341464496572696164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edac88e4cf04efb46a5e27cc977ed1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

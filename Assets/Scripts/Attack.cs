@@ -12,6 +12,7 @@ public class Attack : MonoBehaviour
     
     NewWeaponManager newWeaponManager;
     FollowMouse followMouse;
+    FollowTarget followTarget;
 
     public int CurrentArrows { get; set; } = 5;
 
@@ -20,6 +21,7 @@ public class Attack : MonoBehaviour
         boxCollider.enabled = false;
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
         followMouse = FindObjectOfType<FollowMouse>();
+        followTarget = FindObjectOfType<FollowTarget>();
     }
 
     void Update()
@@ -41,6 +43,7 @@ public class Attack : MonoBehaviour
             {
                 if (CurrentArrows-- > 0)
                 {
+                    followTarget.StartShake(0.2f, 0.5f);
                     ShootArrow(bullet);
                 }
             }

@@ -1,4 +1,3 @@
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,12 +15,14 @@ public class NewWeaponManager : MonoBehaviour
     [SerializeField] Sprite axe;
     [SerializeField] Sprite crossBow;
     [SerializeField] Sprite holyCross;
+    [SerializeField] Sprite glock;
 
     [Header("Weapon Icons")]
     [SerializeField] Sprite swordImage;
     [SerializeField] Sprite axeImage;
     [SerializeField] Sprite crossBowImage;
     [SerializeField] Sprite holyCrossImage;
+    [SerializeField] Sprite glockImage;
 
     [Header("Animators")]
     [SerializeField] Animator torsoAnimator;
@@ -156,11 +157,13 @@ public class NewWeaponManager : MonoBehaviour
 
         GameObject newProjectile = Instantiate(throwingProjectile, transform.position, transform.rotation);
 
-        newProjectile.GetComponent<SpriteRenderer>().sprite = weaponSprite;
-        newProjectile.gameObject.tag = projectileTag;
+        newProjectile.transform.GetChild(0).gameObject.tag = projectileTag;
+        newProjectile.GetComponentInChildren<SpriteRenderer>().sprite = weaponSprite;
+        newProjectile.GetComponent<WeaponProjectile>().Velocity(throwPower);
         //newProjectile.gameObject.layer = projectileLayer;
         //newProjectile.GetComponent<Rigidbody2D>().AddForce(followMouse.MousePosition() * throwPower);
-        newProjectile.GetComponent<WeaponProjectile>().Velocity(throwPower);
+
+        Debug.Log("glock threwn");
     }
 
     public void SetAttackAnimator()
@@ -174,12 +177,14 @@ public class NewWeaponManager : MonoBehaviour
         torsoAnimator.SetBool("Axe", false);
         torsoAnimator.SetBool("Cross", false);
         torsoAnimator.SetBool("Crossbow", false);
-
         torsoAnimator.SetBool("Glock", true);
-        Debug.Log("GLOCK");
 
         HasGlock = true;
         HasWeapon = false;
         HasCrossbow = false;
+
+        projectileTag = "Glock";
+        weaponSprite = glock;
+        weaponImage.sprite = glockImage;
     }
 }
