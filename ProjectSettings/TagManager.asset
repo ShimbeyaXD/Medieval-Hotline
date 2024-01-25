@@ -13,6 +13,7 @@ TagManager:
   - Cross
   - Artifact
   - enemy
+  - Glock
   layers:
   - Default
   - TransparentFX
