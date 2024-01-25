@@ -14,6 +14,8 @@ public class PowerManager : MonoBehaviour
 
     NewWeaponManager weaponManager;
 
+    bool canRecieveGlock = false;
+
     public int KillCount { get; set; }
 
     private float maxHolyness = 100f;
@@ -28,7 +30,7 @@ public class PowerManager : MonoBehaviour
         currentHolyness = 0f;
         holyometer.value = currentHolyness;
         killText.gameObject.SetActive(false);
-        glockImage.gameObject.SetActive(false);
+        //glockImage.gameObject.SetActive(false);
         StartCoroutine(HolynessFade());
    }
 
@@ -37,16 +39,28 @@ public class PowerManager : MonoBehaviour
         killText.text = "Kills: " + KillCount;
 
         HereMyBOIIIii();
-        if (currentHolyness >= maxHolyness) { currentHolyness = maxHolyness; SliderFull(); }
-        if (weaponManager.HasGlock)
-        {
+
+        if (currentHolyness >= maxHolyness) 
+        { 
+            currentHolyness = maxHolyness; 
+            canRecieveGlock = true; 
+            glockImage.GetComponent<Animator>().SetBool("isActive", true);
             holyometer.transform.parent.gameObject.SetActive(false);
             glockImage.gameObject.SetActive(true);
         }
-        else if (!weaponManager.HasGlock)
+
+        if (currentHolyness < maxHolyness)
         {
             holyometer.transform.parent.gameObject.SetActive(true);
             glockImage.gameObject.SetActive(false);
+        }
+
+        if (canRecieveGlock)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                RecieveGlock();
+            }
         }
     }
 
@@ -65,8 +79,10 @@ public class PowerManager : MonoBehaviour
         }
     }
     
-    void SliderFull()
+    void RecieveGlock()
     {
+        canRecieveGlock = false;
+        glockImage.GetComponent<Animator>().SetBool("isActive", false);
         weaponManager.Glock();
         currentHolyness = 0;
     }
