@@ -10,7 +10,7 @@ public class PowerManager : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] TextMeshProUGUI killText;
     [SerializeField] private float currentHolyness;
-    [SerializeField] Image glockImage;
+    [SerializeField] GameObject glockImage;
 
     NewWeaponManager weaponManager;
 
@@ -44,7 +44,7 @@ public class PowerManager : MonoBehaviour
         { 
             currentHolyness = maxHolyness; 
             canRecieveGlock = true; 
-            glockImage.GetComponent<Animator>().SetBool("isActive", true);
+            glockImage.transform.GetChild(0).GetComponent<Animator>().SetBool("isActive", true);
             holyometer.transform.parent.gameObject.SetActive(false);
             glockImage.gameObject.SetActive(true);
         }
@@ -82,7 +82,8 @@ public class PowerManager : MonoBehaviour
     void RecieveGlock()
     {
         canRecieveGlock = false;
-        glockImage.GetComponent<Animator>().SetBool("isActive", false);
+        glockImage.transform.GetChild(0).GetComponent<Animator>().SetBool("isActive", false);
+        animator.SetTrigger("Add");
         weaponManager.Glock();
         currentHolyness = 0;
     }

@@ -8593,7 +8593,7 @@ PrefabInstance:
     - target: {fileID: 134835651782428170, guid: 871d2eca4e6dc0f4babe6266b9f7e2d3, type: 3}
       propertyPath: glockImage
       value: 
-      objectReference: {fileID: 1624792842}
+      objectReference: {fileID: 2064662944}
     - target: {fileID: 134835651782428170, guid: 871d2eca4e6dc0f4babe6266b9f7e2d3, type: 3}
       propertyPath: holyometer
       value: 
@@ -23192,17 +23192,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1929692505553037698, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
   m_PrefabInstance: {fileID: 1624233687}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1624792842 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1291460057473441658, guid: 72d48080fdab51042ac2071d5068d697, type: 3}
-  m_PrefabInstance: {fileID: 104778119}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1624908385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24493,6 +24482,11 @@ Transform:
   - {fileID: 930739725}
   m_Father: {fileID: 1642285488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2064662944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6777001391744868592, guid: 72d48080fdab51042ac2071d5068d697, type: 3}
+  m_PrefabInstance: {fileID: 104778119}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2098027071
 GameObject:
   m_ObjectHideFlags: 0
