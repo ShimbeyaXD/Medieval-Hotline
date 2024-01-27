@@ -20,6 +20,9 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] LayerMask arrowLayer;
     [SerializeField] LayerMask projectileLayer;
 
+    [SerializeField] float attackRange;
+    [SerializeField] float attackCoolDown;
+
     [SerializeField] GameObject weapon;
 
     PowerManager powerManager;
@@ -27,14 +30,18 @@ public class EnemyYEs : MonoBehaviour
 
     void Start()
     {
+
         powerManager = FindObjectOfType<PowerManager>();
         followTarget = FindObjectOfType<FollowTarget>();
+
     }
 
     void Update()
-    {       
-       //transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
-       //Look();
+    {
+        //transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
+        //Look();
+
+        AttackCheck();
     }
 
     void Look()
@@ -72,4 +79,35 @@ public class EnemyYEs : MonoBehaviour
 
         gameObject.SetActive(false);                                                    
     }
+
+    void AttackCheck() 
+    { 
+      GameObject attackCollider = gameObject.transform.GetChild(0).gameObject;
+        float dist = Vector3.Distance(player.position, gameObject.transform.position);
+       
+      if(dist < attackRange) { StartCoroutine(Attack()); }
+       
+    }
+
+    IEnumerator Attack() 
+    {
+        Debug.Log("Attack");
+      new WaitForSeconds(attackCoolDown);
+
+        GameObject attackCollider = gameObject.transform.GetChild(0).gameObject;
+        float dist = Vector3.Distance(player.position, gameObject.transform.position);
+
+        if (dist < attackRange) 
+        {
+            FindObjectOfType<PlayerMovement>().Death();
+            yield return null;
+
+        }
+
+        yield return null;
+        
+
+    }
+
+
 }
