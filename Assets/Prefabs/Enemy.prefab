@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3932835758728987901}
   - component: {fileID: 4961834329583639485}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1495469617647946079, guid: b6d0b9429d97abc4499b9342e550bfc7, type: 3}
   weapon: {fileID: 0}
-  deathParticles: {fileID: 2380737317711734344, guid: b6d0b9429d97abc4499b9342e550bfc7, type: 3}
   speed: 2
   killShakeAmount: 0.2
   killShakeDuration: 0.2
@@ -240,7 +239,8 @@ MonoBehaviour:
     m_Bits: 1024
   attackRange: 2
   attackCoolDown: 2
-  weapon: {fileID: 0}
+  particleParent: {fileID: 0}
+  deathParticles: {fileID: 2380737317711734344, guid: b6d0b9429d97abc4499b9342e550bfc7, type: 3}
 --- !u!61 &2370701090224078771
 BoxCollider2D:
   m_ObjectHideFlags: 0

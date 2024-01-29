@@ -98,8 +98,8 @@ public class Attack : MonoBehaviour
             
             if (ray.collider != null)
             {
+                Debug.Log(ray.collider.gameObject.name);
                 ray.collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
-                Debug.Log("Hit enemy!!!");
             }
             yield return null;
         }

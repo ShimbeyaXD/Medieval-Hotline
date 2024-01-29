@@ -25,7 +25,6 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] float attackRange;
     [SerializeField] float attackCoolDown;
 
-    [SerializeField] GameObject weapon;
     [Header("ParticleSystem")]
     [SerializeField] GameObject particleParent;
     [SerializeField] ParticleSystem deathParticles;
