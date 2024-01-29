@@ -15,7 +15,10 @@ public class Attack : MonoBehaviour
     [SerializeField] float shootForce = 4000;
     [SerializeField] int maxArrows = 5;
     [SerializeField] GameObject weaponObject;
-    
+
+    RaycastHit2D attackRay;
+    bool isCastingRay = false;
+
     NewWeaponManager newWeaponManager;
     FollowMouse followMouse;
     FollowTarget followTarget;
@@ -94,14 +97,17 @@ public class Attack : MonoBehaviour
     {
         if (true)
         {
-            RaycastHit2D ray = Physics2D.Raycast(transform.position, followMouse.MousePosition() - (Vector2)transform.position, attackRange, enemyLayer);
+            attackRay = Physics2D.Raycast(transform.position, followMouse.MousePosition() - (Vector2)transform.position, attackRange, enemyLayer);
+            isCastingRay = true;
             
-            if (ray.collider != null)
+            if (attackRay.collider != null)
             {
-                Debug.Log(ray.collider.gameObject.name);
-                ray.collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
+                Debug.Log(attackRay.collider.gameObject.name);
+                attackRay.collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
             }
             yield return null;
         }
+
+        isCastingRay = false;
     }
 }
