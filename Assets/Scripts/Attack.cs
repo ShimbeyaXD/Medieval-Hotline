@@ -53,6 +53,7 @@ public class Attack : MonoBehaviour
                 if (CurrentArrows-- > 0)
                 {
                     followTarget.StartShake(0.2f, 0.5f);
+                    FindObjectOfType<SFXManager>().PlaySFX("Gun");
                     ShootArrow(bullet);
                 }
             }
@@ -83,6 +84,7 @@ public class Attack : MonoBehaviour
 
         //boxCollider.enabled = true;
         newWeaponManager.SetAttackAnimator();
+        FindObjectOfType<SFXManager>().PlaySFX("slash");
         weaponObject.SetActive(false);
     }
 

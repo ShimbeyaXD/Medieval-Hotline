@@ -33,11 +33,14 @@ public class EnemyYEs : MonoBehaviour
     PowerManager powerManager;
     FollowTarget followTarget;
 
+    AudioSource audioSource;
+
     void Start()
     {
 
         powerManager = FindObjectOfType<PowerManager>();
         followTarget = FindObjectOfType<FollowTarget>();
+        audioSource = FindObjectOfType<AudioSource>();
 
     }
 
@@ -78,6 +81,7 @@ public class EnemyYEs : MonoBehaviour
         FindObjectOfType<PowerManager>().AddHoliness(20f);
 
         powerManager.KillCount = powerManager.KillCount + 1;
+        audioSource.Play();
         Death();
     }
 

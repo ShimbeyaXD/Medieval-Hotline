@@ -46,7 +46,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        transitionAnim.SetTrigger("Load(CloseScene)");
+        //transitionAnim.SetTrigger("Load(CloseScene)");
         LoadSceneWithDelay(MAIN_MENU_SCENE);
     }
 
