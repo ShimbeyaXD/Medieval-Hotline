@@ -147,7 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43331a71d757ffd46889eb11f7e76c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1495469617647946079, guid: b6d0b9429d97abc4499b9342e550bfc7, type: 3}
+  weapon: {fileID: 0}
+  deathParticles: {fileID: 2380737317711734344, guid: b6d0b9429d97abc4499b9342e550bfc7, type: 3}
   speed: 2
   killShakeAmount: 0.2
   killShakeDuration: 0.2
@@ -157,7 +159,6 @@ MonoBehaviour:
   projectileLayer:
     serializedVersion: 2
     m_Bits: 1024
-  weapon: {fileID: 0}
 --- !u!1 &8501903969897490284
 GameObject:
   m_ObjectHideFlags: 0

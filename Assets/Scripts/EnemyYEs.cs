@@ -5,11 +5,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
+using static UnityEngine.ParticleSystem;
 
 public class EnemyYEs : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] Transform player;
+    [SerializeField] GameObject weapon;
     [SerializeField] float speed = 2f;
 
     [Header("Camera Shake")]
@@ -20,7 +22,10 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] LayerMask arrowLayer;
     [SerializeField] LayerMask projectileLayer;
 
-    [SerializeField] GameObject weapon;
+    [Header("ParticleSystem")]
+    [SerializeField] GameObject particleParent;
+    [SerializeField] ParticleSystem deathParticles;
+
 
     PowerManager powerManager;
     FollowTarget followTarget;
@@ -56,12 +61,15 @@ public class EnemyYEs : MonoBehaviour
             Debug.Log(other.name);
         }
     }
-
     public void TakeDamage() 
     {
+        GameObject particle = Instantiate(deathParticles.gameObject, transform.position, Quaternion.identity);
+        particle.transform.parent = GameObject.FindGameObjectWithTag("Particles").transform;
+
         followTarget.StartShake(killShakeAmount, killShakeDuration);
 
         FindObjectOfType<PowerManager>().AddHoliness(20f);
+
         powerManager.KillCount = powerManager.KillCount + 1;
         Death();
     }
