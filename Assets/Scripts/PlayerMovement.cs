@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -46,4 +47,11 @@ public class PlayerMovement : MonoBehaviour
             myAnimator.SetBool("isWalking", true);
         }
     }
+
+    public void Death() 
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
 }
