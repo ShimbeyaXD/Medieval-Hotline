@@ -50,6 +50,7 @@ public class NewWeaponManager : MonoBehaviour
 
     void Start()
     {
+        weaponImage.enabled = false;
         followMouse = FindObjectOfType<FollowMouse>();
         attack = GetComponent<Attack>();
     }

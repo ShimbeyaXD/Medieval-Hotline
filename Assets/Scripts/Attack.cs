@@ -1,7 +1,13 @@
+using System.Collections;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    [SerializeField] float attackRange = 3;
+    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] LayerMask wallLayer;
+
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject rangeWeapon;
@@ -71,7 +77,9 @@ public class Attack : MonoBehaviour
 
     public void EnableMelee()
     {
-        boxCollider.enabled = true;
+        StartCoroutine(AttackRay());
+
+        //boxCollider.enabled = true;
         newWeaponManager.SetAttackAnimator();
         FindObjectOfType<SFXManager>().PlaySFX("slash");
         weaponObject.SetActive(false);
@@ -79,6 +87,23 @@ public class Attack : MonoBehaviour
 
     public void DisableMelee() // trigger from animation events
     {
-        boxCollider.enabled = false;
+        StopCoroutine(AttackRay());
+
+        //boxCollider.enabled = false;
+    }
+
+    IEnumerator AttackRay()
+    {
+        if (true)
+        {
+            RaycastHit2D ray = Physics2D.Raycast(transform.position, followMouse.MousePosition() - (Vector2)transform.position, attackRange, enemyLayer);
+            
+            if (ray.collider != null)
+            {
+                Debug.Log(ray.collider.gameObject.name);
+                ray.collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
+            }
+            yield return null;
+        }
     }
 }

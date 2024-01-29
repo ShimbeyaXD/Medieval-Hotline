@@ -10,18 +10,20 @@ public class Artifact : MonoBehaviour
 
     public bool LevelCleared { get; private set; }
 
+    private void Start()
+    {
+        artifactImage.enabled = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Artifact"))
         {
-            PickupArtifact();
+            LevelCleared = true;
+            artifactImage.enabled = true;
+            artifactImage.sprite = artifactSprite;
             other.gameObject.SetActive(false);
         }
     }
 
-    void PickupArtifact()
-    {
-        LevelCleared = true;
-        artifactImage.sprite = artifactSprite;
-    }
 }
