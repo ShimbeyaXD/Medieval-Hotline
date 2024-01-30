@@ -47,6 +47,13 @@ public class WeaponProjectile : MonoBehaviour
         Debug.Log("THrowpower is " + throwPower);
     }
 
+    public void GroundWeapon()
+    {
+        midAir = false;
+        transform.GetChild(0).gameObject.layer = layer;
+        rigidbody.bodyType = RigidbodyType2D.Static;
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
@@ -62,9 +69,7 @@ public class WeaponProjectile : MonoBehaviour
 
         else
         {
-            midAir = false;
-            transform.GetChild(0).gameObject.layer = layer;
-            rigidbody.bodyType = RigidbodyType2D.Static;
+            GroundWeapon();
         }
     }
 }

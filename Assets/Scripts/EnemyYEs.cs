@@ -1,11 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Rendering;
-using static UnityEngine.ParticleSystem;
 
 public class EnemyYEs : MonoBehaviour
 {
@@ -13,6 +7,7 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] GameObject weapon;
     [SerializeField] float speed = 2f;
+    [SerializeField] GameObject droppedWeapon;
 
     [Header("Camera Shake")]
     [SerializeField] float killShakeAmount = 5;
@@ -29,19 +24,69 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] GameObject particleParent;
     [SerializeField] ParticleSystem deathParticles;
 
+    [Header("WeaponSprites")]
+    [SerializeField] Sprite swordSprite;
+    [SerializeField] Sprite axeSprite;
+    [SerializeField] Sprite holyCrossSprite;
+    [SerializeField] Sprite crossbowSprite;
+
+    string droppedWeaponTag;
+    Sprite weaponSprite;
 
     PowerManager powerManager;
     FollowTarget followTarget;
-
     AudioSource audioSource;
+    Animator spriteAnimator;
 
-    void Start()
+    void OnEnable()
     {
-
+        spriteAnimator = transform.GetComponentInChildren<Animator>();
         powerManager = FindObjectOfType<PowerManager>();
         followTarget = FindObjectOfType<FollowTarget>();
         audioSource = FindObjectOfType<AudioSource>();
 
+        if (weapon == null) { return; }
+        
+        switch (weapon.tag)
+        {
+            case "Sword":
+                spriteAnimator.SetBool("Sword", true);
+
+                droppedWeaponTag = "Sword";
+                weaponSprite = swordSprite;
+
+                break;
+
+            case "Axe":
+                spriteAnimator.SetBool("Axe", true);
+
+                droppedWeaponTag = "Axe";
+                weaponSprite = axeSprite;
+
+                break;
+
+            case "CrossBow":
+                spriteAnimator.SetBool("Crossbow", true);
+
+
+                droppedWeaponTag = "CrossBow";
+                weaponSprite = crossbowSprite;
+
+                break;
+
+            case "Cross":
+                spriteAnimator.SetBool("Cross", true);
+
+
+                droppedWeaponTag = "Cross";
+                weaponSprite = holyCrossSprite;
+
+                break;
+
+            default:
+                Debug.Log("something went wrong");
+                break;
+        }
     }
 
     void Update()
@@ -82,6 +127,18 @@ public class EnemyYEs : MonoBehaviour
 
         powerManager.KillCount = powerManager.KillCount + 1;
         audioSource.Play();
+
+        if (weaponSprite != null)
+        {
+            Debug.Log("Weaponsprite is " + weaponSprite.name);
+            GameObject newProjectile = Instantiate(droppedWeapon, transform.position, transform.rotation);
+
+            newProjectile.transform.GetChild(0).gameObject.tag = droppedWeaponTag;
+            newProjectile.GetComponentInChildren<SpriteRenderer>().sprite = weaponSprite;
+            newProjectile.GetComponent<WeaponProjectile>().Velocity(0);
+            newProjectile.GetComponent<WeaponProjectile>().GroundWeapon();
+        }
+
         Death();
     }
 

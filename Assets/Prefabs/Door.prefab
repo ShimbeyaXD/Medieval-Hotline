@@ -110,6 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1735453359219530930}
   - component: {fileID: 1255892025273416772}
+  - component: {fileID: 3777208859625312544}
   m_Layer: 0
   m_Name: DoorSprite
   m_TagString: Untagged
@@ -184,6 +185,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3777208859625312544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2549960706720334124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -1.5999999, y: -0.39999962, z: 0}
+  - {x: -1.5999999, y: 0.39999962, z: 0}
+  - {x: 1.6000001, y: 0.39999962, z: 0}
+  - {x: 1.6000001, y: -0.39999962, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -363952
+  m_LocalBounds:
+    m_Center: {x: 0.00000011920929, y: 0, z: 0}
+    m_Extent: {x: 1.6, y: 0.39999962, z: 0}
 --- !u!1 &6304725049245892427
 GameObject:
   m_ObjectHideFlags: 0
