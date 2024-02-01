@@ -121,7 +121,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125015856275959325}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -309,9 +309,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   detectionAndSightRange: 20
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!195 &8351160350196378964
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -358,7 +355,10 @@ MonoBehaviour:
   projectileLayer:
     serializedVersion: 2
     m_Bits: 1024
-  attackRange: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  attackRange: 6
   attackCoolDown: 2
   particleParent: {fileID: 0}
   deathParticles: {fileID: 2380737317711734344, guid: b6d0b9429d97abc4499b9342e550bfc7, type: 3}

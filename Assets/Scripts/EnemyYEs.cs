@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class EnemyYEs : MonoBehaviour
@@ -16,6 +17,7 @@ public class EnemyYEs : MonoBehaviour
     [Header("Layermasks")]
     [SerializeField] LayerMask arrowLayer;
     [SerializeField] LayerMask projectileLayer;
+    [SerializeField] LayerMask playerLayer;
 
     [SerializeField] float attackRange;
     [SerializeField] float attackCoolDown;
@@ -166,8 +168,21 @@ public class EnemyYEs : MonoBehaviour
         GameObject attackCollider = gameObject.transform.GetChild(0).gameObject;
         float dist = Vector3.Distance(player.position, gameObject.transform.position);
 
-        if (dist < attackRange) 
+        //make attack ray instead
+
+        
+
+        RaycastHit2D attackRay = Physics2D.Raycast(transform.position, transform.position - attackCollider.transform.position, attackRange, playerLayer);
+        Debug.DrawLine(transform.position, attackRay.point, Color.red);
+
+        Debug.Log("cast ray");
+
+        if (attackRay.collider != null)
         {
+            Debug.Log("Hit player");
+
+            spriteAnimator.SetTrigger("Attack");
+
             FindObjectOfType<PlayerMovement>().Death();
             yield return null;
 
