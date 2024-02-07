@@ -64,6 +64,8 @@ public class NewWeaponManager : MonoBehaviour
         {
             WeaponPickup();
         }
+
+        Debug.Log("hasGlock is " + HasGlock);
     }
 
     void WeaponPickup()

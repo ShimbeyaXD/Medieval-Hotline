@@ -15,6 +15,7 @@ TagManager:
   - enemy
   - Glock
   - Particles
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - Artifact
   - Exit
   - Wall
-  - 
+  - EnemyArrow
   - 
   - 
   - 

@@ -10,7 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     NavMeshAgent agent;
     Animator anim;
 
-    bool isChasingTarget = false;
+    public bool isChasingTarget { get; private set; }
 
     void Start()
     {

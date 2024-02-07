@@ -43,4 +43,20 @@ public class SFXManager : MonoBehaviour
         
 
     }
+
+    public void EnemyDeathSound()
+    {
+        StartCoroutine(PlayEnemyDeathSound());
+    }
+
+    IEnumerator PlayEnemyDeathSound()
+    {
+        GameObject enemySoundObject = transform.GetChild(1).gameObject;
+
+        enemySoundObject.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+
+        enemySoundObject.SetActive(false); 
+    }
 }

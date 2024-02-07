@@ -1,14 +1,22 @@
 using System.Collections;
 using Unity.Burst.CompilerServices;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class EnemyYEs : MonoBehaviour
 {
+    [Header("Enemy Type")]
+    [SerializeField] bool isRangedEnemy;
+
     [Header("General")]
     [SerializeField] Transform player;
     [SerializeField] GameObject weapon;
     [SerializeField] float speed = 2f;
     [SerializeField] GameObject droppedWeapon;
+
+    [Header("Arrow")]
+    [SerializeField] float shootForce;
+    [SerializeField] GameObject arrow;
 
     [Header("Camera Shake")]
     [SerializeField] float killShakeAmount = 5;
@@ -19,6 +27,7 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] LayerMask projectileLayer;
     [SerializeField] LayerMask playerLayer;
 
+    [Header("Attack Parameters")]
     [SerializeField] float attackRange;
     [SerializeField] float attackCoolDown;
 
@@ -33,19 +42,32 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] Sprite crossbowSprite;
 
     string droppedWeaponTag;
+    bool canShootArrow = true;
     Sprite weaponSprite;
+    BoxCollider2D attackCollider;
 
     PowerManager powerManager;
     FollowTarget followTarget;
     AudioSource audioSource;
     Animator spriteAnimator;
+    EnemyBehavior enemyBehavior;
+    SFXManager sfxManager;
 
     void OnEnable()
     {
+        if (gameObject.transform.GetChild(1) != null && gameObject.name == "AttackCollider")
+        {
+            string message = $"Can't find \"AttackCollider\" on {gameObject}!" + "\nPlease make sure there is a AttackCollider object childed to this object with a BoxCollider2D";
+            Debug.LogWarning(message, gameObject);
+            return;
+        }
+        attackCollider = gameObject.transform.GetChild(1).GetComponent<BoxCollider2D>();
         spriteAnimator = transform.GetComponentInChildren<Animator>();
+        enemyBehavior = transform.GetComponent<EnemyBehavior>();
         powerManager = FindObjectOfType<PowerManager>();
         followTarget = FindObjectOfType<FollowTarget>();
-        audioSource = FindObjectOfType<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        sfxManager = FindAnyObjectByType<SFXManager>();
 
         if (weapon == null) { return; }
         
@@ -95,8 +117,9 @@ public class EnemyYEs : MonoBehaviour
     {
         //transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
         //Look();
-
-        AttackCheck();
+        if (isRangedEnemy) { RangedCheck(); }
+        
+        else if (!isRangedEnemy) { AttackCheck(); }
     }
 
     void Look()
@@ -128,7 +151,8 @@ public class EnemyYEs : MonoBehaviour
         FindObjectOfType<PowerManager>().AddHoliness(20f);
 
         powerManager.KillCount = powerManager.KillCount + 1;
-        audioSource.Play();
+        //audioSource.Play();
+        sfxManager.EnemyDeathSound();
 
         if (weaponSprite != null)
         {
@@ -165,7 +189,6 @@ public class EnemyYEs : MonoBehaviour
         Debug.Log("Attack");
       new WaitForSeconds(attackCoolDown);
 
-        GameObject attackCollider = gameObject.transform.GetChild(0).gameObject;
         float dist = Vector3.Distance(player.position, gameObject.transform.position);
 
         //make attack ray instead
@@ -191,6 +214,34 @@ public class EnemyYEs : MonoBehaviour
         yield return null;
         
 
+    }
+
+    void RangedCheck()
+    {
+        if (enemyBehavior.isChasingTarget && canShootArrow)
+        {
+            canShootArrow = false;
+            Debug.Log("Enemy is shooting arrow and is chasing target is" + enemyBehavior.isChasingTarget );
+
+            StartCoroutine(ShootArrow());
+        }
+    }
+
+    IEnumerator ShootArrow()
+    {
+        Vector3 direction = attackCollider.transform.position - transform.position;
+
+        float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
+
+        GameObject newProjectile = Instantiate(arrow, attackCollider.transform.position, Quaternion.Euler(0, 0, 270 + angle));
+
+        //newProjectile.gameObject.layer = LayerMask.GetMask("EnemyArrow");
+
+        newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
+
+        yield return new WaitForSeconds(attackCoolDown);
+
+        canShootArrow = true;
     }
 
 

@@ -73,6 +73,7 @@ public class Attack : MonoBehaviour
         newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
     }
 
+
     public void ResetArrows()
     {
         CurrentArrows = 5;

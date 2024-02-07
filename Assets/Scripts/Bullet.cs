@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<EnemyYEs>().TakeDamage();
             Destroy(gameObject);
@@ -21,7 +21,5 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        Debug.Log("Bullet hit");
     }
 }
