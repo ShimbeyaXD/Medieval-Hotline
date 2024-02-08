@@ -1,6 +1,5 @@
 using System.Collections;
 using Unity.Burst.CompilerServices;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class EnemyYEs : MonoBehaviour
