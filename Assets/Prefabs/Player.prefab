@@ -376,19 +376,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 3
+  shootForce: 8000
+  maxArrows: 5
+  weaponObject: {fileID: 7012760005686822359}
+  arrow: {fileID: 500120906234883092, guid: 062a10ab7fd543e479848cbad782003a, type: 3}
+  bullet: {fileID: 8341464496572696164, guid: 693af315bd0e63b4086d051a5d4b48dc, type: 3}
+  rangeWeapon: {fileID: 7012760005686822359}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   wallLayer:
     serializedVersion: 2
     m_Bits: 16384
-  arrow: {fileID: 500120906234883092, guid: 062a10ab7fd543e479848cbad782003a, type: 3}
-  bullet: {fileID: 8341464496572696164, guid: 693af315bd0e63b4086d051a5d4b48dc, type: 3}
-  rangeWeapon: {fileID: 7012760005686822359}
   boxCollider: {fileID: 1266825672160810858}
-  shootForce: 4000
-  maxArrows: 5
-  weaponObject: {fileID: 7012760005686822359}
 --- !u!114 &1767330878381990139
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -174,6 +174,11 @@ public class NewWeaponManager : MonoBehaviour
         torsoAnimator.SetTrigger("Attack");
     }
 
+    public void SetPunchAnimator()
+    {
+        torsoAnimator.SetTrigger("Punch");
+    }
+
     public void Glock()
     {
         torsoAnimator.SetBool("Sword", false);

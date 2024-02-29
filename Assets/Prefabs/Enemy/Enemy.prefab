@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3932835758728987901}
   - component: {fileID: 4961834329583639485}
+  - component: {fileID: 8992373538555586658}
   m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Untagged
@@ -121,7 +122,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125015856275959325}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -143,7 +144,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.20814276, y: 0}
@@ -159,6 +160,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5837145, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8992373538555586658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125015856275959325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e084df4534b6f064d9813c7cd8249135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6803530668277947305}
 --- !u!1 &4433390982433518357
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,8 +361,9 @@ MonoBehaviour:
   player: {fileID: 0}
   weapon: {fileID: 579394101672748834, guid: 36a872ee9e124e043a1198fe5acb3521, type: 3}
   speed: 2
+  knockbackRange: 15
   droppedWeapon: {fileID: 6952808158290722028, guid: 3848073c196e90446827c06d93ce64ba, type: 3}
-  shootForce: 0
+  shootForce: 8000
   arrow: {fileID: 0}
   killShakeAmount: 0.2
   killShakeDuration: 0.2
@@ -361,7 +376,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  attackRange: 6
+  attackRange: 4
   attackCoolDown: 2
   particleParent: {fileID: 0}
   deathParticles: {fileID: 2380737317711734344, guid: b6d0b9429d97abc4499b9342e550bfc7, type: 3}

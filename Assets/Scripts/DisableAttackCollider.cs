@@ -9,5 +9,7 @@ public class DisableAttackCollider : MonoBehaviour
     {
         attackCollider.enabled = false;
         weaponObject.SetActive(true);
+
+        FindObjectOfType<Attack>().DisableMelee();
     }
 }

@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    [Header("Attack Parameters")]
     [SerializeField] float attackRange = 3;
-    [SerializeField] LayerMask enemyLayer;
-    [SerializeField] LayerMask wallLayer;
+    [SerializeField] float shootForce = 4000;
+    [SerializeField] int maxArrows = 5;
+    [SerializeField] float knockbackCooldown = 3;
 
+    [Header("Attack Objects")]
+    [SerializeField] GameObject weaponObject;
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject rangeWeapon;
+
+    [Header("Layer")]
+    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] LayerMask wallLayer;
+
+    [Header("Components")]
     [SerializeField] BoxCollider2D boxCollider;
-    [SerializeField] float shootForce = 4000;
-    [SerializeField] int maxArrows = 5;
-    [SerializeField] GameObject weaponObject;
 
     RaycastHit2D attackRay;
     bool isCastingRay = false;
@@ -24,6 +31,9 @@ public class Attack : MonoBehaviour
     FollowTarget followTarget;
 
     public int CurrentArrows { get; set; } = 5;
+
+    public bool PlayerIsPunching { get; private set; } = false;
+
 
     void Start()
     {
@@ -35,11 +45,18 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetMouseButton(0) && !newWeaponManager.AnyWeapon && !PlayerIsPunching)
+        {
+            StartCoroutine(KnockbackCooldown());
+        }
+
         if (Input.GetMouseButtonDown(0) && newWeaponManager.AnyWeapon)
         {
             if (newWeaponManager.HasWeapon)
             {
                 EnableMelee();
+                FindObjectOfType<SFXManager>().PlaySFX("slash");
+                newWeaponManager.SetAttackAnimator();
             }
             if (newWeaponManager.HasCrossbow) 
             {
@@ -84,13 +101,12 @@ public class Attack : MonoBehaviour
         StartCoroutine(AttackRay());
 
         //boxCollider.enabled = true;
-        newWeaponManager.SetAttackAnimator();
-        FindObjectOfType<SFXManager>().PlaySFX("slash");
         weaponObject.SetActive(false);
     }
 
     public void DisableMelee() // trigger from animation events
     {
+        PlayerIsPunching = false;
         StopCoroutine(AttackRay());
 
         //boxCollider.enabled = false;
@@ -112,5 +128,16 @@ public class Attack : MonoBehaviour
         }
 
         isCastingRay = false;
+    }
+
+    IEnumerator KnockbackCooldown()
+    {
+        PlayerIsPunching = true;
+        EnableMelee();
+        newWeaponManager.SetPunchAnimator();
+
+        yield return new WaitForSeconds(knockbackCooldown);
+
+        PlayerIsPunching = false;
     }
 }

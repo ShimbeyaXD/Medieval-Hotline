@@ -6,14 +6,19 @@ public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float detectionAndSightRange = 5f;
+    [SerializeField] float knockbackCooldown = 3;
 
     NavMeshAgent agent;
     Animator anim;
+    EnemyYEs enemyYes;
 
     public bool isChasingTarget { get; private set; }
 
     void Start()
     {
+        target = FindObjectOfType<PlayerMovement>().transform;
+        enemyYes = GetComponent<EnemyYEs>();
+
         anim = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -22,8 +27,19 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
-        if (!isChasingTarget && TargetInDetectionRadius())
+        if (target == null) { return; }
+
+        if (enemyYes.Punched)
         {
+            StopCoroutine(ChaseTargetRoutine());
+            agent.enabled = false;
+            isChasingTarget = false;
+            Debug.Log("I am punched");
+        }
+
+        if (!isChasingTarget && TargetInDetectionRadius() && !enemyYes.Punched)
+        {
+            agent.enabled = true;
             StartCoroutine(ChaseTargetRoutine());
         }
 
@@ -58,7 +74,8 @@ public class EnemyBehavior : MonoBehaviour
 
     private void FollowTarget()
     {
-        agent.SetDestination(target.position);
+        agent.enabled = true;
+        if (!enemyYes.Punched) { agent.SetDestination(target.position); } 
     }
 
     IEnumerator ChaseTargetRoutine()
@@ -78,7 +95,8 @@ public class EnemyBehavior : MonoBehaviour
             timeSinceStarted += Time.deltaTime;
         }
 
-        agent.isStopped = true;
+        // alex var här
+        agent.enabled = false;
         isChasingTarget = false;
     }
 

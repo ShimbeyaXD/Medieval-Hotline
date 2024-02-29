@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq.Expressions;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] GameObject weapon;
     [SerializeField] float speed = 2f;
+    [SerializeField] float knockbackRange = 15;
     [SerializeField] GameObject droppedWeapon;
 
     [Header("Arrow")]
@@ -44,6 +46,7 @@ public class EnemyYEs : MonoBehaviour
     bool canShootArrow = true;
     Sprite weaponSprite;
     BoxCollider2D attackCollider;
+    Rigidbody2D rigidbody;
 
     PowerManager powerManager;
     FollowTarget followTarget;
@@ -51,9 +54,15 @@ public class EnemyYEs : MonoBehaviour
     Animator spriteAnimator;
     EnemyBehavior enemyBehavior;
     SFXManager sfxManager;
+    Attack playerAttack;
+    FollowMouse followMouse;
+
+    public bool Punched { get; private set; } = false;
 
     void OnEnable()
     {
+        player = FindObjectOfType<PlayerMovement>().transform;
+
         if (gameObject.transform.GetChild(1) != null && gameObject.name == "AttackCollider")
         {
             string message = $"Can't find \"AttackCollider\" on {gameObject}!" + "\nPlease make sure there is a AttackCollider object childed to this object with a BoxCollider2D";
@@ -67,6 +76,9 @@ public class EnemyYEs : MonoBehaviour
         followTarget = FindObjectOfType<FollowTarget>();
         audioSource = GetComponent<AudioSource>();
         sfxManager = FindAnyObjectByType<SFXManager>();
+        playerAttack = FindObjectOfType<Attack>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        followMouse = FindObjectOfType<FollowMouse>();
 
         if (weapon == null) { return; }
         
@@ -114,6 +126,8 @@ public class EnemyYEs : MonoBehaviour
 
     void Update()
     {
+        if (player == null) { return; }
+
         //transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
         //Look();
         if (isRangedEnemy) { RangedCheck(); }
@@ -131,30 +145,12 @@ public class EnemyYEs : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            TakeDamage();
-
-            Debug.Log(other.name);
-        }
-    }
     public void TakeDamage() 
     {
-        GameObject particle = Instantiate(deathParticles.gameObject, transform.position, Quaternion.identity);
-        particle.transform.parent = GameObject.FindGameObjectWithTag("Particles").transform;
-
-        followTarget.StartShake(killShakeAmount, killShakeDuration);
-
-        FindObjectOfType<PowerManager>().AddHoliness(20f);
-
-        powerManager.KillCount = powerManager.KillCount + 1;
-        //audioSource.Play();
-        sfxManager.EnemyDeathSound();
-
-        if (weaponSprite != null)
+        if (weaponSprite != null) // Enemy drops its weapon...
         {
+            followTarget.StartShake(killShakeAmount, killShakeDuration);
+
             Debug.Log("Weaponsprite is " + weaponSprite.name);
             GameObject newProjectile = Instantiate(droppedWeapon, transform.position, transform.rotation);
 
@@ -164,7 +160,27 @@ public class EnemyYEs : MonoBehaviour
             newProjectile.GetComponent<WeaponProjectile>().GroundWeapon();
         }
 
-        Death();
+        if (playerAttack.PlayerIsPunching) // Player is punching enemy -> Enemy Knockback! 
+        {
+            Vector2 knockbackDirection = transform.position - player.position;
+
+            StartCoroutine(PunchedCooldown());
+
+            rigidbody.AddForce(knockbackDirection.normalized * knockbackRange);
+
+            Debug.Log("Enemy is punched");
+        }
+        else // Player is attacking enemy -> Enemy simply dies!
+        {
+            GameObject particle = Instantiate(deathParticles.gameObject, transform.position, Quaternion.identity);
+            particle.transform.parent = GameObject.FindGameObjectWithTag("Particles").transform;
+
+            FindObjectOfType<PowerManager>().AddHoliness(20f);
+
+            powerManager.KillCount = powerManager.KillCount + 1;
+            sfxManager.EnemyDeathSound();
+            Death();
+        }
     }
 
     private void Death()
@@ -176,10 +192,20 @@ public class EnemyYEs : MonoBehaviour
 
     void AttackCheck() 
     { 
-      GameObject attackCollider = gameObject.transform.GetChild(0).gameObject;
+      GameObject attackCollider = gameObject.transform.GetChild(1).gameObject;
         float dist = Vector3.Distance(player.position, gameObject.transform.position);
-       
-      if(dist < attackRange) { StartCoroutine(Attack()); }
+
+
+        if (dist > attackRange)
+        {
+            attackCollider.SetActive(false);
+        }
+        if (Punched) return;
+        if (dist <= attackRange) 
+        {
+            attackCollider.SetActive(true); 
+        }
+
        
     }
 
@@ -241,6 +267,14 @@ public class EnemyYEs : MonoBehaviour
         yield return new WaitForSeconds(attackCoolDown);
 
         canShootArrow = true;
+    }
+
+    IEnumerator PunchedCooldown()
+    {
+        Punched = true;
+        yield return new WaitForSeconds(3);
+
+        Punched = false;
     }
 
 

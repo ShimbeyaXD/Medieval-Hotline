@@ -12,14 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arrow Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 500120906234883092, guid: 062a10ab7fd543e479848cbad782003a, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2332714106669225580, guid: 062a10ab7fd543e479848cbad782003a, type: 3}
-      propertyPath: isEnemyArrow
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4825065901013856853, guid: 062a10ab7fd543e479848cbad782003a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -59,14 +51,6 @@ PrefabInstance:
     - target: {fileID: 4825065901013856853, guid: 062a10ab7fd543e479848cbad782003a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5526248369099305517, guid: 062a10ab7fd543e479848cbad782003a, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8233278093852897057, guid: 062a10ab7fd543e479848cbad782003a, type: 3}
-      propertyPath: m_Layer
-      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
