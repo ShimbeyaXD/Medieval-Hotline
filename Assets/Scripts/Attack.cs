@@ -5,7 +5,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [Header("Attack Parameters")]
-    [SerializeField] float attackRange = 3;
+    [SerializeField] float attackRange = 4f;
     [SerializeField] float shootForce = 4000;
     [SerializeField] int maxArrows = 5;
     [SerializeField] float knockbackCooldown = 3;
@@ -34,6 +34,8 @@ public class Attack : MonoBehaviour
 
     public bool PlayerIsPunching { get; private set; } = false;
 
+    public bool PlayerIsAttacking { get; private set; } = false;
+
 
     void Start()
     {
@@ -55,6 +57,7 @@ public class Attack : MonoBehaviour
             if (newWeaponManager.HasWeapon)
             {
                 EnableMelee();
+                PlayerIsAttacking = true;
                 FindObjectOfType<SFXManager>().PlaySFX("slash");
                 newWeaponManager.SetAttackAnimator();
             }
@@ -107,6 +110,7 @@ public class Attack : MonoBehaviour
     public void DisableMelee() // trigger from animation events
     {
         PlayerIsPunching = false;
+        PlayerIsAttacking = false;
         StopCoroutine(AttackRay());
 
         //boxCollider.enabled = false;

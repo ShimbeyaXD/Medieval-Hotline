@@ -27,19 +27,21 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("update pos is "+ agent.updatePosition);
+
         if (target == null) { return; }
 
         if (enemyYes.Punched)
         {
             StopCoroutine(ChaseTargetRoutine());
-            agent.enabled = false;
+            agent.updatePosition = false;
             isChasingTarget = false;
             Debug.Log("I am punched");
         }
 
         if (!isChasingTarget && TargetInDetectionRadius() && !enemyYes.Punched)
         {
-            agent.enabled = true;
+            agent.updatePosition = true;
             StartCoroutine(ChaseTargetRoutine());
         }
 
@@ -74,7 +76,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void FollowTarget()
     {
-        agent.enabled = true;
+        agent.updatePosition = true;
         if (!enemyYes.Punched) { agent.SetDestination(target.position); } 
     }
 
@@ -96,7 +98,7 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         // alex var här
-        agent.enabled = false;
+        agent.updatePosition = false;
         isChasingTarget = false;
     }
 

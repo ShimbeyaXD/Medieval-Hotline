@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq.Expressions;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class EnemyYEs : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] Sprite axeSprite;
     [SerializeField] Sprite holyCrossSprite;
     [SerializeField] Sprite crossbowSprite;
+
+    Vector2 knockbackVector;
 
     string droppedWeaponTag;
     bool canShootArrow = true;
@@ -133,6 +136,7 @@ public class EnemyYEs : MonoBehaviour
         if (isRangedEnemy) { RangedCheck(); }
         
         else if (!isRangedEnemy) { AttackCheck(); }
+
     }
 
     void Look()
@@ -162,11 +166,21 @@ public class EnemyYEs : MonoBehaviour
 
         if (playerAttack.PlayerIsPunching) // Player is punching enemy -> Enemy Knockback! 
         {
-            Vector2 knockbackDirection = transform.position - player.position;
-
             StartCoroutine(PunchedCooldown());
 
+            //transform.Translate(knockbackVector, Space.Self);
+
+            Vector2 knockbackDirection = player.position - transform.position;
+
             rigidbody.AddForce(knockbackDirection.normalized * knockbackRange);
+
+            //knockbackVector = Vector2.Lerp(transform.position, knockbackDirection.normalized * knockbackRange, Time.deltaTime);
+
+
+            //rigidbody.velocity = knockbackDirection.normalized * knockbackRange
+
+
+            Debug.Log(rigidbody.velocity);
 
             Debug.Log("Enemy is punched");
         }
@@ -201,7 +215,7 @@ public class EnemyYEs : MonoBehaviour
             attackCollider.SetActive(false);
         }
         if (Punched) return;
-        if (dist <= attackRange) 
+        if (dist <= attackRange && !playerAttack.PlayerIsAttacking) 
         {
             attackCollider.SetActive(true); 
         }
