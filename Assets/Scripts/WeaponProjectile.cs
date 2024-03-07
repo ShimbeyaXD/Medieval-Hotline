@@ -43,8 +43,6 @@ public class WeaponProjectile : MonoBehaviour
     {
         rigidbody.AddForce(-transform.right * throwPower);
         midAir = true;
-
-        Debug.Log("THrowpower is " + throwPower);
     }
 
     public void GroundWeapon()

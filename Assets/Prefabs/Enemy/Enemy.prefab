@@ -260,7 +260,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -273,7 +273,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
-  m_Constraints: 3
+  m_Constraints: 0
 --- !u!70 &1428095164639518828
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -323,6 +323,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   detectionAndSightRange: 20
+  knockbackCooldown: 3
+  knockbackForce: 350
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!195 &8351160350196378964
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -361,7 +366,7 @@ MonoBehaviour:
   player: {fileID: 0}
   weapon: {fileID: 579394101672748834, guid: 36a872ee9e124e043a1198fe5acb3521, type: 3}
   speed: 2
-  knockbackRange: 15
+  knockbackRange: 1000
   droppedWeapon: {fileID: 6952808158290722028, guid: 3848073c196e90446827c06d93ce64ba, type: 3}
   shootForce: 8000
   arrow: {fileID: 0}

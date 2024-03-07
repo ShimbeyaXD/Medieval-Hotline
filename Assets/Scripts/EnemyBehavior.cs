@@ -6,11 +6,18 @@ public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float detectionAndSightRange = 5f;
+
+    [Header("Knockback Attributes")]
     [SerializeField] float knockbackCooldown = 3;
+    [SerializeField] float knockbackForce = 3;
+    [SerializeField] LayerMask wallLayer;
 
     NavMeshAgent agent;
     Animator anim;
     EnemyYEs enemyYes;
+    Rigidbody2D myRigidbody;
+
+    bool once = true;
 
     public bool isChasingTarget { get; private set; }
 
@@ -18,6 +25,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         target = FindObjectOfType<PlayerMovement>().transform;
         enemyYes = GetComponent<EnemyYEs>();
+        myRigidbody = GetComponent<Rigidbody2D>();
 
         anim = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -27,22 +35,27 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
+
         Debug.Log("update pos is "+ agent.updatePosition);
+        Debug.Log("Enemypunched is " + enemyYes.Punched);
 
         if (target == null) { return; }
 
         if (enemyYes.Punched)
         {
             StopCoroutine(ChaseTargetRoutine());
-            agent.updatePosition = false;
-            isChasingTarget = false;
-            Debug.Log("I am punched");
+
+            ApplyKnockback();
         }
 
         if (!isChasingTarget && TargetInDetectionRadius() && !enemyYes.Punched)
         {
-            agent.updatePosition = true;
+            myRigidbody.freezeRotation = false;
+            myRigidbody.velocity = Vector3.zero;
             StartCoroutine(ChaseTargetRoutine());
+            agent.updatePosition = true;
+            agent.updateRotation = true;
+            once = true;
         }
 
         UpdateAnimation();
@@ -97,9 +110,12 @@ public class EnemyBehavior : MonoBehaviour
             timeSinceStarted += Time.deltaTime;
         }
 
-        // alex var här
+        // alex var hï¿½r
         agent.updatePosition = false;
         isChasingTarget = false;
+
+
+        //myRigidbody.AddForce(knockbackDirection.normalized * 100000);
     }
 
     private void UpdateRotation()
@@ -117,5 +133,33 @@ public class EnemyBehavior : MonoBehaviour
     private void UpdateAnimation()
     {
         //animation
+    }
+
+    public void ApplyKnockback()
+    {
+        if (once)
+        {
+            myRigidbody.freezeRotation = true;
+            agent.isStopped = true; 
+            agent.updatePosition = false;
+            agent.updateRotation = false;
+            isChasingTarget = false;
+
+            Vector2 knockbackDirection = target.position - transform.position;
+            myRigidbody.velocity = Vector3.zero;
+
+            myRigidbody.velocity = -knockbackDirection.normalized * knockbackForce;
+            Debug.Log("called knock");
+            once = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == wallLayer)
+        {
+            myRigidbody.velocity = Vector3.zero;
+            Debug.Log("Hit a wall");
+        }
     }
 }

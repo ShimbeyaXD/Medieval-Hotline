@@ -155,7 +155,6 @@ public class EnemyYEs : MonoBehaviour
         {
             followTarget.StartShake(killShakeAmount, killShakeDuration);
 
-            Debug.Log("Weaponsprite is " + weaponSprite.name);
             GameObject newProjectile = Instantiate(droppedWeapon, transform.position, transform.rotation);
 
             newProjectile.transform.GetChild(0).gameObject.tag = droppedWeaponTag;
@@ -167,22 +166,6 @@ public class EnemyYEs : MonoBehaviour
         if (playerAttack.PlayerIsPunching) // Player is punching enemy -> Enemy Knockback! 
         {
             StartCoroutine(PunchedCooldown());
-
-            //transform.Translate(knockbackVector, Space.Self);
-
-            Vector2 knockbackDirection = player.position - transform.position;
-
-            rigidbody.AddForce(knockbackDirection.normalized * knockbackRange);
-
-            //knockbackVector = Vector2.Lerp(transform.position, knockbackDirection.normalized * knockbackRange, Time.deltaTime);
-
-
-            //rigidbody.velocity = knockbackDirection.normalized * knockbackRange
-
-
-            Debug.Log(rigidbody.velocity);
-
-            Debug.Log("Enemy is punched");
         }
         else // Player is attacking enemy -> Enemy simply dies!
         {
