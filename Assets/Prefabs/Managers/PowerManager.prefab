@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 517b6f34a53eeae43af7b9f61a13481e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHolyness: 0
   holyometer: {fileID: 0}
+  animator: {fileID: 0}
+  killText: {fileID: 0}
+  currentHolyness: 0
+  decreaseHolyness: 7
+  glockImage: {fileID: 0}

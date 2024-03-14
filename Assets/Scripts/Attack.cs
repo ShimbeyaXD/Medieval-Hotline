@@ -29,6 +29,7 @@ public class Attack : MonoBehaviour
     NewWeaponManager newWeaponManager;
     FollowMouse followMouse;
     FollowTarget followTarget;
+    PlayerMovement playerMovement;
 
     public int CurrentArrows { get; set; } = 5;
 
@@ -43,13 +44,35 @@ public class Attack : MonoBehaviour
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
         followMouse = FindObjectOfType<FollowMouse>();
         followTarget = FindObjectOfType<FollowTarget>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && !newWeaponManager.AnyWeapon && !PlayerIsPunching)
+        if (Input.GetMouseButton(0) && !newWeaponManager.AnyWeapon && !PlayerIsPunching) // Is punching
         {
             StartCoroutine(KnockbackCooldown());
+        }
+
+        if (Input.GetButtonDown("Jump") && !PlayerIsAttacking) // Is charging
+        {
+            PlayerIsAttacking = true;
+            boxCollider.enabled = true;
+            playerMovement.ChangeSpeed(true);
+            newWeaponManager.SetChargingAnimator();
+            
+            // enable animation
+            // raise the movement speed 
+
+        }
+        if (Input.GetButtonUp("Jump") && PlayerIsAttacking)
+        {
+            PlayerIsAttacking = false;
+            boxCollider.enabled = false;
+            playerMovement.ChangeSpeed(false);
+
+            Debug.Log("DeCharging");
+
         }
 
         if (Input.GetMouseButtonDown(0) && newWeaponManager.AnyWeapon)
@@ -142,5 +165,10 @@ public class Attack : MonoBehaviour
         yield return new WaitForSeconds(knockbackCooldown);
 
         PlayerIsPunching = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy") { collision.GetComponent<EnemyYEs>().Knockback(); }
     }
 }

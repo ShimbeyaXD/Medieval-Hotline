@@ -10,6 +10,7 @@ public class PowerManager : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] TextMeshProUGUI killText;
     [SerializeField] private float currentHolyness;
+    [SerializeField] private float decreaseHolyness = 5;
     [SerializeField] GameObject glockImage;
 
     NewWeaponManager weaponManager;
@@ -94,7 +95,7 @@ public class PowerManager : MonoBehaviour
         {
             if (currentHolyness > 0 && currentHolyness < maxHolyness)
             {
-                currentHolyness -= (Time.deltaTime);
+                currentHolyness -= (Time.deltaTime * decreaseHolyness);
                 holyometer.value = currentHolyness;
             }
             yield return new WaitForEndOfFrame();

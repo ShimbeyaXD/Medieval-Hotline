@@ -177,8 +177,14 @@ public class NewWeaponManager : MonoBehaviour
         torsoAnimator.SetTrigger("Punch");
     }
 
+    public void SetChargingAnimator()
+    {
+        torsoAnimator.SetTrigger("Charge");
+    }
+
     public void Glock()
     {
+        attack.ResetArrows();
         torsoAnimator.SetBool("Sword", false);
         torsoAnimator.SetBool("Axe", false);
         torsoAnimator.SetBool("Cross", false);

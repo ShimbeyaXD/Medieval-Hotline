@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 12
+  chargingSpeed: 18
 --- !u!114 &6967533776143097741
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -36,8 +36,8 @@ public class EnemyBehavior : MonoBehaviour
     void Update()
     {
 
-        Debug.Log("update pos is "+ agent.updatePosition);
-        Debug.Log("Enemypunched is " + enemyYes.Punched);
+        //Debug.Log("update pos is "+ agent.updatePosition);
+        //Debug.Log("Enemypunched is " + enemyYes.Punched);
 
         if (target == null) { return; }
 
@@ -75,7 +75,7 @@ public class EnemyBehavior : MonoBehaviour
 
             if (hit.collider.gameObject.tag == "Player")
             {
-                Debug.Log("SEEN");
+                //Debug.Log("SEEN");
                 return true;
             }
         }
@@ -95,7 +95,7 @@ public class EnemyBehavior : MonoBehaviour
 
     IEnumerator ChaseTargetRoutine()
     {
-        Debug.Log("CHASE");
+        //Debug.Log("CHASE");
         isChasingTarget = true;
         agent.ResetPath();
 
@@ -149,7 +149,6 @@ public class EnemyBehavior : MonoBehaviour
             myRigidbody.velocity = Vector3.zero;
 
             myRigidbody.velocity = -knockbackDirection.normalized * knockbackForce;
-            Debug.Log("called knock");
             once = false;
         }
     }

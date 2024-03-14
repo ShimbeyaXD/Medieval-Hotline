@@ -47,6 +47,7 @@ public class EnemyYEs : MonoBehaviour
 
     string droppedWeaponTag;
     bool canShootArrow = true;
+    bool once = true;
     Sprite weaponSprite;
     BoxCollider2D attackCollider;
     Rigidbody2D rigidbody;
@@ -84,7 +85,7 @@ public class EnemyYEs : MonoBehaviour
         followMouse = FindObjectOfType<FollowMouse>();
 
         if (weapon == null) { return; }
-        
+
         switch (weapon.tag)
         {
             case "Sword":
@@ -151,24 +152,14 @@ public class EnemyYEs : MonoBehaviour
 
     public void TakeDamage() 
     {
-        if (weaponSprite != null) // Enemy drops its weapon...
-        {
-            followTarget.StartShake(killShakeAmount, killShakeDuration);
-
-            GameObject newProjectile = Instantiate(droppedWeapon, transform.position, transform.rotation);
-
-            newProjectile.transform.GetChild(0).gameObject.tag = droppedWeaponTag;
-            newProjectile.GetComponentInChildren<SpriteRenderer>().sprite = weaponSprite;
-            newProjectile.GetComponent<WeaponProjectile>().Velocity(0);
-            newProjectile.GetComponent<WeaponProjectile>().GroundWeapon();
-        }
-
         if (playerAttack.PlayerIsPunching) // Player is punching enemy -> Enemy Knockback! 
         {
-            StartCoroutine(PunchedCooldown());
+            Knockback();
         }
         else // Player is attacking enemy -> Enemy simply dies!
         {
+            DropWeapon();
+
             GameObject particle = Instantiate(deathParticles.gameObject, transform.position, Quaternion.identity);
             particle.transform.parent = GameObject.FindGameObjectWithTag("Particles").transform;
 
@@ -188,54 +179,43 @@ public class EnemyYEs : MonoBehaviour
     }
 
     void AttackCheck() 
-    { 
-      GameObject attackCollider = gameObject.transform.GetChild(1).gameObject;
+    {
+        if (weapon == null) { return; }
+
+        GameObject attackCollider = gameObject.transform.GetChild(1).gameObject;
         float dist = Vector3.Distance(player.position, gameObject.transform.position);
 
-
-        if (dist > attackRange)
+        if (dist > attackRange || playerAttack.PlayerIsAttacking || playerAttack.PlayerIsPunching)
         {
             attackCollider.SetActive(false);
         }
-        if (Punched) return;
-        if (dist <= attackRange && !playerAttack.PlayerIsAttacking) 
+
+        else if (dist <= attackRange) 
         {
+            Debug.Log("Playerattacking is " + playerAttack.PlayerIsAttacking + " Enemy is attacking");
+
             attackCollider.SetActive(true); 
         }
-
-       
     }
 
     IEnumerator Attack() 
     {
-        Debug.Log("Attack");
       new WaitForSeconds(attackCoolDown);
 
         float dist = Vector3.Distance(player.position, gameObject.transform.position);
 
-        //make attack ray instead
-
-        
-
         RaycastHit2D attackRay = Physics2D.Raycast(transform.position, transform.position - attackCollider.transform.position, attackRange, playerLayer);
         Debug.DrawLine(transform.position, attackRay.point, Color.red);
 
-        Debug.Log("cast ray");
-
         if (attackRay.collider != null)
         {
-            Debug.Log("Hit player");
-
             spriteAnimator.SetTrigger("Attack");
 
             FindObjectOfType<PlayerMovement>().Death();
             yield return null;
-
         }
 
         yield return null;
-        
-
     }
 
     void RangedCheck()
@@ -274,5 +254,32 @@ public class EnemyYEs : MonoBehaviour
         Punched = false;
     }
 
+    private void DropWeapon()
+    {
+        if (weaponSprite != null && once) // Enemy drops its weapon...
+        {
+            once = false;
 
+            followTarget.StartShake(killShakeAmount, killShakeDuration);
+
+            GameObject newProjectile = Instantiate(droppedWeapon, transform.position, transform.rotation);
+
+            newProjectile.transform.GetChild(0).gameObject.tag = droppedWeaponTag;
+            newProjectile.GetComponentInChildren<SpriteRenderer>().sprite = weaponSprite;
+            newProjectile.GetComponent<WeaponProjectile>().Velocity(0);
+            newProjectile.GetComponent<WeaponProjectile>().GroundWeapon();
+
+            spriteAnimator.SetBool("Sword", false);
+            spriteAnimator.SetBool("Axe", false);
+            spriteAnimator.SetBool("Crossbow", false);
+            spriteAnimator.SetBool("Cross", false);
+            weapon = null;
+        }
+    }
+
+    public void Knockback()
+    {
+        DropWeapon();
+        StartCoroutine(PunchedCooldown());
+    }
 }
