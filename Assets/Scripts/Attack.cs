@@ -1,5 +1,6 @@
 using System.Collections;
-using Unity.Burst.CompilerServices;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
@@ -9,6 +10,7 @@ public class Attack : MonoBehaviour
     [SerializeField] float shootForce = 4000;
     [SerializeField] int maxArrows = 5;
     [SerializeField] float knockbackCooldown = 3;
+    [SerializeField] float chargeTime = 3;
 
     [Header("Attack Objects")]
     [SerializeField] GameObject weaponObject;
@@ -18,6 +20,7 @@ public class Attack : MonoBehaviour
 
     [Header("Layer")]
     [SerializeField] LayerMask enemyLayer;
+
     [SerializeField] LayerMask wallLayer;
 
     [Header("Components")]
@@ -25,6 +28,7 @@ public class Attack : MonoBehaviour
 
     RaycastHit2D attackRay;
     bool isCastingRay = false;
+    bool isCharging = false;
 
     NewWeaponManager newWeaponManager;
     FollowMouse followMouse;
@@ -49,6 +53,8 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
+        CurrentArrows = (int)Mathf.Clamp(CurrentArrows, 0, Mathf.Infinity);
+
         if (Input.GetMouseButton(0) && !newWeaponManager.AnyWeapon && !PlayerIsPunching) // Is punching
         {
             StartCoroutine(KnockbackCooldown());
@@ -56,23 +62,15 @@ public class Attack : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && !PlayerIsAttacking) // Is charging
         {
-            PlayerIsAttacking = true;
-            boxCollider.enabled = true;
-            playerMovement.ChangeSpeed(true);
-            newWeaponManager.SetChargingAnimator();
-            
+            StartCoroutine(ChargingTime());
+            StartCoroutine(Charge());
+
             // enable animation
             // raise the movement speed 
-
         }
-        if (Input.GetButtonUp("Jump") && PlayerIsAttacking)
+        if (PlayerIsAttacking && !isCharging)
         {
-            PlayerIsAttacking = false;
-            boxCollider.enabled = false;
-            playerMovement.ChangeSpeed(false);
-
-            Debug.Log("DeCharging");
-
+            StopCoroutine(ChargingTime());
         }
 
         if (Input.GetMouseButtonDown(0) && newWeaponManager.AnyWeapon)
@@ -105,8 +103,6 @@ public class Attack : MonoBehaviour
 
     void ShootArrow(GameObject projectile)
     {
-        Debug.Log(CurrentArrows);
-
         Vector3 direction = followMouse.MousePosition() - (Vector2)transform.position;
 
         float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
@@ -167,8 +163,78 @@ public class Attack : MonoBehaviour
         PlayerIsPunching = false;
     }
 
+    IEnumerator Charge()
+    {
+        while (true)
+        {
+            Debug.Log("Charge called");
+
+            float offsetMagnitude = 1.5f;
+
+            Vector2 mousePosition = followMouse.MousePosition();
+            Vector2 offset = (mousePosition - (Vector2)transform.position).normalized * offsetMagnitude;
+            Vector2 boxPosition = (Vector2)transform.position + offset;
+            
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, new Vector2(2,2), 0);
+
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.gameObject.CompareTag("Wall"))
+                {
+                    Debug.Log("Hit " + collider.gameObject.name);
+                    ChangeCharge(false);
+                    yield break;
+                }
+                else if (collider.gameObject.CompareTag("Enemy"))
+                {
+                    collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
+                }
+            }
+            // https://chat.openai.com/c/9c931eaf-add3-4323-9258-724fb452b832
+            if (!isCharging) { yield break; }
+
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    void ChangeCharge(bool state)
+    {
+        isCharging = state;
+        PlayerIsPunching = state;
+        PlayerIsAttacking = state;
+        playerMovement.ChangeSpeed(state);
+        newWeaponManager.SetChargingAnimator(state);
+    }
+
+    IEnumerator ChargingTime()
+    {
+        ChangeCharge(true);
+        /*
+        isCharging = true;
+        PlayerIsPunching = true;
+        PlayerIsAttacking = true;
+        playerMovement.ChangeSpeed(true);
+        newWeaponManager.SetChargingAnimator(true);
+        */
+        
+
+        yield return new WaitForSeconds(chargeTime);
+
+        ChangeCharge(false);
+        /*
+        isCharging = false;
+        PlayerIsAttacking = false;
+        PlayerIsPunching = false;
+        playerMovement.ChangeSpeed(false);
+        newWeaponManager.SetChargingAnimator(false);
+        */
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy") { collision.GetComponent<EnemyYEs>().Knockback(); }
+        if (collision.gameObject.tag == "Enemy") 
+        { 
+            collision.GetComponent<EnemyYEs>().Knockback(); 
+        }
     }
 }

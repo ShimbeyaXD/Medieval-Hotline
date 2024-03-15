@@ -16,7 +16,7 @@ public class ArrowText : MonoBehaviour
 
     void Update()
     {
-        if (newWeaponManager.HasCrossbow)
+        if (newWeaponManager.HasCrossbow || newWeaponManager.HasGlock)
         {
             transform.GetChild(0).gameObject.SetActive(true);
             magazineText.text = attack.CurrentArrows.ToString();

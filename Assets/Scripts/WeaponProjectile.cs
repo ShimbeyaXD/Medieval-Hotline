@@ -57,6 +57,8 @@ public class WeaponProjectile : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             other.gameObject.GetComponent<EnemyYEs>().TakeDamage();
+            destroyParticle.Play();
+            Destroy(transform.GetChild(0).gameObject);
         }
 
         if (transform.GetChild(0).tag == "CrossBow" || transform.GetChild(0).tag == "Glock")

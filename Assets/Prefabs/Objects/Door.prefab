@@ -211,7 +211,7 @@ MonoBehaviour:
   - {x: 1.6000001, y: -0.39999962, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -363952
+  m_InstanceId: 195458
   m_LocalBounds:
     m_Center: {x: 0.00000011920929, y: 0, z: 0}
     m_Extent: {x: 1.6, y: 0.39999962, z: 0}
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 2546234867403955353}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

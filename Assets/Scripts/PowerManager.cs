@@ -10,7 +10,7 @@ public class PowerManager : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] TextMeshProUGUI killText;
     [SerializeField] private float currentHolyness;
-    [SerializeField] private float decreaseHolyness = 5;
+    [SerializeField] private float decreaseHolyness = 2.5f;
     [SerializeField] GameObject glockImage;
 
     NewWeaponManager weaponManager;

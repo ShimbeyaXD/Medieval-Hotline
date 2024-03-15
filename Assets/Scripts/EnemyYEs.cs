@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Linq.Expressions;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class EnemyYEs : MonoBehaviour
 {
@@ -56,6 +53,7 @@ public class EnemyYEs : MonoBehaviour
     FollowTarget followTarget;
     AudioSource audioSource;
     Animator spriteAnimator;
+    Animator stunAnimator;
     EnemyBehavior enemyBehavior;
     SFXManager sfxManager;
     Attack playerAttack;
@@ -67,14 +65,15 @@ public class EnemyYEs : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMovement>().transform;
 
-        if (gameObject.transform.GetChild(1) != null && gameObject.name == "AttackCollider")
+        if (gameObject.transform.GetChild(2) != null && gameObject.name == "AttackCollider")
         {
             string message = $"Can't find \"AttackCollider\" on {gameObject}!" + "\nPlease make sure there is a AttackCollider object childed to this object with a BoxCollider2D";
             Debug.LogWarning(message, gameObject);
             return;
         }
-        attackCollider = gameObject.transform.GetChild(1).GetComponent<BoxCollider2D>();
+        attackCollider = gameObject.transform.GetChild(2).GetComponent<BoxCollider2D>();
         spriteAnimator = transform.GetComponentInChildren<Animator>();
+        stunAnimator = transform.GetChild(1).GetComponent<Animator>();
         enemyBehavior = transform.GetComponent<EnemyBehavior>();
         powerManager = FindObjectOfType<PowerManager>();
         followTarget = FindObjectOfType<FollowTarget>();
@@ -134,7 +133,7 @@ public class EnemyYEs : MonoBehaviour
 
         //transform.position = Vector2.MoveTowards(gameObject.transform.position, player.position, speed * Time.deltaTime);
         //Look();
-        if (isRangedEnemy) { RangedCheck(); }
+        if (isRangedEnemy && spriteAnimator.GetBool("Crossbow")) { RangedCheck(); }
         
         else if (!isRangedEnemy) { AttackCheck(); }
 
@@ -182,7 +181,7 @@ public class EnemyYEs : MonoBehaviour
     {
         if (weapon == null) { return; }
 
-        GameObject attackCollider = gameObject.transform.GetChild(1).gameObject;
+        GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
         float dist = Vector3.Distance(player.position, gameObject.transform.position);
 
         if (dist > attackRange || playerAttack.PlayerIsAttacking || playerAttack.PlayerIsPunching)
@@ -249,9 +248,12 @@ public class EnemyYEs : MonoBehaviour
     IEnumerator PunchedCooldown()
     {
         Punched = true;
+        stunAnimator.SetBool("Stun", true);
+
         yield return new WaitForSeconds(3);
 
         Punched = false;
+        stunAnimator.SetBool("Stun", false);
     }
 
     private void DropWeapon()

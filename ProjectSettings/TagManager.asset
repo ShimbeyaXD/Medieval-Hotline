@@ -16,6 +16,7 @@ TagManager:
   - Glock
   - Particles
   - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX

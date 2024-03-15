@@ -109,6 +109,7 @@ public class NewWeaponManager : MonoBehaviour
                 weaponSprite = crossBow;
                 //ChangeSprite(ray.collider.gameObject);
 
+                attack.ResetArrows();
                 weaponImage.enabled = true;
                 weaponImage.sprite = crossBowImage;
                 HasCrossbow = true;
@@ -177,9 +178,9 @@ public class NewWeaponManager : MonoBehaviour
         torsoAnimator.SetTrigger("Punch");
     }
 
-    public void SetChargingAnimator()
+    public void SetChargingAnimator(bool state)
     {
-        torsoAnimator.SetTrigger("Charge");
+        torsoAnimator.SetBool("Charge", state);
     }
 
     public void Glock()
