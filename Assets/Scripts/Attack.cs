@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.LowLevel;
 
 public class Attack : MonoBehaviour
 {
@@ -31,9 +32,11 @@ public class Attack : MonoBehaviour
     bool isCharging = false;
 
     NewWeaponManager newWeaponManager;
+    PlayerLook playerLook;
     FollowMouse followMouse;
     FollowTarget followTarget;
     PlayerMovement playerMovement;
+    Rigidbody2D myRigidbody;
 
     public int CurrentArrows { get; set; } = 5;
 
@@ -46,9 +49,11 @@ public class Attack : MonoBehaviour
     {
         boxCollider.enabled = false;
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
+        playerLook = GetComponent<PlayerLook>();
         followMouse = FindObjectOfType<FollowMouse>();
         followTarget = FindObjectOfType<FollowTarget>();
         playerMovement = GetComponent<PlayerMovement>();
+        myRigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -60,7 +65,7 @@ public class Attack : MonoBehaviour
             StartCoroutine(KnockbackCooldown());
         }
 
-        if (Input.GetButtonDown("Jump") && !PlayerIsAttacking) // Is charging
+        if (Input.GetButtonDown("Jump") && !PlayerIsAttacking && playerMovement.IsWalking) // Is charging
         {
             StartCoroutine(ChargingTime());
             StartCoroutine(Charge());
@@ -137,19 +142,34 @@ public class Attack : MonoBehaviour
 
     IEnumerator AttackRay()
     {
-        if (true)
+        while (true)
         {
-            attackRay = Physics2D.Raycast(transform.position, followMouse.MousePosition() - (Vector2)transform.position, attackRange, enemyLayer);
-            isCastingRay = true;
-            
-            if (attackRay.collider != null)
-            {
-                attackRay.collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
-            }
-            yield return null;
-        }
+            float offsetMagnitude = 0.9f;
 
-        isCastingRay = false;
+            Vector2 mousePosition = followMouse.MousePosition();
+            Vector2 offset = ((mousePosition - (Vector2)transform.position).normalized) * offsetMagnitude;
+            Vector2 boxPosition = (Vector2)transform.position + offset;
+
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, new Vector2(4f, 4f), 0);
+
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.gameObject.CompareTag("Wall"))
+                {
+                    Debug.Log("Hit " + collider.gameObject.name);
+                    yield break;
+                }
+                else if (collider.gameObject.CompareTag("Enemy"))
+                {
+                    collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+            // https://chat.openai.com/c/9c931eaf-add3-4323-9258-724fb452b832
+            if (!PlayerIsAttacking) { yield break; }
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     IEnumerator KnockbackCooldown()
@@ -167,8 +187,6 @@ public class Attack : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Charge called");
-
             float offsetMagnitude = 1.5f;
 
             Vector2 mousePosition = followMouse.MousePosition();
@@ -204,11 +222,14 @@ public class Attack : MonoBehaviour
         PlayerIsAttacking = state;
         playerMovement.ChangeSpeed(state);
         newWeaponManager.SetChargingAnimator(state);
+        followMouse.FreezeMouse = state;
     }
 
     IEnumerator ChargingTime()
     {
         ChangeCharge(true);
+        playerLook.LockRotation(true);
+
         /*
         isCharging = true;
         PlayerIsPunching = true;
@@ -216,11 +237,13 @@ public class Attack : MonoBehaviour
         playerMovement.ChangeSpeed(true);
         newWeaponManager.SetChargingAnimator(true);
         */
-        
+
 
         yield return new WaitForSeconds(chargeTime);
 
         ChangeCharge(false);
+        playerLook.LockRotation(false);
+
         /*
         isCharging = false;
         PlayerIsAttacking = false;

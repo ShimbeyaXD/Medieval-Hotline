@@ -5,6 +5,7 @@ public class EnemyYEs : MonoBehaviour
 {
     [Header("Enemy Type")]
     [SerializeField] bool isRangedEnemy;
+    [SerializeField] bool isDemonEnemy;
 
     [Header("General")]
     [SerializeField] Transform player;
@@ -45,6 +46,7 @@ public class EnemyYEs : MonoBehaviour
     string droppedWeaponTag;
     bool canShootArrow = true;
     bool once = true;
+    bool once2 = true;
     Sprite weaponSprite;
     BoxCollider2D attackCollider;
     Rigidbody2D rigidbody;
@@ -155,8 +157,10 @@ public class EnemyYEs : MonoBehaviour
         {
             Knockback();
         }
-        else // Player is attacking enemy -> Enemy simply dies!
+        else if (once2) // Player is attacking enemy -> Enemy simply dies!
         {
+            once2 = false;
+
             DropWeapon();
 
             GameObject particle = Instantiate(deathParticles.gameObject, transform.position, Quaternion.identity);
@@ -167,6 +171,7 @@ public class EnemyYEs : MonoBehaviour
             powerManager.KillCount = powerManager.KillCount + 1;
             sfxManager.EnemyDeathSound();
             Death();
+
         }
     }
 
@@ -174,7 +179,7 @@ public class EnemyYEs : MonoBehaviour
     {
         FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform);
 
-        gameObject.SetActive(false);                                                    
+        gameObject.SetActive(false);
     }
 
     void AttackCheck() 
@@ -222,7 +227,6 @@ public class EnemyYEs : MonoBehaviour
         if (enemyBehavior.isChasingTarget && canShootArrow)
         {
             canShootArrow = false;
-            Debug.Log("Enemy is shooting arrow and is chasing target is" + enemyBehavior.isChasingTarget );
 
             StartCoroutine(ShootArrow());
         }

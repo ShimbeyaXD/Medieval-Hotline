@@ -8,11 +8,6 @@ public class BloodManager : MonoBehaviour
 
     [SerializeField] int numInSortingLayer = -25;
 
-    private void Start()
-    {
-        //SpawnBlood(gameObject.transform);
-    }
-
     public void SpawnBlood(Transform pos)
     {
         SpawnCorpse(pos);

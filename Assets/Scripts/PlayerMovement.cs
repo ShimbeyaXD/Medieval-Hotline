@@ -13,13 +13,15 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 movementVector;
 
-    Rigidbody2D rigidbody;
+    Rigidbody2D myRigidbody;
     Animator myAnimator;
     Extraction extraction;
 
+    public bool IsWalking { get; private set; } = false;
+
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = transform.GetChild(0).transform.GetChild(1).GetComponent<Animator>();
         extraction = GetComponent<Extraction>();
         originalSpeed = movementSpeed;
@@ -43,23 +45,25 @@ public class PlayerMovement : MonoBehaviour
         {
             myAnimator.SetBool("isWalking", false);
             FindObjectOfType<SFXManager>().RunningSFX(false);
+            IsWalking = false;
         }
         else
         {
             myAnimator.SetBool("isWalking", true);
             FindObjectOfType<SFXManager>().RunningSFX(true);
+            IsWalking = true;
         }
 
 
         if (isCharging)
         {
-            rigidbody.velocity = new Vector2(movementVector.x, movementVector.y).normalized * chargingSpeed;
+            myRigidbody.velocity = new Vector2(movementVector.x, movementVector.y).normalized * chargingSpeed;
             return;
         }
 
         movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        rigidbody.velocity = new Vector2(movementVector.x, movementVector.y).normalized * movementSpeed;
+        myRigidbody.velocity = new Vector2(movementVector.x, movementVector.y).normalized * movementSpeed;
     }
 
     public void Death() 

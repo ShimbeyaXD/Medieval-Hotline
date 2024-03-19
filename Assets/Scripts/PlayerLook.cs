@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
+    bool lockRotation;
 
     private void Update()
     {
+        if (lockRotation == true) { return; }
         Look();
     }
 
@@ -21,5 +21,10 @@ public class PlayerLook : MonoBehaviour
         float AngleDeg = (180 / Mathf.PI) * AngleRad;
 
         this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg + 180);
+    }
+
+    public void LockRotation(bool state)
+    {
+        lockRotation = state;
     }
 }
