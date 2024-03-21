@@ -204,7 +204,7 @@ public class EnemyYEs : MonoBehaviour
 
     IEnumerator Attack() 
     {
-        yield return new WaitForSeconds(attackCoolDown);
+      new WaitForSeconds(attackCoolDown);
 
         float dist = Vector3.Distance(player.position, gameObject.transform.position);
 
