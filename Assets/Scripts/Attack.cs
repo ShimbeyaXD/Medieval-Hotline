@@ -44,6 +44,8 @@ public class Attack : MonoBehaviour
 
     public bool PlayerIsAttacking { get; private set; } = false;
 
+    public bool PlayerIsCharging { get; private set; } = false;
+
 
     void Start()
     {
@@ -226,7 +228,7 @@ public class Attack : MonoBehaviour
     IEnumerator ChargingTime()
     {
         ChangeCharge(true);
-        playerLook.LockRotation(true);
+        PlayerIsCharging = true;
 
         /*
         isCharging = true;
@@ -240,7 +242,8 @@ public class Attack : MonoBehaviour
         yield return new WaitForSeconds(chargeTime);
 
         ChangeCharge(false);
-        playerLook.LockRotation(false);
+        PlayerIsCharging = false;
+
 
         /*
         isCharging = false;

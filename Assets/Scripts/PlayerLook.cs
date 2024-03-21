@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-    bool lockRotation;
+    Attack playerAttack;
+
+    private void Start()
+    {
+        playerAttack = GetComponent<Attack>();
+    }
 
     private void Update()
     {
-        if (lockRotation == true) { return; }
+        if (playerAttack.PlayerIsCharging) { return; }
         Look();
     }
 
@@ -23,8 +28,4 @@ public class PlayerLook : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg + 180);
     }
 
-    public void LockRotation(bool state)
-    {
-        lockRotation = state;
-    }
 }
