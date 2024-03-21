@@ -50,5 +50,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0a78e9d1b56446d4388e504126d2eead, type: 3}
   - {fileID: 21300000, guid: a109e20d7c0a87f4a886b0b276213071, type: 3}
   - {fileID: 21300000, guid: 59b55e87d17c60c4b93269bd7dec4fdb, type: 3}
-  corpseSprite: {fileID: 21300000, guid: 1daca08fd9b27824bad90e9a4b318e3b, type: 3}
+  corpseSprite: {fileID: 21300000, guid: 14eac1fb7b100704ea2af8243dcce541, type: 3}
   numInSortingLayer: 2

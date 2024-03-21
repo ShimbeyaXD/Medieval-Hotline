@@ -144,13 +144,11 @@ public class Attack : MonoBehaviour
     {
         while (true)
         {
-            float offsetMagnitude = 0.9f;
-
             Vector2 mousePosition = followMouse.MousePosition();
-            Vector2 offset = ((mousePosition - (Vector2)transform.position).normalized) * offsetMagnitude;
+            Vector2 offset = ((mousePosition - (Vector2)transform.position).normalized);
             Vector2 boxPosition = (Vector2)transform.position + offset;
 
-            Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, new Vector2(4f, 4f), 0);
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, new Vector2(attackRange, attackRange), 0);
 
             foreach (Collider2D collider in colliders)
             {

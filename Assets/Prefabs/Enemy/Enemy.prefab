@@ -345,8 +345,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 545075103557056437}
   - {fileID: 762000985386988873}
@@ -470,6 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRangedEnemy: 0
+  isDemonEnemy: 0
   player: {fileID: 0}
   weapon: {fileID: 579394101672748834, guid: 36a872ee9e124e043a1198fe5acb3521, type: 3}
   speed: 2

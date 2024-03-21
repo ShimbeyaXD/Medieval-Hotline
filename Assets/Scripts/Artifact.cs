@@ -12,7 +12,6 @@ public class Artifact : MonoBehaviour
 
     private void Start()
     {
-        if(artifactImage == null) { return; }
         artifactImage.enabled = false;
     }
 
