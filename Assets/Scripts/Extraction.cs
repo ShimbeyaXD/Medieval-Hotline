@@ -16,8 +16,6 @@ public class Extraction : MonoBehaviour
 
     void Start()
     {
-        if(continueButton == null) { return; }
-
         continueButton.gameObject.SetActive(false);
 
         roundTimer = FindObjectOfType<RoundTimer>();
@@ -27,8 +25,6 @@ public class Extraction : MonoBehaviour
 
     void Update()
     {
-        if (continueButton == null) { return; }
-
         if (Input.GetKeyDown(KeyCode.E) && artifact.LevelCleared)
         {
             RaycastHit2D ray = Physics2D.BoxCast(transform.position, new Vector2(2, 2), 0, Vector2.up, detectionDistance, exitLayer);
