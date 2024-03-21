@@ -168,15 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308f604538e79ca4b8bd1a0126998a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boodSprites:
-  - {fileID: 21300000, guid: 745b51b14e1855d478c276ad13fbba16, type: 3}
-  - {fileID: 21300000, guid: 31dff35044102e841a986fc6be894e23, type: 3}
-  - {fileID: 21300000, guid: 0a78e9d1b56446d4388e504126d2eead, type: 3}
-  - {fileID: 21300000, guid: a109e20d7c0a87f4a886b0b276213071, type: 3}
-  - {fileID: 21300000, guid: 59b55e87d17c60c4b93269bd7dec4fdb, type: 3}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!4 &156062851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8469019716099702473, guid: 4ba4077960d55e94ebfa8778dfc8871c, type: 3}
@@ -669,7 +660,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &299733912
@@ -1179,7 +1170,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1309310984
@@ -1480,7 +1471,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1840727765
@@ -1565,7 +1556,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1850163614
@@ -1645,6 +1636,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 79890264309501146, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 156062851}
     - target: {fileID: 1929692505553037698, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.06
@@ -1687,6 +1682,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3211926483095227674, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
       propertyPath: player
+      value: 
+      objectReference: {fileID: 156062851}
+    - target: {fileID: 5425608030107382398, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
+      propertyPath: target
       value: 
       objectReference: {fileID: 156062851}
     - target: {fileID: 5758338468230608986, guid: 4b39e9632c285604884b51707467f4f5, type: 3}
