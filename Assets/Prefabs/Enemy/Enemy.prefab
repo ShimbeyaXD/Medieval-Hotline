@@ -490,7 +490,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackRange: 4
-  attackCoolDown: 2
+  attackCoolDown: 1
   particleParent: {fileID: 0}
   deathParticles: {fileID: 2380737317711734344, guid: b6d0b9429d97abc4499b9342e550bfc7, type: 3}
   swordSprite: {fileID: 21300000, guid: cf2f83770b6472749a6260633060c88c, type: 3}

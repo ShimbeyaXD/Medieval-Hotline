@@ -162,6 +162,7 @@ public class NewWeaponManager : MonoBehaviour
         newProjectile.transform.GetChild(0).gameObject.tag = projectileTag;
         newProjectile.GetComponentInChildren<SpriteRenderer>().sprite = weaponSprite;
         newProjectile.GetComponent<WeaponProjectile>().Velocity(throwPower);
+        newProjectile.transform.localScale = new Vector2(0.8f, 0.8f);
         //newProjectile.gameObject.layer = projectileLayer;
         //newProjectile.GetComponent<Rigidbody2D>().AddForce(followMouse.MousePosition() * throwPower);
 
