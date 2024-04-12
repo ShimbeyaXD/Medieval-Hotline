@@ -9,12 +9,15 @@ public class Artifact : MonoBehaviour
     [SerializeField] Image artifactImage;
     [SerializeField] Sprite artifactSprite;
 
+    [SerializeField] GameObject dialogHandler;
+
     public bool LevelCleared { get; private set; }
 
     private void Start()
     {
         LevelCleared = false;
         artifactImage.enabled = false;
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -25,6 +28,8 @@ public class Artifact : MonoBehaviour
             artifactImage.enabled = true;
             artifactImage.sprite = artifactSprite;
             other.gameObject.SetActive(false);
+
+            dialogHandler.SetActive(true);
         }
     }
 

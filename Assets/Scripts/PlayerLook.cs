@@ -13,7 +13,10 @@ public class PlayerLook : MonoBehaviour
 
     private void Update()
     {
+
+        if (lockRotation == true || Time.timeScale == 0) { return; }
         if (playerAttack.PlayerIsCharging || playerMovement.Dead) { return; }
+
         Look();
     }
 
