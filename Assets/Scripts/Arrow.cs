@@ -3,6 +3,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     [SerializeField] bool isEnemyArrow;
+    [SerializeField] CapsuleCollider2D capsuleCollider;
 
     bool hasHit = false;
 
@@ -32,5 +33,6 @@ public class Arrow : MonoBehaviour
         animator.SetTrigger("Hit");
         hasHit = true;
         rigidbody.bodyType = RigidbodyType2D.Static;
+        capsuleCollider.isTrigger = true;
     }
 }

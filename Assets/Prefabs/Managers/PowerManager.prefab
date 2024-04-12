@@ -48,5 +48,5 @@ MonoBehaviour:
   animator: {fileID: 0}
   killText: {fileID: 0}
   currentHolyness: 0
-  decreaseHolyness: 7
+  decreaseHolyness: 2.5
   glockImage: {fileID: 0}

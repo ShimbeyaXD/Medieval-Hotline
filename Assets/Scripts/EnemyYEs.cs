@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyYEs : MonoBehaviour
@@ -47,6 +48,7 @@ public class EnemyYEs : MonoBehaviour
     bool canShootArrow = true;
     bool once = true;
     bool once2 = true;
+    bool once3 = true;
     Sprite weaponSprite;
     BoxCollider2D attackCollider;
     Rigidbody2D rigidbody;
@@ -137,7 +139,7 @@ public class EnemyYEs : MonoBehaviour
         //Look();
         if (isRangedEnemy && spriteAnimator.GetBool("Crossbow")) { RangedCheck(); }
         
-        else if (!isRangedEnemy) { AttackCheck(); }
+        else if (!isRangedEnemy) { StartAttackEncounter(); }
 
     }
 
@@ -177,14 +179,25 @@ public class EnemyYEs : MonoBehaviour
 
     private void Death()
     {
-        FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform);
+        FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform, gameObject);
 
         gameObject.SetActive(false);
     }
 
-    void AttackCheck() 
+    void StartAttackEncounter() 
     {
-        if (weapon == null) { return; }
+        if (once3)
+        {
+            once3 = false;
+            StartCoroutine(Attack());
+        }
+    }
+
+    IEnumerator Attack() 
+    {
+        yield return new WaitForSeconds(attackCoolDown);
+
+        if (weapon == null) { yield break; }
 
         GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
         float dist = Vector3.Distance(player.position, gameObject.transform.position);
@@ -194,32 +207,14 @@ public class EnemyYEs : MonoBehaviour
             attackCollider.SetActive(false);
         }
 
-        else if (dist <= attackRange) 
+        else if (dist <= attackRange)
         {
             Debug.Log("Playerattacking is " + playerAttack.PlayerIsAttacking + " Enemy is attacking");
 
-            attackCollider.SetActive(true); 
-        }
-    }
-
-    IEnumerator Attack() 
-    {
-        yield return new WaitForSeconds(attackCoolDown);
-
-        float dist = Vector3.Distance(player.position, gameObject.transform.position);
-
-        RaycastHit2D attackRay = Physics2D.Raycast(transform.position, transform.position - attackCollider.transform.position, attackRange, playerLayer);
-        Debug.DrawLine(transform.position, attackRay.point, Color.red);
-
-        if (attackRay.collider != null)
-        {
-            spriteAnimator.SetTrigger("Attack");
-
-            FindObjectOfType<PlayerMovement>().Death();
-            yield return null;
+            attackCollider.SetActive(true);
         }
 
-        yield return null;
+        once3 = true;
     }
 
     void RangedCheck()
@@ -234,6 +229,8 @@ public class EnemyYEs : MonoBehaviour
 
     IEnumerator ShootArrow()
     {
+        yield return new WaitForSeconds(attackCoolDown);
+
         Vector3 direction = attackCollider.transform.position - transform.position;
 
         float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
@@ -243,8 +240,6 @@ public class EnemyYEs : MonoBehaviour
         //newProjectile.gameObject.layer = LayerMask.GetMask("EnemyArrow");
 
         newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
-
-        yield return new WaitForSeconds(attackCoolDown);
 
         canShootArrow = true;
     }
@@ -262,7 +257,7 @@ public class EnemyYEs : MonoBehaviour
 
     private void DropWeapon()
     {
-        if (weaponSprite != null && once) // Enemy drops its weapon...
+        if (weaponSprite != null && once && !isDemonEnemy) // Enemy drops its weapon...
         {
             once = false;
 
@@ -274,6 +269,7 @@ public class EnemyYEs : MonoBehaviour
             newProjectile.GetComponentInChildren<SpriteRenderer>().sprite = weaponSprite;
             newProjectile.GetComponent<WeaponProjectile>().Velocity(0);
             newProjectile.GetComponent<WeaponProjectile>().GroundWeapon();
+            newProjectile.transform.localScale = new Vector2(0.8f, 0.8f);
 
             spriteAnimator.SetBool("Sword", false);
             spriteAnimator.SetBool("Axe", false);
@@ -287,5 +283,15 @@ public class EnemyYEs : MonoBehaviour
     {
         DropWeapon();
         StartCoroutine(PunchedCooldown());
+    }
+
+    public bool ReturnDemonType()
+    {
+        return isDemonEnemy;
+    }
+
+    public bool ReturnRangedType()
+    {
+        return isRangedEnemy;
     }
 }

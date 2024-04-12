@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.LowLevel;
 
 public class Attack : MonoBehaviour
 {
@@ -44,6 +41,8 @@ public class Attack : MonoBehaviour
 
     public bool PlayerIsAttacking { get; private set; } = false;
 
+    public bool PlayerIsCharging { get; private set; } = false;
+
 
     void Start()
     {
@@ -60,19 +59,14 @@ public class Attack : MonoBehaviour
     {
         CurrentArrows = (int)Mathf.Clamp(CurrentArrows, 0, Mathf.Infinity);
 
+        /*
         if (Input.GetMouseButton(0) && !newWeaponManager.AnyWeapon && !PlayerIsPunching) // Is punching
         {
             StartCoroutine(KnockbackCooldown());
         }
+        */
 
-        if (Input.GetButtonDown("Jump") && !PlayerIsAttacking && playerMovement.IsWalking) // Is charging
-        {
-            StartCoroutine(ChargingTime());
-            StartCoroutine(Charge());
 
-            // enable animation
-            // raise the movement speed 
-        }
         if (PlayerIsAttacking && !isCharging)
         {
             StopCoroutine(ChargingTime());
@@ -140,17 +134,21 @@ public class Attack : MonoBehaviour
         //boxCollider.enabled = false;
     }
 
+    public void EnableCharge()
+    {
+        StartCoroutine(ChargingTime());
+        StartCoroutine(Charge());
+    }
+
     IEnumerator AttackRay()
     {
         while (true)
         {
-            float offsetMagnitude = 0.9f;
-
             Vector2 mousePosition = followMouse.MousePosition();
-            Vector2 offset = ((mousePosition - (Vector2)transform.position).normalized) * offsetMagnitude;
+            Vector2 offset = ((mousePosition - (Vector2)transform.position).normalized);
             Vector2 boxPosition = (Vector2)transform.position + offset;
 
-            Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, new Vector2(4f, 4f), 0);
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, new Vector2(attackRange, attackRange), 0);
 
             foreach (Collider2D collider in colliders)
             {
@@ -223,12 +221,12 @@ public class Attack : MonoBehaviour
         playerMovement.ChangeSpeed(state);
         newWeaponManager.SetChargingAnimator(state);
         followMouse.FreezeMouse = state;
+        PlayerIsCharging = state;
     }
 
     IEnumerator ChargingTime()
     {
         ChangeCharge(true);
-        playerLook.LockRotation(true);
 
         /*
         isCharging = true;
@@ -242,7 +240,7 @@ public class Attack : MonoBehaviour
         yield return new WaitForSeconds(chargeTime);
 
         ChangeCharge(false);
-        playerLook.LockRotation(false);
+
 
         /*
         isCharging = false;

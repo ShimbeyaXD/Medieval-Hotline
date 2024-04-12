@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 12f;
     [SerializeField] float chargingSpeed = 18f;
+    [SerializeField] float reloadSceneDelay = 2;
+
+    public bool Dead {  get; private set; }
 
     float horizontal;
     float vertical;
@@ -35,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (extraction.LevelEnded) return;
+        if (extraction.LevelEnded || Dead) return;
         Move();       
     }
 
@@ -68,7 +72,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death() 
     {
-        return;
+
+        StartCoroutine(ReloadScene());
+    }
+
+    IEnumerator ReloadScene()
+    {
+        Dead = true;
+        yield return new WaitForSeconds(reloadSceneDelay);
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
