@@ -63,11 +63,12 @@ public class PlayerMovement : MonoBehaviour
 
         movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        myRigidbody.velocity = new Vector2(movementVector.x, movementVector.y).normalized * movementSpeed;
+        myRigidbody.velocity = new Vector2(movementVector.x, movementVector.y).normalized * (movementSpeed * Time.timeScale);
     }
 
     public void Death() 
     {
+        return;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
