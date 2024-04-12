@@ -14,6 +14,8 @@ public class PowerManager : MonoBehaviour
     [SerializeField] GameObject glockImage;
 
     NewWeaponManager weaponManager;
+    PlayerMovement playerMovement;
+    Attack playerAttack;
 
     bool canRecieveGlock = false;
 
@@ -25,7 +27,9 @@ public class PowerManager : MonoBehaviour
 
    void Start() 
    {
-        weaponManager = FindAnyObjectByType<NewWeaponManager>();
+        weaponManager = FindObjectOfType<NewWeaponManager>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerAttack = FindObjectOfType<Attack>();
 
         KillCount = 0;
         currentHolyness = 0f;
@@ -37,6 +41,8 @@ public class PowerManager : MonoBehaviour
 
     private void Update()
     {
+        //currentHolyness = 100f; // DEBUG PURPOSE - TA BORT SEN 
+
         killText.text = "Kills: " + KillCount;
 
         HereMyBOIIIii();
@@ -56,12 +62,15 @@ public class PowerManager : MonoBehaviour
             glockImage.gameObject.SetActive(false);
         }
 
-        if (canRecieveGlock)
+        if (Input.GetButtonDown("Jump") && !playerAttack.PlayerIsAttacking && playerMovement.IsWalking && canRecieveGlock)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                RecieveGlock();
-            }
+            playerAttack.EnableCharge();
+            //RecieveGlock();
+            canRecieveGlock = false;
+            glockImage.transform.GetChild(0).GetComponent<Animator>().SetBool("isActive", false);
+            animator.SetTrigger("Add");
+            currentHolyness = 0;
+            holyometer.value = currentHolyness;
         }
     }
 
@@ -80,13 +89,9 @@ public class PowerManager : MonoBehaviour
         }
     }
     
-    void RecieveGlock()
+    void RecieveGlock() // OBSELETE
     {
-        canRecieveGlock = false;
-        glockImage.transform.GetChild(0).GetComponent<Animator>().SetBool("isActive", false);
-        animator.SetTrigger("Add");
         weaponManager.Glock();
-        currentHolyness = 0;
     }
 
     IEnumerator HolynessFade() 

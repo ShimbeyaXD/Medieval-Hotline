@@ -4,13 +4,17 @@ using UnityEngine;
 public class BloodManager : MonoBehaviour
 {
     [SerializeField] List<Sprite> boodSprites = new List<Sprite>();
-    [SerializeField] Sprite corpseSprite;
+    [SerializeField] List<Sprite> corpseSprite = new List<Sprite>();
+    [SerializeField] Sprite demonSprite;
 
     [SerializeField] float objectSize = 0.8f;
     [SerializeField] int numInSortingLayer = -25;
 
-    public void SpawnBlood(Transform pos)
+    GameObject enemy;
+
+    public void SpawnBlood(Transform pos, GameObject sender)
     {
+        enemy = sender;
         SpawnCorpse(pos);
 
         int i = Random.Range(0, boodSprites.Count);
@@ -31,7 +35,18 @@ public class BloodManager : MonoBehaviour
         corpse.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
         corpse.transform.localScale = new Vector2(objectSize, objectSize);
         SpriteRenderer sp = corpse.AddComponent<SpriteRenderer>();
-        sp.sprite = corpseSprite;
+
+        if (enemy.GetComponent<EnemyYEs>().ReturnDemonType())
+        {
+            sp.sprite = demonSprite;
+        }
+        else
+        {
+            int randomNum = Random.Range(0, 2);
+            if (randomNum <= 0) { sp.sprite = corpseSprite[0]; }
+            if (randomNum >= 1) { sp.sprite = corpseSprite[1]; }
+        }
+
         int newCorpsSortingLayer = numInSortingLayer;
         newCorpsSortingLayer++;
         sp.sortingOrder = newCorpsSortingLayer;

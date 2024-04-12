@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.LowLevel;
 
 public class Attack : MonoBehaviour
 {
@@ -62,19 +59,14 @@ public class Attack : MonoBehaviour
     {
         CurrentArrows = (int)Mathf.Clamp(CurrentArrows, 0, Mathf.Infinity);
 
+        /*
         if (Input.GetMouseButton(0) && !newWeaponManager.AnyWeapon && !PlayerIsPunching) // Is punching
         {
             StartCoroutine(KnockbackCooldown());
         }
+        */
 
-        if (Input.GetButtonDown("Jump") && !PlayerIsAttacking && playerMovement.IsWalking) // Is charging
-        {
-            StartCoroutine(ChargingTime());
-            StartCoroutine(Charge());
 
-            // enable animation
-            // raise the movement speed 
-        }
         if (PlayerIsAttacking && !isCharging)
         {
             StopCoroutine(ChargingTime());
@@ -140,6 +132,12 @@ public class Attack : MonoBehaviour
         StopCoroutine(AttackRay());
 
         //boxCollider.enabled = false;
+    }
+
+    public void EnableCharge()
+    {
+        StartCoroutine(ChargingTime());
+        StartCoroutine(Charge());
     }
 
     IEnumerator AttackRay()
@@ -223,12 +221,12 @@ public class Attack : MonoBehaviour
         playerMovement.ChangeSpeed(state);
         newWeaponManager.SetChargingAnimator(state);
         followMouse.FreezeMouse = state;
+        PlayerIsCharging = state;
     }
 
     IEnumerator ChargingTime()
     {
         ChangeCharge(true);
-        PlayerIsCharging = true;
 
         /*
         isCharging = true;
@@ -242,7 +240,6 @@ public class Attack : MonoBehaviour
         yield return new WaitForSeconds(chargeTime);
 
         ChangeCharge(false);
-        PlayerIsCharging = false;
 
 
         /*

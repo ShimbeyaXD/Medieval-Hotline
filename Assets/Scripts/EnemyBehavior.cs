@@ -6,6 +6,8 @@ public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float detectionAndSightRange = 5f;
+    [SerializeField] Animator legAnimator;
+    [SerializeField] Animator torsoAnimator;
 
     [Header("Knockback Attributes")]
     [SerializeField] float knockbackCooldown = 3;
@@ -13,7 +15,6 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] LayerMask wallLayer;
 
     NavMeshAgent agent;
-    Animator anim;
     EnemyYEs enemyYes;
     Rigidbody2D myRigidbody;
 
@@ -26,16 +27,29 @@ public class EnemyBehavior : MonoBehaviour
         target = FindObjectOfType<PlayerMovement>().transform;
         enemyYes = GetComponent<EnemyYEs>();
         myRigidbody = GetComponent<Rigidbody2D>();
-
-        anim = GetComponentInChildren<Animator>();
+        legAnimator = transform.GetChild(1).GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        legAnimator.SetBool("isWalking", false);
+        if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
+
     }
 
     void Update()
     {
+        if (!isChasingTarget)
+        {
+            float xRotation = transform.rotation.x;
+            float yRotation = transform.rotation.y;
 
+            xRotation = Mathf.Clamp(xRotation, 0, 0);
+            yRotation = Mathf.Clamp(yRotation, 0, 0);
+            Vector2 clampRotation = new Vector2(xRotation, yRotation);
+
+            transform.rotation = Quaternion.Euler(clampRotation);
+        }
         //Debug.Log("update pos is "+ agent.updatePosition);
         //Debug.Log("Enemypunched is " + enemyYes.Punched);
 
@@ -56,6 +70,9 @@ public class EnemyBehavior : MonoBehaviour
             agent.updatePosition = true;
             agent.updateRotation = true;
             once = true;
+
+            legAnimator.SetBool("isWalking", true);
+            if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", true); }
         }
 
         UpdateAnimation();
@@ -90,6 +107,7 @@ public class EnemyBehavior : MonoBehaviour
     private void FollowTarget()
     {
         agent.updatePosition = true;
+
         if (!enemyYes.Punched) { agent.SetDestination(target.position); } 
     }
 
@@ -110,12 +128,19 @@ public class EnemyBehavior : MonoBehaviour
             timeSinceStarted += Time.deltaTime;
         }
 
-        // alex var h�r
-        agent.updatePosition = false;
-        isChasingTarget = false;
-
+        StopFollowing();
 
         //myRigidbody.AddForce(knockbackDirection.normalized * 100000);
+    }
+
+    public void StopFollowing()
+    {
+        // alex var h�r
+        //agent.isStopped = true;
+        agent.updatePosition = false;
+        isChasingTarget = false;
+        legAnimator.SetBool("isWalking", false);
+        if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
     }
 
     private void UpdateRotation()
@@ -150,6 +175,9 @@ public class EnemyBehavior : MonoBehaviour
 
             myRigidbody.velocity = -knockbackDirection.normalized * knockbackForce;
             once = false;
+
+            legAnimator.SetBool("isWalking", false);
+            if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
         }
     }
 

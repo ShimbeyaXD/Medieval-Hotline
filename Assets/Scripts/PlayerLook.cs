@@ -3,15 +3,17 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
     Attack playerAttack;
+    PlayerMovement playerMovement;
 
     private void Start()
     {
         playerAttack = GetComponent<Attack>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
     }
 
     private void Update()
     {
-        if (playerAttack.PlayerIsCharging) { return; }
+        if (playerAttack.PlayerIsCharging || playerMovement.Dead) { return; }
         Look();
     }
 

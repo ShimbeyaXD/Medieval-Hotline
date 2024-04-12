@@ -1,3 +1,4 @@
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class Artifact : MonoBehaviour
 
     private void Start()
     {
+        LevelCleared = false;
         artifactImage.enabled = false;
     }
 

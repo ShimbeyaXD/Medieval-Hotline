@@ -179,7 +179,7 @@ public class EnemyYEs : MonoBehaviour
 
     private void Death()
     {
-        FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform);
+        FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform, gameObject);
 
         gameObject.SetActive(false);
     }
@@ -229,6 +229,8 @@ public class EnemyYEs : MonoBehaviour
 
     IEnumerator ShootArrow()
     {
+        yield return new WaitForSeconds(attackCoolDown);
+
         Vector3 direction = attackCollider.transform.position - transform.position;
 
         float angle = Mathf.Rad2Deg * (Mathf.Atan2(direction.y, direction.x));
@@ -238,8 +240,6 @@ public class EnemyYEs : MonoBehaviour
         //newProjectile.gameObject.layer = LayerMask.GetMask("EnemyArrow");
 
         newProjectile.GetComponent<Rigidbody2D>().AddForce(direction.normalized * shootForce);
-
-        yield return new WaitForSeconds(attackCoolDown);
 
         canShootArrow = true;
     }
@@ -257,7 +257,7 @@ public class EnemyYEs : MonoBehaviour
 
     private void DropWeapon()
     {
-        if (weaponSprite != null && once) // Enemy drops its weapon...
+        if (weaponSprite != null && once && !isDemonEnemy) // Enemy drops its weapon...
         {
             once = false;
 
@@ -283,5 +283,15 @@ public class EnemyYEs : MonoBehaviour
     {
         DropWeapon();
         StartCoroutine(PunchedCooldown());
+    }
+
+    public bool ReturnDemonType()
+    {
+        return isDemonEnemy;
+    }
+
+    public bool ReturnRangedType()
+    {
+        return isRangedEnemy;
     }
 }
