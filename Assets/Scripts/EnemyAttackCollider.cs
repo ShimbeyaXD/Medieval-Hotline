@@ -49,7 +49,6 @@ public class EnemyAttackCollider : MonoBehaviour
     void KillPlayer()
     {
         followTarget.StartShake(0.2f, 0.5f);
-        newWeaponManager.SetDeadAnimator();
         enemyBehaviour.StopFollowing();
     }
 }

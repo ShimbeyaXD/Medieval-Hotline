@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D myRigidbody;
     Animator myAnimator;
     Extraction extraction;
+    NewWeaponManager newWeaponManager;
 
     public bool IsWalking { get; private set; } = false;
 
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = transform.GetChild(0).transform.GetChild(1).GetComponent<Animator>();
         extraction = GetComponent<Extraction>();
         originalSpeed = movementSpeed;
+        newWeaponManager = FindObjectOfType<NewWeaponManager>();
     }
 
     private void Update()
@@ -74,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
     {
         return;
         StartCoroutine(ReloadScene());
+        newWeaponManager.SetDeadAnimator();
     }
 
     IEnumerator ReloadScene()
