@@ -47,7 +47,7 @@ public class DialogManager : MonoBehaviour
             }
             else 
             { 
-              StopAllCoroutines();
+                StopAllCoroutines();
                 talkingAnimator.SetBool("isTalk", false);
                 textComponent.text = justATest.Lines[i];
             }
@@ -58,7 +58,17 @@ public class DialogManager : MonoBehaviour
 
     IEnumerator TypeLine() 
     {
-        talkingAnimator.SetBool("isTalk", true);
+        if (gameScene) 
+        {
+            talkingAnimator.SetBool("isTalk", false);
+            talkingAnimator.SetBool("isTalkInGame", true);
+        }
+        else 
+        {
+            talkingAnimator.SetBool("isTalk", true);
+            talkingAnimator.SetBool("isTalkInGame", false);
+        }
+
         
       foreach (char c in line) 
       {
@@ -67,6 +77,7 @@ public class DialogManager : MonoBehaviour
       }
        
         talkingAnimator.SetBool("isTalk", false);
+        talkingAnimator.SetBool("isTalkInGame", false);
     }
 
     private void NextLine()

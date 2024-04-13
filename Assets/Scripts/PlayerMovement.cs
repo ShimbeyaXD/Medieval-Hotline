@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death() 
     {
-
+        return;
         StartCoroutine(ReloadScene());
     }
 
