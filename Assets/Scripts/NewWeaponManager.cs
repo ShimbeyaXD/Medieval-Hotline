@@ -185,7 +185,7 @@ public class NewWeaponManager : MonoBehaviour
     }
 
     public void SetChargingAnimator(bool state)
-    {
+    {   
         torsoAnimator.SetBool("Charge", state);
     }
 
