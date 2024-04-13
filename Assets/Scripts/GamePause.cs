@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GamePause : MonoBehaviour
 {
     [SerializeField] private bool paused;
-    [SerializeField] DialogManager dialogManger;
+    [SerializeField] DialogueManager dialogueManager;
 
  
 
@@ -22,7 +19,7 @@ public class GamePause : MonoBehaviour
             Time.timeScale = 1f;
         }
 
-        if(dialogManger.GetIsTalkingToPope() == true) { paused = true; } else { paused = false; }
+        if(dialogueManager.GetIsTalkingToPope() == true) { paused = true; } else { paused = false; }
 
         Debug.Log(paused);
     }

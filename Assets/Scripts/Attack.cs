@@ -57,6 +57,8 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
+        if (playerMovement.Dead) return;
+        
         CurrentArrows = (int)Mathf.Clamp(CurrentArrows, 0, Mathf.Infinity);
 
         /*
@@ -72,7 +74,7 @@ public class Attack : MonoBehaviour
             StopCoroutine(ChargingTime());
         }
 
-        if (Input.GetMouseButtonDown(0) && newWeaponManager.AnyWeapon)
+        if (Input.GetButtonDown("Fire1") && newWeaponManager.AnyWeapon) // Fire
         {
             if (newWeaponManager.HasWeapon)
             {
@@ -92,7 +94,7 @@ public class Attack : MonoBehaviour
             {
                 if (CurrentArrows-- > 0)
                 {
-                    followTarget.StartShake(0.2f, 0.5f);
+                    followTarget.StartShake(0.4f, 1.7f);
                     FindObjectOfType<SFXManager>().PlaySFX("Gun");
                     ShootArrow(bullet);
                 }

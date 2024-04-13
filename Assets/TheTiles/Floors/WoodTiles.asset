@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: WoodTiles
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 73528f08288c9724eb5cee21c2663568, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4910ef9d4a81f8f41afbb569d7499074, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

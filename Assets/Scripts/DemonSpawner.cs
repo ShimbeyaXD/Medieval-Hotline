@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DemonSpawner : MonoBehaviour
@@ -34,20 +33,8 @@ public class DemonSpawner : MonoBehaviour
     {
         StartCoroutine(PlayAnimation());
 
-
         // Spawn bao's demons, maybe make a collecrtive script to reference one instead of 1 million 
     }
-
-    public void SpawnDemons()
-    {
-        if (once2)
-        {
-            once2 = false;
-            Debug.Log("Start spanw");
-            StartCoroutine(Spawning());
-        }
-    }
-
 
     IEnumerator PlayAnimation()
     {
@@ -59,6 +46,15 @@ public class DemonSpawner : MonoBehaviour
         }
 
         yield break;
+    }
+
+    public void SpawnDemons()
+    {
+        if (once2)
+        {
+            once2 = false;
+            StartCoroutine(Spawning());
+        }
     }
 
     IEnumerator Spawning()

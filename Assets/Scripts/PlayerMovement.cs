@@ -8,12 +8,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float chargingSpeed = 18f;
     [SerializeField] float reloadSceneDelay = 2;
 
-    public bool Dead {  get; private set; }
+    public bool Dead { get; private set; }
 
     float horizontal;
     float vertical;
     float originalSpeed;
     bool isCharging = false;
+    bool once = true;
 
     Vector2 movementVector;
 
@@ -43,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (extraction.LevelEnded || Dead) return;
-        Move();       
+        Move();
     }
 
     void Move()
@@ -73,11 +74,21 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody.velocity = new Vector2(movementVector.x, movementVector.y).normalized * (movementSpeed * Time.timeScale);
     }
 
-    public void Death() 
+    public void Death()
     {
-        myRigidbody.isKinematic = true;
-        StartCoroutine(ReloadScene());
-        newWeaponManager.SetDeadAnimator();
+        if (once)
+        {
+            once = false;
+            myRigidbody.isKinematic = true;
+            myRigidbody.velocity = Vector3.zero;
+            newWeaponManager.SetDeadAnimator();
+            StartCoroutine(ReloadScene());
+
+            if (FindObjectOfType<HellMode>().gameObject != null)
+            {
+                FindObjectOfType<HellMode>().FillOpacity();
+            }
+        }
     }
 
     IEnumerator ReloadScene()
@@ -102,14 +113,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void CinamaticWalk() 
+    public void CinamaticWalk()
     {
         myAnimator.SetBool("isWalking", true);
         IsOpeningAnim = true;
         Debug.Log("Walk did walk");
     }
 
-    public void CinamaticWalkFalse() 
+    public void CinamaticWalkFalse()
     {
         myAnimator.SetBool("isWalking", false);
         IsOpeningAnim = false;

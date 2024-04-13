@@ -4,12 +4,19 @@ using UnityEngine.UI;
 
 public class Artifact : MonoBehaviour
 {
+    [Header("Parameters")]
     [SerializeField] float pickupDistance = 1.0f;
+
+    [Header("Artifact Attributes")]
     [SerializeField] LayerMask artifactLayer;
     [SerializeField] Image artifactImage;
     [SerializeField] Sprite artifactSprite;
 
-    [SerializeField] GameObject dialogHandler;
+    [Header("DialogueSystem")]
+    [SerializeField] GameObject dialogueManager;
+
+    PlayerMovement playerMovement;
+    ObjectiveUI objectiveUI;
 
     public bool LevelCleared { get; private set; }
 
@@ -17,19 +24,24 @@ public class Artifact : MonoBehaviour
     {
         LevelCleared = false;
         artifactImage.enabled = false;
+        playerMovement = GetComponent<PlayerMovement>();
 
+        objectiveUI = FindObjectOfType<ObjectiveUI>();
+        objectiveUI.ObjectiveImage(artifactSprite);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (playerMovement.Dead) return;
+
         if (other.gameObject.CompareTag("Artifact"))
         {
             LevelCleared = true;
             artifactImage.enabled = true;
             artifactImage.sprite = artifactSprite;
-            other.gameObject.SetActive(false);
+            dialogueManager.SetActive(true);
 
-            dialogHandler.SetActive(true);
+            other.gameObject.SetActive(false);
         }
     }
 

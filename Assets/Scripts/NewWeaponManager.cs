@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class NewWeaponManager : MonoBehaviour
 {
+    [Header("General Weapon Parameters")]
     [SerializeField] float pickupDistance = 1;
     [SerializeField] float throwPower = 100;
     [SerializeField] LayerMask gunLayer;
@@ -37,6 +38,7 @@ public class NewWeaponManager : MonoBehaviour
     FollowMouse followMouse;
     Animator myAnimator;
     Attack attack;
+    PlayerMovement playerMovement;
     
     public bool AnyWeapon { get; private set; }
 
@@ -53,14 +55,17 @@ public class NewWeaponManager : MonoBehaviour
         weaponImage.enabled = false;
         followMouse = FindObjectOfType<FollowMouse>();
         attack = GetComponent<Attack>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
+        if (playerMovement.Dead) return;
+
         if (HasCrossbow || HasGlock || HasWeapon) AnyWeapon = true;
 
-        if (Input.GetMouseButton(1) && AnyWeapon) WeaponThrow();
-        if (Input.GetKeyDown(KeyCode.E) && !AnyWeapon)
+        if (Input.GetButton("Fire2") && AnyWeapon) WeaponThrow(); // Throw
+        if (Input.GetButtonDown("Submit") && !AnyWeapon) // Pickup
         {
             WeaponPickup();
         }
@@ -171,6 +176,7 @@ public class NewWeaponManager : MonoBehaviour
 
     public void SetDeadAnimator()
     {
+        legAnimator.SetBool("isWalking", false);
         torsoAnimator.SetTrigger("Dead");
     }
 

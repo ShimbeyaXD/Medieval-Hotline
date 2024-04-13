@@ -51,7 +51,7 @@ public class EnemyYEs : MonoBehaviour
     bool once3 = true;
     Sprite weaponSprite;
     BoxCollider2D attackCollider;
-    Rigidbody2D rigidbody;
+    Rigidbody2D myRigidbody;
 
     PowerManager powerManager;
     FollowTarget followTarget;
@@ -84,7 +84,7 @@ public class EnemyYEs : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         sfxManager = FindAnyObjectByType<SFXManager>();
         playerAttack = FindObjectOfType<Attack>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        myRigidbody = GetComponent<Rigidbody2D>();
         followMouse = FindObjectOfType<FollowMouse>();
 
         if (weapon == null) { return; }
@@ -249,7 +249,6 @@ public class EnemyYEs : MonoBehaviour
         Punched = true;
         stunAnimator.gameObject.SetActive(true);
         stunAnimator.SetBool("Stun", true);
-        Debug.Log("enemy Stunned");
 
         yield return new WaitForSeconds(3);
 
