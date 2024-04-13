@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     NewWeaponManager newWeaponManager;
 
     public bool IsWalking { get; private set; } = false;
+    public bool IsOpeningAnim { get; private set; } = false;
 
     void Start()
     {
@@ -47,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        if (movementVector.magnitude <= Mathf.Epsilon)
+        if (movementVector.magnitude <= Mathf.Epsilon && !IsOpeningAnim)
         {
             myAnimator.SetBool("isWalking", false);
             FindObjectOfType<SFXManager>().RunningSFX(false);
@@ -99,6 +100,19 @@ public class PlayerMovement : MonoBehaviour
             isCharging = false;
             movementSpeed = originalSpeed;
         }
+    }
+
+    public void CinamaticWalk() 
+    {
+        myAnimator.SetBool("isWalking", true);
+        IsOpeningAnim = true;
+        Debug.Log("Walk did walk");
+    }
+
+    public void CinamaticWalkFalse() 
+    {
+        myAnimator.SetBool("isWalking", false);
+        IsOpeningAnim = false;
     }
 
 }
