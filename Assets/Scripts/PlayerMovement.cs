@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death() 
     {
-        return;
+        myRigidbody.isKinematic = true;
         StartCoroutine(ReloadScene());
         newWeaponManager.SetDeadAnimator();
     }

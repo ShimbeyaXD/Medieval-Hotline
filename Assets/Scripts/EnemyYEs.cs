@@ -75,9 +75,9 @@ public class EnemyYEs : MonoBehaviour
             Debug.LogWarning(message, gameObject);
             return;
         }
-        attackCollider = gameObject.transform.GetChild(2).GetComponent<BoxCollider2D>();
+        attackCollider = gameObject.transform.GetChild(3).GetComponent<BoxCollider2D>();
         spriteAnimator = transform.GetComponentInChildren<Animator>();
-        stunAnimator = transform.GetChild(1).GetComponent<Animator>();
+        stunAnimator = transform.GetChild(2).GetComponent<Animator>();
         enemyBehavior = transform.GetComponent<EnemyBehavior>();
         powerManager = FindObjectOfType<PowerManager>();
         followTarget = FindObjectOfType<FollowTarget>();
@@ -247,7 +247,9 @@ public class EnemyYEs : MonoBehaviour
     IEnumerator PunchedCooldown()
     {
         Punched = true;
+        stunAnimator.gameObject.SetActive(true);
         stunAnimator.SetBool("Stun", true);
+        Debug.Log("enemy Stunned");
 
         yield return new WaitForSeconds(3);
 

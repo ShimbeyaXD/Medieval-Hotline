@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7765170289463223934}
   - component: {fileID: 6724628779277512172}
   m_Layer: 0
-  m_Name: pentagram kopiera (2)
+  m_Name: pentagram (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 5027919016650108414}
   - component: {fileID: 8414014276837454408}
   m_Layer: 0
-  m_Name: pentagram kopiera (1)
+  m_Name: pentagram (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 6492150066199409209}
   - component: {fileID: 8985153550596090710}
   m_Layer: 0
-  m_Name: pentagram kopiera
+  m_Name: 'Crack pentagram '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
