@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Animation/artifact_idle.meta
 guid: 78ecf31897ba78f4db85fd751b188b02
+========
+guid: 265da4736ed8ee64a8f2341358834509
+>>>>>>>> c4b8ab924674b27e91de08e99cd620152bdd705c:Assets/Tiles/OldTiles/Floors.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
