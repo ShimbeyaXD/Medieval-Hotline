@@ -205,7 +205,6 @@ public class Attack : MonoBehaviour
                     collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
                 }
             }
-            // https://chat.openai.com/c/9c931eaf-add3-4323-9258-724fb452b832
             if (!isCharging) { yield break; }
 
             yield return new WaitForEndOfFrame();

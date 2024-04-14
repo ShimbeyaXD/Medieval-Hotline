@@ -20,7 +20,6 @@ public class SFXManager : MonoBehaviour
         
         for (int i = 0; i < clips.Count; i++) 
         {
-            Debug.Log("SFXPlay");
             if (soundName == clips[i].name){
                 audioSource.clip = clips[i];
                 audioSource.Play();

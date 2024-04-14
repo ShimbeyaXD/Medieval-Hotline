@@ -9,6 +9,8 @@ public class Keeper : MonoBehaviour
     int duplicates = 0;
     bool destroyMyself = false;
 
+    [SerializeField] Vector3 objectScale = new Vector3(0.75f, 0.75f, 0.75f);
+
     GameObject systemObject;  // Managers
     GameObject demonObject;   // Objects from Demonphase
     GameObject cultistObject; // Objects from Cultistphase
@@ -21,13 +23,10 @@ public class Keeper : MonoBehaviour
 
     List<EnemyYEs> enemyYes = new List<EnemyYEs>();
 
+    public List<GameObject> cultistList;
+    public List<GameObject> demonList;
 
-
-    public List<GameObject> childrenList;
-
-    public bool GrantCheckpoint { get; private set; } = false;
-
-    public bool DemonPhase { get; set; } = false;
+    public bool GrantCheckpoint { get; set; } = false;
 
     public Vector2 Checkpoint { get; private set; }
 
@@ -58,7 +57,7 @@ public class Keeper : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("DemonPhase " + DemonPhase);
+        Debug.Log("DemonPhase " + GrantCheckpoint);
 
         CheckCurrentScene();
 
@@ -80,18 +79,22 @@ public class Keeper : MonoBehaviour
     {
         if (!GrantCheckpoint) return false;
 
-        for (int i = 0; i < childrenList.Count; i++)
+        if (GrantCheckpoint)
         {
-            if (gameObject.transform.name == childrenList[i].name)
+            for (int i = 0; i < cultistList.Count; i++)
             {
-                destroyMyself = true;
-                break;
-            }
-            else
-            {
-                destroyMyself = false;
+                if (gameObject.transform.name == cultistList[i].name)
+                {
+                    destroyMyself = true;
+                    break;
+                }
+                else
+                {
+                    destroyMyself = false;
+                }
             }
         }
+
 
         return destroyMyself;
     }
@@ -103,47 +106,71 @@ public class Keeper : MonoBehaviour
 
         if (!SearchAndDestroy(gameObject))
         {
-            if (DemonPhase)
+            if (GrantCheckpoint)
             {
                 gameObject.transform.parent = demonObject.transform;
+                demonList.Add(gameObject);
             }
-
-
-            gameObject.transform.parent = this.transform;
-            childrenList.Add(gameObject);
+            if (!GrantCheckpoint)
+            {
+                gameObject.transform.parent = cultistObject.transform;
+                cultistList.Add(gameObject);
+            }
         }
     }
 
     public void WeaponInstance(WeaponProjectile weaponProjectile, GameObject gameObject)
     {
-        //weaponProjectiles.Add(weaponProjectile);
+        gameObject.transform.localScale = objectScale;
 
         if (!SearchAndDestroy(gameObject))
         {
-            gameObject.transform.parent = this.transform;
-            childrenList.Add(gameObject);
+            if (GrantCheckpoint)
+            {
+                gameObject.transform.parent = demonObject.transform;
+                demonList.Add(gameObject);
+            }
+            if (!GrantCheckpoint)
+            {
+                gameObject.transform.parent = cultistObject.transform;
+                cultistList.Add(gameObject);
+            }
         }
     }
 
     public void BloodInstance(BloodManager bloodManager, GameObject gameObject)
     {
-        //bloodManagers.Add(bloodManager);
-
         if (!SearchAndDestroy(gameObject))
         {
-            gameObject.transform.parent = this.transform;
-            childrenList.Add(gameObject);
+            if (GrantCheckpoint)
+            {
+                gameObject.transform.parent = demonObject.transform;
+                demonList.Add(gameObject);
+            }
+            if (!GrantCheckpoint)
+            {
+                gameObject.transform.parent = cultistObject.transform;
+                cultistList.Add(gameObject);
+            }
         }
     }
 
     public void CorpseInstance(BloodManager bloodManager, GameObject gameObject)
     {
-        //bloodManagers.Add(bloodManager);
+        gameObject.transform.localScale = objectScale;
 
         if (!SearchAndDestroy(gameObject))
         {
-            gameObject.transform.parent = this.transform;
-            childrenList.Add(gameObject);
+            if (GrantCheckpoint)
+            {
+                gameObject.transform.parent = demonObject.transform;
+                demonList.Add(gameObject);
+            }
+            if (!GrantCheckpoint)
+            {
+                gameObject.transform.parent = cultistObject.transform;
+                cultistList.Add(gameObject);
+            }
         }
     }
 
@@ -154,9 +181,18 @@ public class Keeper : MonoBehaviour
         if (!SearchAndDestroy(gameObject))
         {
             GameObject nameHolder = new GameObject(enemy.name);
-            nameHolder.transform.parent = this.transform;
-            //gameObject.transform.parent = this.transform;
-            childrenList.Add(nameHolder);
+
+            if (GrantCheckpoint)
+            {
+                nameHolder.transform.parent = demonObject.transform;
+                demonList.Add(nameHolder);
+            }
+            if (!GrantCheckpoint)
+            {
+                nameHolder.transform.parent = cultistObject.transform;
+                cultistList.Add(nameHolder);
+            }
+
         }
     }
 
@@ -169,7 +205,7 @@ public class Keeper : MonoBehaviour
     public void StageEnd()
     {
         GrantCheckpoint = false;
-        DemonPhase = false;
+        GrantCheckpoint = false;
         IsLevelCleared = false;
         PlayOpeningAnimation = true;
 
@@ -178,34 +214,37 @@ public class Keeper : MonoBehaviour
 
     public void WipeLists() 
     {
-        if (GrantCheckpoint) { return; }
 
-        
+
         // If demonphase is true then wipe all lists from both the cultist and the demonobject
         // But if demonphase is false then only wipe the lists from the demonobject
 
-        for (int i = 0; i < transform.childCount; i++)
+        if (GrantCheckpoint)
         {
-            if (DemonPhase)
+            for (int i = 0; i < demonObject.transform.childCount; i++)
             {
-                Destroy(demonObject.transform.GetChild(i).gameObject);
-            }
-            else
-            {
-                Destroy(cultistObject.transform.GetChild(i).gameObject);
                 Destroy(demonObject.transform.GetChild(i).gameObject);
             }
         }
+        if (!GrantCheckpoint)
+        {
+            for (int i = 0; i < cultistObject.transform.childCount; i++)
+            {
+                Destroy(cultistObject.transform.GetChild(i).gameObject);
+            }
+        }
 
-        childrenList.Clear();
+        if (GrantCheckpoint) { return; }
+
+        cultistList.Clear();
         weaponProjectiles.Clear();
         bloodManagers.Clear();
         enemyYes.Clear();
         doors.Clear();
 
-        for (int i = 0; i < childrenList.Count; i++)
+        for (int i = 0; i < cultistList.Count; i++)
         {
-            childrenList.RemoveAt(i);
+            cultistList.RemoveAt(i);
         }
 
         for (int i = 0; i < doors.Count; i++)

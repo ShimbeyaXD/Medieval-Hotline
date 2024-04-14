@@ -52,6 +52,7 @@ public class EnemyYEs : MonoBehaviour
     bool once = true;
     bool once2 = true;
     bool once3 = true;
+    bool once4 = true;
     Sprite weaponSprite;
     BoxCollider2D attackCollider;
     Rigidbody2D myRigidbody;
@@ -183,6 +184,13 @@ public class EnemyYEs : MonoBehaviour
 
     public void TakeDamage() 
     {
+        if (once4)
+        {
+            once4 = false;
+            followTarget.StartShake(killShakeAmount, killShakeDuration);
+            GameObject particle = Instantiate(deathParticles.gameObject, transform.position, Quaternion.identity);
+            particle.transform.parent = GameObject.FindGameObjectWithTag("Particles").transform;
+        }
         if (playerAttack.PlayerIsPunching) // Player is punching enemy -> Enemy Knockback! 
         {
             Knockback();
@@ -190,11 +198,9 @@ public class EnemyYEs : MonoBehaviour
         else if (once2) // Player is attacking enemy -> Enemy simply dies!
         {
             once2 = false;
+            FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform, gameObject, GetComponent<EnemyYEs>());
 
             DropWeapon();
-
-            GameObject particle = Instantiate(deathParticles.gameObject, transform.position, Quaternion.identity);
-            particle.transform.parent = GameObject.FindGameObjectWithTag("Particles").transform;
 
             FindObjectOfType<PowerManager>().AddHoliness(20f);
 
@@ -207,8 +213,6 @@ public class EnemyYEs : MonoBehaviour
 
     private void Death()
     {
-        FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform, gameObject, GetComponent<EnemyYEs>());
-
         gameObject.SetActive(false);
     }
 
@@ -287,8 +291,6 @@ public class EnemyYEs : MonoBehaviour
         if (weaponSprite != null && once && !isDemonEnemy) // Enemy drops its weapon...
         {
             once = false;
-
-            followTarget.StartShake(killShakeAmount, killShakeDuration);
 
             GameObject newProjectile = Instantiate(droppedWeapon, transform.position, transform.rotation);
 

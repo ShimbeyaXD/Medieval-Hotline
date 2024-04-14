@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 12f;
     [SerializeField] float chargingSpeed = 18f;
-    [SerializeField] float reloadSceneDelay = 2;
 
     [SerializeField] GameObject startPoint;
 
@@ -102,26 +101,18 @@ public class PlayerMovement : MonoBehaviour
         {
             once = false;
             myRigidbody.isKinematic = true;
+            Dead = true;
             myRigidbody.velocity = Vector3.zero;
             newWeaponManager.SetDeadAnimator();
-            StartCoroutine(ReloadScene());
+            extraction.DeathScreen();
 
+            /*
             if (GameObject.Find("HellModeManager") != null)
             {
                 FindObjectOfType<HellMode>().FillOpacity();
             }
+            */
         }
-    }
-
-    IEnumerator ReloadScene()
-    {
-        Dead = true;
-        yield return new WaitForSeconds(reloadSceneDelay);
-
-        keeper.WipeLists();
-
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
     }
 
     public void ChangeSpeed(bool increase)

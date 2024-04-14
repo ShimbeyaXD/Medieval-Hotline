@@ -538,6 +538,7 @@ MonoBehaviour:
   detectionAndSightRange: 20
   legAnimator: {fileID: 5446179151447891705}
   torsoAnimator: {fileID: 6803530668277947305}
+  agent: {fileID: 8351160350196378964}
   knockbackCooldown: 3
   knockbackForce: 350
   wallLayer:

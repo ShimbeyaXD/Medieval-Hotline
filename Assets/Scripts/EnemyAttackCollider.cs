@@ -29,7 +29,7 @@ public class EnemyAttackCollider : MonoBehaviour
             if (playerObject != null)
             {
                 playerAttack = playerObject.GetComponent<Attack>();
-                break;
+                yield break;
             }
 
             yield return new WaitForSeconds(1f);
@@ -63,7 +63,7 @@ public class EnemyAttackCollider : MonoBehaviour
 
     void KillPlayer()
     {
-        followTarget.StartShake(0.2f, 0.5f);
+        followTarget.StartShake(0.2f, 0.7f);
         enemyBehaviour.StopFollowing();
     }
 }
