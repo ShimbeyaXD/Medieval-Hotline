@@ -271,6 +271,26 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.05660379
       objectReference: {fileID: 0}
+    - target: {fileID: 3352411902182222059, guid: fb6205029259e9c45905a2860c4f7fa4, type: 3}
+      propertyPath: dialogBox
+      value: 
+      objectReference: {fileID: 1440445651}
+    - target: {fileID: 3352411902182222059, guid: fb6205029259e9c45905a2860c4f7fa4, type: 3}
+      propertyPath: Dialogs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352411902182222059, guid: fb6205029259e9c45905a2860c4f7fa4, type: 3}
+      propertyPath: dialogs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352411902182222059, guid: fb6205029259e9c45905a2860c4f7fa4, type: 3}
+      propertyPath: Dialogs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 92e9e5fe814c04949ac719a51409fb30, type: 2}
+    - target: {fileID: 3352411902182222059, guid: fb6205029259e9c45905a2860c4f7fa4, type: 3}
+      propertyPath: dialogs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 92e9e5fe814c04949ac719a51409fb30, type: 2}
     - target: {fileID: 5320325940418465219, guid: fb6205029259e9c45905a2860c4f7fa4, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1866.2
@@ -779,6 +799,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1440445651 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2565239362481940741, guid: fb6205029259e9c45905a2860c4f7fa4, type: 3}
+  m_PrefabInstance: {fileID: 303333558}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

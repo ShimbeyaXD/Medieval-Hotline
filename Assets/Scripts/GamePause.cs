@@ -21,5 +21,7 @@ public class GamePause : MonoBehaviour
         }
 
         if(dialogueManager.GetIsTalkingToPope() == true) { paused = true; } else { paused = false; }
+        //PLayer Dies will also pause fix later
+
     }
 }

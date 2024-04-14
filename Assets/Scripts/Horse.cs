@@ -9,6 +9,11 @@ public class Horse : MonoBehaviour
 
     [SerializeField] Transform myTransfrom;
     [SerializeField] Transform endPosition;
+    [SerializeField] GameObject realHorse;
+
+    [Header("PlayerOffset")]
+    [SerializeField] float xOffset;
+    [SerializeField] float yOffset;
 
     [SerializeField] float speed;
 
@@ -32,6 +37,7 @@ public class Horse : MonoBehaviour
             canvas.enabled = false;
         }
 
+        endPosition.position += new Vector3(xOffset, yOffset, 0);
 
     }
 
@@ -44,14 +50,15 @@ public class Horse : MonoBehaviour
 
             endPosition.gameObject.SetActive(false);
 
-            transform.position = Vector3.SmoothDamp(myTransfrom.position, endPosition.position + new Vector3(0.5f, 0, 0), ref velocity, speed);
+            transform.position = Vector3.SmoothDamp(myTransfrom.position, endPosition.position, ref velocity, speed);
 
-            if (Vector3.Distance(myTransfrom.position, endPosition.position + new Vector3(0.24f, 0, 0)) < 0.2f)
+            if (Vector3.Distance(myTransfrom.position, endPosition.position) < 0.2f)
             {
                 reachedEnd = true;
                 keeper.PlayOpeningAnimation = false;
 
                 endPosition.gameObject.SetActive(true);
+                realHorse.SetActive(true);
                 openingAnimator.enabled = true;
 
                 StartAnimation();
@@ -67,10 +74,12 @@ public class Horse : MonoBehaviour
         if (sceneAnimationNumber[0])
         {
             openingAnimator.SetBool("isScene1", true);
+
         }
         if (sceneAnimationNumber[1])
         {
             openingAnimator.SetBool("isScene2", true);
+
         }
         else
         {
