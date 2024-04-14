@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -10,12 +11,29 @@ public class ArrowText : MonoBehaviour
 
     void Start()
     {
-        attack = FindObjectOfType<Attack>();
-        newWeaponManager = FindObjectOfType<NewWeaponManager>();
+        StartCoroutine(LookForAttackAndManager());
+    }
+
+    IEnumerator LookForAttackAndManager() 
+    {
+        attack = null;
+        newWeaponManager = null;
+        GameObject player = null;
+
+        while (player == null || !player.activeSelf) 
+        {
+            player = GameObject.Find("player");
+            yield return new WaitForSeconds(1f);
+        }
+
+        attack = player.GetComponent<Attack>();
+        newWeaponManager = player.GetComponent<NewWeaponManager>();
     }
 
     void Update()
     {
+        if(newWeaponManager == null || attack == null) { return; }
+
         if (newWeaponManager.HasCrossbow || newWeaponManager.HasGlock)
         {
             transform.GetChild(0).gameObject.SetActive(true);

@@ -25,7 +25,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] GameObject hellModeManager;
 
     // Start is called before the first frame update
-    void Start()
+    void OnAwake()
     {
         textComponent.text = string.Empty;
         dialog = justATest;

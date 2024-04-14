@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class FollowMouse : MonoBehaviour
@@ -9,7 +10,20 @@ public class FollowMouse : MonoBehaviour
 
     private void Start()
     {
-        playerPosition = FindObjectOfType<PlayerMovement>().transform.position;
+        StartCoroutine(LookForPlayer());
+    }
+
+    IEnumerator LookForPlayer() 
+    {
+        GameObject player = null;
+
+        while (player == null || !player.activeSelf) 
+        {
+            player = GameObject.Find("Player");
+            yield return new WaitForSeconds(1f);
+        }
+
+        playerPosition = player.transform.position;
     }
 
     void Update()

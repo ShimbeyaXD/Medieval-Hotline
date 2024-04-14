@@ -17,14 +17,30 @@ public class DemonSpawner : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(LookForArtifact());
+
+        demonAnimator = GetComponent<Animator>();
         demonAnimator = GetComponent<Animator>(); 
-        artifact = FindObjectOfType<Artifact>();
 
         keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+
+
+    }
+
+    IEnumerator LookForArtifact() 
+    {
+        artifact = null;
+
+        while (artifact == null || !artifact.isActiveAndEnabled) 
+        { 
+            artifact = FindObjectOfType<Artifact>();
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     private void Update()
     {
+        if (artifact == null) { return; }
         if (keeper.IsLevelCleared && once1)
         {
             once1 = true;

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,7 +25,8 @@ public class EnemyBehavior : MonoBehaviour
 
     void Start()
     {
-        target = FindObjectOfType<PlayerMovement>().transform;
+        StartCoroutine(LookForTarget());
+
         enemyYes = GetComponent<EnemyYEs>();
         myRigidbody = GetComponent<Rigidbody2D>();
         legAnimator = transform.GetChild(1).GetComponent<Animator>();
@@ -35,6 +37,22 @@ public class EnemyBehavior : MonoBehaviour
         legAnimator.SetBool("isWalking", false);
         if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
 
+    }
+
+    IEnumerator LookForTarget()
+    {
+        while (target == null || !target.gameObject.activeSelf)
+        {
+            GameObject playerObject = GameObject.Find("Player");
+
+            // Check if playerObject is not null before accessing its transform
+            if (playerObject != null)
+            {
+                target = playerObject.transform;
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     void Update()

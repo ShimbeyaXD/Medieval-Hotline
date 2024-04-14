@@ -10,11 +10,21 @@ public class Horse : MonoBehaviour
     [SerializeField] float speed;
 
     private Vector3 velocity = Vector3.zero;
-
+    private bool reachedEnd = false;
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.SmoothDamp(myTransfrom.position, endPosition.position, ref velocity ,speed * Time.deltaTime, 4f);
+        if (!reachedEnd)
+        {
+            transform.position = Vector3.SmoothDamp(myTransfrom.position, endPosition.position + new Vector3(0.24f, 0, 0), ref velocity, speed);
+
+            if (Vector3.Distance(myTransfrom.position, endPosition.position + new Vector3(0.24f, 0, 0)) < 0.01f)
+            {
+                reachedEnd = true;
+                endPosition.gameObject.SetActive(true);
+                gameObject.SetActive(false);
+            }
+        }
     }
 }

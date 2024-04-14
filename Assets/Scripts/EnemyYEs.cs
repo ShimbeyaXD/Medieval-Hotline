@@ -9,7 +9,8 @@ public class EnemyYEs : MonoBehaviour
     [SerializeField] bool isDemonEnemy;
 
     [Header("General")]
-    [SerializeField] Transform player;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField]private GameObject player;
     [SerializeField] GameObject weapon;
     [SerializeField] float speed = 2f;
     [SerializeField] float knockbackRange = 15;
@@ -68,7 +69,7 @@ public class EnemyYEs : MonoBehaviour
 
     void OnEnable()
     {
-        player = FindObjectOfType<PlayerMovement>().transform;
+        StartCoroutine(LookForPlayer());
 
         if (gameObject.transform.GetChild(2) != null && gameObject.name == "AttackCollider")
         {
@@ -84,9 +85,8 @@ public class EnemyYEs : MonoBehaviour
         followTarget = FindObjectOfType<FollowTarget>();
         audioSource = GetComponent<AudioSource>();
         sfxManager = FindAnyObjectByType<SFXManager>();
-        playerAttack = FindObjectOfType<Attack>();
         myRigidbody = GetComponent<Rigidbody2D>();
-        followMouse = FindObjectOfType<FollowMouse>();
+        
 
         if (weapon == null) { return; }
 
@@ -132,6 +132,24 @@ public class EnemyYEs : MonoBehaviour
         }
     }
 
+    IEnumerator LookForPlayer() 
+    {
+        player = null;
+
+        while(player == null || !player.activeSelf) 
+        {
+            player = GameObject.Find("Player");
+
+             yield return new WaitForSeconds(1);
+        }
+
+        Debug.Log("Player was found");
+
+        playerTransform = player.transform;
+        playerAttack = FindObjectOfType<Attack>();
+        followMouse = FindObjectOfType<FollowMouse>();
+    }
+
     void Update()
     {
         if (player == null) { return; }
@@ -146,7 +164,7 @@ public class EnemyYEs : MonoBehaviour
 
     void Look()
     {
-        Vector3 lookAt = player.position;
+        Vector3 lookAt = playerTransform.position;
 
         float AngleRad = Mathf.Atan2(lookAt.y - this.transform.position.y, lookAt.x - this.transform.position.x);
         float AngleDeg = (180 / Mathf.PI) * AngleRad;
@@ -201,7 +219,7 @@ public class EnemyYEs : MonoBehaviour
         if (weapon == null) { yield break; }
 
         GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
-        float dist = Vector3.Distance(player.position, gameObject.transform.position);
+        float dist = Vector3.Distance(playerTransform.position, gameObject.transform.position);
 
         if (dist > attackRange || playerAttack.PlayerIsAttacking || playerAttack.PlayerIsPunching)
         {
