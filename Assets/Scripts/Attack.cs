@@ -154,9 +154,8 @@ public class Attack : MonoBehaviour
 
             foreach (Collider2D collider in colliders)
             {
-                if (collider.gameObject.CompareTag("Wall"))
+                if (collider.gameObject.CompareTag("Wall") || collider.gameObject.CompareTag("Door"))
                 {
-                    Debug.Log("Hit " + collider.gameObject.name);
                     yield break;
                 }
                 else if (collider.gameObject.CompareTag("Enemy"))
@@ -197,9 +196,8 @@ public class Attack : MonoBehaviour
 
             foreach (Collider2D collider in colliders)
             {
-                if (collider.gameObject.CompareTag("Wall"))
+                if (collider.gameObject.CompareTag("Wall") || collider.gameObject.CompareTag("Door"))
                 {
-                    Debug.Log("Hit " + collider.gameObject.name);
                     ChangeCharge(false);
                     yield break;
                 }

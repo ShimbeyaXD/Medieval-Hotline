@@ -67,7 +67,7 @@ public class RoundTimer : MonoBehaviour
 
     void Update()
     {
-        if (timerText == null || artifact.LevelCleared) return;
+        if (timerText == null || GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>().IsLevelCleared) return;
 
         if (countdownMode) DecreaseTime(Time.deltaTime);
         else IncreaseTime(Time.deltaTime);

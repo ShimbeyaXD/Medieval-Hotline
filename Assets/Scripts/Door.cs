@@ -8,18 +8,31 @@ public class Door : MonoBehaviour
     BoxCollider2D boxCollider;
     Animator animator;
 
+    Keeper keeper;
+
     void Start()
     {
-        boxCollider = transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
+        boxCollider = transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
+        
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+        if (keeper.SearchAndDestroy(gameObject)) Destroy(gameObject); 
     }
 
     void Update()
     {
-        if (Physics2D.OverlapCircle(transform.position, triggerDistance, targetLayer) && Input.GetKeyDown(KeyCode.E))
+        if (Physics2D.OverlapCircle(transform.position, triggerDistance, targetLayer) && Input.GetButtonDown("Submit") && !animator.GetBool("Open"))
         {
             boxCollider.isTrigger = true;
             animator.SetBool("Open", true);
+
+            keeper.DoorInstance(GetComponent<Door>(), gameObject);
         }
+    }
+
+    public void Replace()
+    {
+        Debug.Log("Destroying myself " + transform.name);
+        Destroy(gameObject);
     }
 }

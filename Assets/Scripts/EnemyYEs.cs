@@ -45,6 +45,7 @@ public class EnemyYEs : MonoBehaviour
     Vector2 knockbackVector;
 
     string droppedWeaponTag;
+    int projectileNum;
     bool canShootArrow = true;
     bool once = true;
     bool once2 = true;
@@ -269,6 +270,7 @@ public class EnemyYEs : MonoBehaviour
             newProjectile.transform.GetChild(0).gameObject.tag = droppedWeaponTag;
             newProjectile.GetComponentInChildren<SpriteRenderer>().sprite = weaponSprite;
             newProjectile.GetComponent<WeaponProjectile>().Velocity(0);
+            newProjectile.name = new string("Enemy" + newProjectile.name + projectileNum);
             newProjectile.GetComponent<WeaponProjectile>().GroundWeapon();
             newProjectile.transform.localScale = new Vector2(0.8f, 0.8f);
 

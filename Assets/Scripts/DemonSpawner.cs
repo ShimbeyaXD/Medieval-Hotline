@@ -10,6 +10,7 @@ public class DemonSpawner : MonoBehaviour
 
     Animator demonAnimator;
     Artifact artifact;
+    Keeper keeper;
 
     bool once1 = true;
     bool once2 = true;
@@ -18,11 +19,13 @@ public class DemonSpawner : MonoBehaviour
     {
         demonAnimator = GetComponent<Animator>(); 
         artifact = FindObjectOfType<Artifact>();
+
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
     }
 
     private void Update()
     {
-        if (artifact.LevelCleared && once1)
+        if (keeper.IsLevelCleared && once1)
         {
             once1 = true;
             DemonSpawnInitiate();

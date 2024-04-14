@@ -13,6 +13,7 @@ public class WeaponProjectile : MonoBehaviour
 
     Rigidbody2D rigidbody;
     FollowMouse followMouse;
+    Keeper keeper;
 
     Vector2 playerPosition;
     bool midAir = true;
@@ -24,6 +25,7 @@ public class WeaponProjectile : MonoBehaviour
 
         rigidbody = GetComponentInParent<Rigidbody2D>();
         followMouse = FindObjectOfType<FollowMouse>();
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
     }
 
     void Update()
@@ -50,6 +52,8 @@ public class WeaponProjectile : MonoBehaviour
         midAir = false;
         transform.GetChild(0).gameObject.layer = layer;
         rigidbody.bodyType = RigidbodyType2D.Static;
+
+        keeper.WeaponInstance(GetComponent<WeaponProjectile>(), gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -71,5 +75,10 @@ public class WeaponProjectile : MonoBehaviour
         {
             GroundWeapon();
         }
+    }
+
+    public void Replace()
+    {
+        Destroy(gameObject);
     }
 }

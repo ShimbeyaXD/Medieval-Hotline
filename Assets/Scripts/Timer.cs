@@ -6,6 +6,7 @@ public class Timer : MonoBehaviour
 {
     TextMeshProUGUI timerText;
     Artifact artifact;
+    Keeper keeper;
 
     int timeInt;
 
@@ -15,11 +16,13 @@ public class Timer : MonoBehaviour
 
         artifact = FindObjectOfType<Artifact>();
         timerText = GetComponent<TextMeshProUGUI>();
+
+        keeper = GameObject.FindObjectOfType<Keeper>();
     }
 
     void Update()
     {
-        if (artifact.LevelCleared)
+        if (keeper.IsLevelCleared)
         {
             StopCoroutine(AddTime());
         }

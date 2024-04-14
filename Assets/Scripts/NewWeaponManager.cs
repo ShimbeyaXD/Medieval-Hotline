@@ -33,6 +33,7 @@ public class NewWeaponManager : MonoBehaviour
     [SerializeField] SpriteRenderer torsoRenderer;
 
     string projectileTag;
+    int projectileNum;
 
     Sprite weaponSprite;
     FollowMouse followMouse;
@@ -163,11 +164,13 @@ public class NewWeaponManager : MonoBehaviour
         weaponRenderer.sprite = null;
 
         GameObject newProjectile = Instantiate(throwingProjectile, transform.position, transform.rotation);
+        projectileNum++;
 
         newProjectile.transform.GetChild(0).gameObject.tag = projectileTag;
         newProjectile.GetComponentInChildren<SpriteRenderer>().sprite = weaponSprite;
         newProjectile.GetComponent<WeaponProjectile>().Velocity(throwPower);
         newProjectile.transform.localScale = new Vector2(0.75f, 0.75f);
+        newProjectile.name = new string("Player" + newProjectile.name + projectileNum);
         //newProjectile.gameObject.layer = projectileLayer;
         //newProjectile.GetComponent<Rigidbody2D>().AddForce(followMouse.MousePosition() * throwPower);
 

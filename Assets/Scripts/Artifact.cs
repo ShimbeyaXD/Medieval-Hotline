@@ -18,11 +18,13 @@ public class Artifact : MonoBehaviour
     PlayerMovement playerMovement;
     ObjectiveUI objectiveUI;
 
-    public bool LevelCleared { get; private set; }
+    Keeper keeper;
 
     private void Start()
     {
-        LevelCleared = false;
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+        keeper.IsLevelCleared = false;
+
         artifactImage.enabled = false;
         playerMovement = GetComponent<PlayerMovement>();
 
@@ -36,12 +38,16 @@ public class Artifact : MonoBehaviour
 
         if (other.gameObject.CompareTag("Artifact"))
         {
-            LevelCleared = true;
             artifactImage.enabled = true;
             artifactImage.sprite = artifactSprite;
             dialogueManager.SetActive(true);
-
             other.gameObject.SetActive(false);
+
+            keeper.IsLevelCleared = true;
+        }
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            keeper.RecieveCheckpoint(other.gameObject);
         }
     }
 

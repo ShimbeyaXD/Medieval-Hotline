@@ -17,6 +17,9 @@ TagManager:
   - Particles
   - Enemy
   - Wall
+  - Keeper
+  - Door
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

@@ -186,7 +186,6 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.gameObject.layer == wallLayer)
         {
             myRigidbody.velocity = Vector3.zero;
-            Debug.Log("Hit a wall");
         }
     }
 }

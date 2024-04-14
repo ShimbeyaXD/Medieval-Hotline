@@ -11,7 +11,7 @@ public class Extraction : MonoBehaviour
     Artifact artifact;
     RoundTimer roundTimer;
     PowerManager powerManager;
-
+    Keeper keeper;
     public bool LevelEnded { get; private set; }
 
     void Start()
@@ -21,11 +21,13 @@ public class Extraction : MonoBehaviour
         roundTimer = FindObjectOfType<RoundTimer>();
         powerManager = FindObjectOfType<PowerManager>();
         artifact = FindAnyObjectByType<Artifact>();
+
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && artifact.LevelCleared)
+        if (Input.GetButtonDown("Submit") && keeper.IsLevelCleared)
         {
             RaycastHit2D ray = Physics2D.BoxCast(transform.position, new Vector2(2, 2), 0, Vector2.up, detectionDistance, exitLayer);
 

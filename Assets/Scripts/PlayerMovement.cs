@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Properties;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     Animator myAnimator;
     Extraction extraction;
     NewWeaponManager newWeaponManager;
+    Keeper keeper;
 
     public bool IsWalking { get; private set; } = false;
     public bool IsOpeningAnim { get; private set; } = false;
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         extraction = GetComponent<Extraction>();
         originalSpeed = movementSpeed;
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
     }
 
     private void Update()
@@ -84,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             newWeaponManager.SetDeadAnimator();
             StartCoroutine(ReloadScene());
 
-            if (FindObjectOfType<HellMode>().gameObject != null)
+            if (GameObject.Find("HellModeManager") != null)
             {
                 FindObjectOfType<HellMode>().FillOpacity();
             }

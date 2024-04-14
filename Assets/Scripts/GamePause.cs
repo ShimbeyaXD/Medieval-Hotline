@@ -20,7 +20,5 @@ public class GamePause : MonoBehaviour
         }
 
         if(dialogueManager.GetIsTalkingToPope() == true) { paused = true; } else { paused = false; }
-
-        Debug.Log(paused);
     }
 }
