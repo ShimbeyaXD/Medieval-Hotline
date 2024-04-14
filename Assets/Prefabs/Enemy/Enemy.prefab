@@ -534,7 +534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d7c1c0e8d48f34ab4515e0da6a4242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demon: 0
   target: {fileID: 0}
   detectionAndSightRange: 20
   legAnimator: {fileID: 5446179151447891705}
@@ -580,8 +579,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRangedEnemy: 0
   isDemonEnemy: 0
+  playerTransform: {fileID: 0}
   player: {fileID: 0}
-  weapon: {fileID: 579394101672748834, guid: 36a872ee9e124e043a1198fe5acb3521, type: 3}
+  weapon: {fileID: 4892390225535697260, guid: 1a8b56b6a083e29458a6dbebd35f98f3, type: 3}
   speed: 2
   knockbackRange: 1000
   droppedWeapon: {fileID: 6952808158290722028, guid: 3848073c196e90446827c06d93ce64ba, type: 3}

@@ -26,10 +26,10 @@ public class EnemyAttackCollider : MonoBehaviour
         {
             GameObject playerObject = GameObject.Find("Player");
 
-            // Check if playerObject is not null before accessing its transform
             if (playerObject != null)
             {
                 playerAttack = playerObject.GetComponent<Attack>();
+                break;
             }
 
             yield return new WaitForSeconds(1f);
@@ -42,8 +42,6 @@ public class EnemyAttackCollider : MonoBehaviour
         {
             if (enemyYes.ReturnDemonType())
             {
-                Debug.Log("attacking");
-
                 int randomNum = Random.Range(0, 2);
                 if (randomNum == 0)
                 {

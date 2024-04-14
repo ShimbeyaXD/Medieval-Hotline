@@ -36,6 +36,7 @@ public class Extraction : MonoBehaviour
                 LevelEnded = true;
                 continueButton.gameObject.SetActive(true);
                 powerManager.ShowKillText();
+                keeper.StageEnd();
             }
         }
     }
