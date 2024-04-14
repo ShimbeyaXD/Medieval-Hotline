@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArrowText : MonoBehaviour
@@ -22,17 +23,25 @@ public class ArrowText : MonoBehaviour
 
         while (player == null || !player.activeSelf) 
         {
-            player = GameObject.Find("player");
+            player = GameObject.Find("Player");
+
+            if (player != null)
+            {
+                attack = player.GetComponent<Attack>();
+                newWeaponManager = player.GetComponent<NewWeaponManager>();
+                break;
+            }
             yield return new WaitForSeconds(1f);
         }
-
-        attack = player.GetComponent<Attack>();
-        newWeaponManager = player.GetComponent<NewWeaponManager>();
     }
 
     void Update()
     {
-        if(newWeaponManager == null || attack == null) { return; }
+        if(newWeaponManager == null)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            return; 
+        }
 
         if (newWeaponManager.HasCrossbow || newWeaponManager.HasGlock)
         {

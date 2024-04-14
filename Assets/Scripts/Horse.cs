@@ -17,9 +17,9 @@ public class Horse : MonoBehaviour
     {
         if (!reachedEnd)
         {
-            transform.position = Vector3.SmoothDamp(myTransfrom.position, endPosition.position + new Vector3(0.24f, 0, 0), ref velocity, speed);
+            transform.position = Vector3.SmoothDamp(myTransfrom.position, endPosition.position + new Vector3(0.5f, 0, 0), ref velocity, speed);
 
-            if (Vector3.Distance(myTransfrom.position, endPosition.position + new Vector3(0.24f, 0, 0)) < 0.01f)
+            if (Vector3.Distance(myTransfrom.position, endPosition.position + new Vector3(0.24f, 0, 0)) < 0.2f)
             {
                 reachedEnd = true;
                 endPosition.gameObject.SetActive(true);
