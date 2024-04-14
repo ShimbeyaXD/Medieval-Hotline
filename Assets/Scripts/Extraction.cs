@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Extraction : MonoBehaviour
 {
@@ -13,13 +14,15 @@ public class Extraction : MonoBehaviour
 
     [Header("Reloading Stage")]
     [SerializeField] float reloadSceneDelay = 2;
-    [SerializeField] TextMeshProUGUI restartText;
+    [SerializeField] GameObject restartText;
+    [SerializeField] Animator animatorUI;
 
     Artifact artifact;
     RoundTimer roundTimer;
     PowerManager powerManager;
     Keeper keeper;
     PlayerMovement playerMovement;
+    TextMeshProUGUI text;
 
     bool inputIntermission = false;
 
@@ -27,7 +30,10 @@ public class Extraction : MonoBehaviour
 
     void Start()
     {
-        restartText.enabled = false;
+        text = restartText.GetComponent<TextMeshProUGUI>();
+
+        text.enabled = false;
+        restartText.SetActive(false);
         continueButton.gameObject.SetActive(false);
 
         roundTimer = FindObjectOfType<RoundTimer>();
@@ -67,10 +73,18 @@ public class Extraction : MonoBehaviour
     {
         if (playerMovement.Dead)
         {
-            restartText.enabled = true;
+            restartText.SetActive(true);
 
             StartCoroutine(InputIntermission());
+            StartCoroutine(TextAppearCooldown());
         }
+    }
+
+    IEnumerator TextAppearCooldown()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        restartText.GetComponent<TextMeshProUGUI>().enabled = true;
     }
 
     IEnumerator InputIntermission()
@@ -86,6 +100,8 @@ public class Extraction : MonoBehaviour
 
     IEnumerator ReloadScene()
     {
+        animatorUI.SetBool("isFading", true);
+
         yield return new WaitForSeconds(reloadSceneDelay);
 
         keeper.WipeLists();
