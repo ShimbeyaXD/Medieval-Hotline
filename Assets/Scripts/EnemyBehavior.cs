@@ -9,13 +9,13 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] float detectionAndSightRange = 5f;
     [SerializeField] Animator legAnimator;
     [SerializeField] Animator torsoAnimator;
+    [SerializeField] NavMeshAgent agent;
 
     [Header("Knockback Attributes")]
     [SerializeField] float knockbackCooldown = 3;
     [SerializeField] float knockbackForce = 3;
     [SerializeField] LayerMask wallLayer;
 
-    NavMeshAgent agent;
     EnemyYEs enemyYes;
     Rigidbody2D myRigidbody;
 
@@ -155,10 +155,11 @@ public class EnemyBehavior : MonoBehaviour
     {
         // alex var h�r
         //agent.isStopped = true;
-        legAnimator.SetBool("isWalking", false);
-        if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
         agent.updatePosition = false;
         isChasingTarget = false;
+
+        legAnimator.SetBool("isWalking", false);
+        if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
     }
 
     private void UpdateRotation()

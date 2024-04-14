@@ -46,9 +46,14 @@ public class Artifact : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Checkpoint"))
         {
-            Debug.Log("checkpoint granted");
-            keeper.RecieveCheckpoint(other.transform.position);
+            Checkpoint(other.gameObject);
         }
+    }
+
+    void Checkpoint(GameObject other)
+    {
+        Debug.Log("checkpoint granted");
+        keeper.RecieveCheckpoint(other.transform.position);
     }
 
 }

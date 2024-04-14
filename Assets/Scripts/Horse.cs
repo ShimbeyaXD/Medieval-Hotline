@@ -23,11 +23,13 @@ public class Horse : MonoBehaviour
     Keeper keeper;
     Animator openingAnimator;
     Canvas canvas;
+    GameObject playerLights;
 
     private void Awake()
     {
         openingAnimator = endPosition.gameObject.GetComponent<Animator>();
         openingAnimator.enabled = false;
+        playerLights = transform.GetChild(2).gameObject;
 
         keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
 
@@ -35,6 +37,11 @@ public class Horse : MonoBehaviour
         {
             canvas = FindObjectOfType<Canvas>();
             canvas.enabled = false;
+            playerLights.SetActive(true);
+        }
+        else
+        {
+            playerLights.SetActive(false);
         }
 
         endPosition.position += new Vector3(xOffset, yOffset, 0);

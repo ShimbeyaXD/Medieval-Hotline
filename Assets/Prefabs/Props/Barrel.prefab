@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5950607452728466451}
   - component: {fileID: 2973800100803896377}
   - component: {fileID: 3622311549249452320}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Kopia av game barrel kopiera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8094975165061309876}
   - component: {fileID: 6532299171885022171}
   - component: {fileID: 1700461483083221865}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ MonoBehaviour:
   - {x: 0.356925, y: -0.7802854, z: 0}
   m_ShapePathHash: -1759994005
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1388
+  m_InstanceId: 1939454
   m_LocalBounds:
     m_Center: {x: -0.0012859106, y: 0.00017517805, z: 0}
     m_Extent: {x: 0.78134966, y: 0.7804606, z: 0}
@@ -281,9 +281,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5625771345842623508}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

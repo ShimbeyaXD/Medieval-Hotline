@@ -43,15 +43,13 @@ public class DemonSpawner : MonoBehaviour
         if (artifact == null) { return; }
         if (keeper.IsLevelCleared && once1)
         {
-            DemonSpawnInitiate();
+            //once1 = false;
+            //DemonSpawnInitiate(); // Gets called from "End dialogue" in DialogueManager instead
         }
     }
 
     public void DemonSpawnInitiate()
     {
-        once1 = false;
-        keeper.DemonPhase = true;
-
         StartCoroutine(PlayAnimation());
 
         // Spawn bao's demons, maybe make a collecrtive script to reference one instead of 1 million 
