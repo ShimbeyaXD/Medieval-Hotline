@@ -45,10 +45,10 @@ public class EnemyBehavior : MonoBehaviour
         {
             GameObject playerObject = GameObject.Find("Player");
 
-            // Check if playerObject is not null before accessing its transform
             if (playerObject != null)
             {
                 target = playerObject.transform;
+                break;
             }
 
             yield return new WaitForSeconds(1f);

@@ -23,7 +23,6 @@ public class Artifact : MonoBehaviour
     private void Start()
     {
         keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
-        keeper.IsLevelCleared = false;
 
         artifactImage.enabled = false;
         playerMovement = GetComponent<PlayerMovement>();
@@ -47,7 +46,8 @@ public class Artifact : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Checkpoint"))
         {
-            keeper.RecieveCheckpoint(other.gameObject);
+            Debug.Log("checkpoint granted");
+            keeper.RecieveCheckpoint(other.transform.position);
         }
     }
 

@@ -26,7 +26,6 @@ public class HellMode : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Tranistiion color");
             Color red = redMist.GetComponent<Image>().color;
 
             red += red * alphaAmount * Time.deltaTime;

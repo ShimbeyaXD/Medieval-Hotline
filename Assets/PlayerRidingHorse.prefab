@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e1d41f6d8bf0e4e897010b3a3aad24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneAnimationNumber: 
   myTransfrom: {fileID: 4840657597720891671}
   endPosition: {fileID: 0}
   speed: 1
@@ -309,7 +310,7 @@ GameObject:
   - component: {fileID: 7380154557536733419}
   - component: {fileID: 856822258207135022}
   m_Layer: 0
-  m_Name: Player
+  m_Name: FakePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

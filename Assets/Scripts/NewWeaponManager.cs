@@ -72,14 +72,17 @@ public class NewWeaponManager : MonoBehaviour
             if (playerObject != null)
             {
                 player = playerObject;
+                followMouse = FindObjectOfType<FollowMouse>();
+                attack = GetComponent<Attack>();
+                playerMovement = FindObjectOfType<PlayerMovement>();
+
+                break;
             }
 
             yield return new WaitForSeconds(1f);
         }
 
-        followMouse = FindObjectOfType<FollowMouse>();
-        attack = GetComponent<Attack>();
-        playerMovement = FindObjectOfType<PlayerMovement>();
+
 
     }
 
@@ -199,8 +202,6 @@ public class NewWeaponManager : MonoBehaviour
         newProjectile.name = new string("Player" + newProjectile.name + projectileNum);
         //newProjectile.gameObject.layer = projectileLayer;
         //newProjectile.GetComponent<Rigidbody2D>().AddForce(followMouse.MousePosition() * throwPower);
-
-        Debug.Log("glock threwn");
     }
 
     public void SetDeadAnimator()

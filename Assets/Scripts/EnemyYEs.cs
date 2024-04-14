@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -64,11 +65,14 @@ public class EnemyYEs : MonoBehaviour
     SFXManager sfxManager;
     Attack playerAttack;
     FollowMouse followMouse;
+    Keeper keeper;
 
     public bool Punched { get; private set; } = false;
 
-    void OnEnable()
+    void Start()
     {
+        Replace();
+
         StartCoroutine(LookForPlayer());
 
         if (gameObject.transform.GetChild(2) != null && gameObject.name == "AttackCollider")
@@ -136,19 +140,24 @@ public class EnemyYEs : MonoBehaviour
     {
         player = null;
 
-        while(player == null || !player.activeSelf) 
+        while (player == null || !player.activeSelf) 
         {
+
             player = GameObject.Find("Player");
 
-             yield return new WaitForSeconds(1);
+            if (player != null)
+            {
+                playerTransform = player.transform;
+                playerAttack = FindObjectOfType<Attack>();
+                followMouse = FindObjectOfType<FollowMouse>();
+                break;
+            }
+            yield return new WaitForSeconds(1);
         }
 
-        Debug.Log("Player was found");
 
-        playerTransform = player.transform;
-        playerAttack = FindObjectOfType<Attack>();
-        followMouse = FindObjectOfType<FollowMouse>();
     }
+
 
     void Update()
     {
@@ -198,7 +207,7 @@ public class EnemyYEs : MonoBehaviour
 
     private void Death()
     {
-        FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform, gameObject);
+        FindObjectOfType<BloodManager>().SpawnBlood(gameObject.transform, gameObject, GetComponent<EnemyYEs>());
 
         gameObject.SetActive(false);
     }
@@ -228,8 +237,6 @@ public class EnemyYEs : MonoBehaviour
 
         else if (dist <= attackRange)
         {
-            Debug.Log("Playerattacking is " + playerAttack.PlayerIsAttacking + " Enemy is attacking");
-
             attackCollider.SetActive(true);
         }
 
@@ -314,5 +321,11 @@ public class EnemyYEs : MonoBehaviour
     public bool ReturnRangedType()
     {
         return isRangedEnemy;
+    }
+
+    public void Replace()
+    {
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+        if (keeper.SearchAndDestroy(gameObject)) Destroy(gameObject);
     }
 }

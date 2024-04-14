@@ -164,7 +164,6 @@ public class Attack : MonoBehaviour
                     yield return new WaitForEndOfFrame();
                 }
             }
-            // https://chat.openai.com/c/9c931eaf-add3-4323-9258-724fb452b832
             if (!PlayerIsAttacking) { yield break; }
 
             yield return new WaitForEndOfFrame();

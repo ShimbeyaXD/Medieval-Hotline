@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float chargingSpeed = 18f;
     [SerializeField] float reloadSceneDelay = 2;
 
+    [SerializeField] GameObject startPoint;
+
     public bool Dead { get; private set; }
 
     float horizontal;
@@ -28,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsWalking { get; private set; } = false;
     public bool IsOpeningAnim { get; private set; } = false;
 
-    void Awake()
+    void OnEnable()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = transform.GetChild(0).transform.GetChild(1).GetComponent<Animator>();
@@ -37,6 +39,22 @@ public class PlayerMovement : MonoBehaviour
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
         
         keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+
+
+        if (!keeper.PlayOpeningAnimation)
+        {
+            GetComponent<Animator>().enabled = false;
+
+            if (keeper.GrantCheckpoint)
+            {
+                Debug.Log("Spawning player at checkpoint");
+                transform.position = keeper.Checkpoint;
+            }
+            else
+            {
+                transform.position = startPoint.transform.position;
+            }
+        }
     }
 
     private void Update()
@@ -80,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
-        return;
         if (once)
         {
             once = false;
@@ -100,6 +117,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Dead = true;
         yield return new WaitForSeconds(reloadSceneDelay);
+
+        keeper.WipeLists();
+
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
@@ -122,15 +142,12 @@ public class PlayerMovement : MonoBehaviour
     {
         myAnimator.SetBool("isWalking", true);
         IsOpeningAnim = true;
-        Debug.Log("Walk did walk");
     }
 
     public void CinamaticWalkFalse()
     {
         myAnimator.SetBool("isWalking", false);
         IsOpeningAnim = false;
-
-        Debug.Log("Walk finshed");
 
         Animator animator = gameObject.GetComponent<Animator>();
         animator.enabled = false;

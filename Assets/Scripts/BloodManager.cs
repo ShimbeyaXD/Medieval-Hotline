@@ -10,12 +10,24 @@ public class BloodManager : MonoBehaviour
     [SerializeField] float objectSize = 0.8f;
     [SerializeField] int numInSortingLayer = -25;
 
-    GameObject enemy;
+    int bloodNum;
+    int corpseNum;
 
-    public void SpawnBlood(Transform pos, GameObject sender)
+    GameObject enemy;
+    Keeper keeper;
+
+    private void Start()
+    {
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+
+        if (keeper.SearchAndDestroy(gameObject)) Destroy(gameObject);
+    }
+
+    public void SpawnBlood(Transform pos, GameObject sender, EnemyYEs enemyYes)
     {
         enemy = sender;
-        SpawnCorpse(pos);
+        bloodNum++;
+        SpawnCorpse(pos, sender, enemyYes);
 
         int i = Random.Range(0, boodSprites.Count);
 
@@ -23,17 +35,22 @@ public class BloodManager : MonoBehaviour
         blood.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
         blood.transform.position = pos.position;
         blood.transform.localScale = new Vector2(objectSize, objectSize);
+        blood.name = new string(blood.name + bloodNum);
         SpriteRenderer sp = blood.AddComponent<SpriteRenderer>();
         sp.sprite = boodSprites[i];
         sp.sortingOrder = numInSortingLayer;
+
+        keeper.BloodInstance(GetComponent<BloodManager>(), blood);
     }
 
-    void SpawnCorpse(Transform pos)
+    void SpawnCorpse(Transform pos, GameObject sender, EnemyYEs enemyYes)
     {
+        corpseNum++;
         GameObject corpse = new GameObject("Corpse");
         corpse.transform.position = pos.position;
         corpse.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
         corpse.transform.localScale = new Vector2(objectSize, objectSize);
+        corpse.name = new string(corpse.name + corpseNum);
         SpriteRenderer sp = corpse.AddComponent<SpriteRenderer>();
 
         if (enemy.GetComponent<EnemyYEs>().ReturnDemonType())
@@ -50,5 +67,13 @@ public class BloodManager : MonoBehaviour
         int newCorpsSortingLayer = numInSortingLayer;
         newCorpsSortingLayer++;
         sp.sortingOrder = newCorpsSortingLayer;
+
+        keeper.CorpseInstance(GetComponent<BloodManager>(), corpse);
+        keeper.EnemyInstance(enemyYes, sender);
+    }
+
+    public void Replace()
+    {
+        Destroy(gameObject);
     }
 }

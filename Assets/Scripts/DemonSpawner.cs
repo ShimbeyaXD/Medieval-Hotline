@@ -43,13 +43,15 @@ public class DemonSpawner : MonoBehaviour
         if (artifact == null) { return; }
         if (keeper.IsLevelCleared && once1)
         {
-            once1 = true;
             DemonSpawnInitiate();
         }
     }
 
     public void DemonSpawnInitiate()
     {
+        once1 = false;
+        keeper.DemonPhase = true;
+
         StartCoroutine(PlayAnimation());
 
         // Spawn bao's demons, maybe make a collecrtive script to reference one instead of 1 million 
@@ -59,7 +61,6 @@ public class DemonSpawner : MonoBehaviour
     {
         for (int i = 0; i < pentagramList.Count; i++)
         {
-            Debug.Log("Start animation");
             demonAnimator = pentagramList[i].transform.GetComponent<Animator>();
             demonAnimator.SetBool("isCracking", true);
         }
@@ -81,8 +82,6 @@ public class DemonSpawner : MonoBehaviour
         for (int i = 0; i < pentagramList.Count; i++)
         {
             GameObject demonObject = Instantiate(demon, pentagramList[i].transform.position, Quaternion.identity);
-            Debug.Log("Spawning enemies");
-
         }
 
         yield return new WaitForSeconds(spawnIntervals);
