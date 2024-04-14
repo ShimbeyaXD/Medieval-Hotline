@@ -26,13 +26,15 @@ public class PlayerMovement : MonoBehaviour
     public bool IsWalking { get; private set; } = false;
     public bool IsOpeningAnim { get; private set; } = false;
 
-    void Start()
+    void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = transform.GetChild(0).transform.GetChild(1).GetComponent<Animator>();
         extraction = GetComponent<Extraction>();
         originalSpeed = movementSpeed;
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
+
+
     }
 
     private void Update()
@@ -76,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
+        return;
         if (once)
         {
             once = false;
@@ -124,6 +127,11 @@ public class PlayerMovement : MonoBehaviour
     {
         myAnimator.SetBool("isWalking", false);
         IsOpeningAnim = false;
+
+        Debug.Log("Walk finshed");
+
+        Animator animator = gameObject.GetComponent<Animator>();
+        animator.enabled = false;
     }
 
 }

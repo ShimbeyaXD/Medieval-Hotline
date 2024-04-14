@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class NewWeaponManager : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class NewWeaponManager : MonoBehaviour
     Animator myAnimator;
     Attack attack;
     PlayerMovement playerMovement;
+    GameObject player;
     
     public bool AnyWeapon { get; private set; }
 
@@ -52,20 +54,43 @@ public class NewWeaponManager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(LookForPlayer());
+
         weaponImage.enabled = false;
+
+
+    }
+
+    IEnumerator LookForPlayer()
+    {
+        while (player == null || !player.gameObject.activeSelf)
+        {
+            GameObject playerObject = GameObject.Find("Player");
+
+            // Check if playerObject is not null before accessing its transform
+            if (playerObject != null)
+            {
+                player = playerObject;
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
+
         followMouse = FindObjectOfType<FollowMouse>();
         attack = GetComponent<Attack>();
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
+
     }
 
     void Update()
     {
+        if (player.activeSelf == false || playerMovement == null) { return; }
         if (playerMovement.Dead) return;
 
         if (HasCrossbow || HasGlock || HasWeapon) AnyWeapon = true;
 
         if (Input.GetButton("Fire2") && AnyWeapon) WeaponThrow(); // Throw
-        if (Input.GetButtonDown("Submit") && !AnyWeapon) // Pickup
+        if (Input.GetButtonDown("Submit") && !AnyWeapon && player.activeSelf) // Pickup
         {
             WeaponPickup();
         }
@@ -145,6 +170,7 @@ public class NewWeaponManager : MonoBehaviour
 
     void WeaponThrow()
     {
+
         if (HasCrossbow) attack.CurrentArrows = 5;
 
         torsoAnimator.SetBool("Sword", false);

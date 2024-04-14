@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyAttackCollider : MonoBehaviour
 {
@@ -11,12 +12,28 @@ public class EnemyAttackCollider : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(LookForTarget());
         animator = transform.parent.GetChild(0).GetComponent<Animator>();
         enemyYes = transform.parent.GetComponent<EnemyYEs>();
         enemyBehaviour = FindObjectOfType<EnemyBehavior>();
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
-        playerAttack = FindObjectOfType<Attack>();
         followTarget = FindObjectOfType<FollowTarget>();
+    }
+
+    IEnumerator LookForTarget()
+    {
+        while (playerAttack == null || !playerAttack.gameObject.activeSelf)
+        {
+            GameObject playerObject = GameObject.Find("Player");
+
+            // Check if playerObject is not null before accessing its transform
+            if (playerObject != null)
+            {
+                playerAttack = playerObject.GetComponent<Attack>();
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

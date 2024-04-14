@@ -13,6 +13,7 @@ public class PowerManager : MonoBehaviour
     [SerializeField] private float decreaseHolyness = 2.5f;
     [SerializeField] GameObject glockImage;
 
+    GameObject player;
     NewWeaponManager weaponManager;
     PlayerMovement playerMovement;
     Attack playerAttack;
@@ -27,9 +28,8 @@ public class PowerManager : MonoBehaviour
 
    void Start() 
    {
-        weaponManager = FindObjectOfType<NewWeaponManager>();
-        playerMovement = FindObjectOfType<PlayerMovement>();
-        playerAttack = FindObjectOfType<Attack>();
+
+        StartCoroutine(LookForPlayer());
 
         KillCount = 0;
         currentHolyness = 0f;
@@ -39,6 +39,26 @@ public class PowerManager : MonoBehaviour
         StartCoroutine(HolynessFade());
         currentHolyness = 100;
    }
+
+    IEnumerator LookForPlayer()
+    {
+        while (player == null || !player.gameObject.activeSelf)
+        {
+            GameObject playerObject = GameObject.Find("Player");
+
+            // Check if playerObject is not null before accessing its transform
+            if (playerObject != null)
+            {
+                player = playerObject;
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        weaponManager = FindObjectOfType<NewWeaponManager>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerAttack = FindObjectOfType<Attack>();
+    }
 
     private void Update()
     {
