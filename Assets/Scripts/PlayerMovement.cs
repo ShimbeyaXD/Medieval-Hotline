@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float chargingSpeed = 18f;
 
     [SerializeField] GameObject startPoint;
+   
+    [SerializeField] GameObject dialogManger;
 
     public bool Dead { get; private set; }
 
@@ -142,6 +144,11 @@ public class PlayerMovement : MonoBehaviour
 
         Animator animator = gameObject.GetComponent<Animator>();
         animator.enabled = false;
+    }
+
+    public void StartDialogWithPope()
+    {
+        dialogManger.SetActive(true);   
     }
 
 }

@@ -10,11 +10,38 @@ public class HellMode : MonoBehaviour
 
     Extraction extraction;
 
+    //Follow Target for 'camerashake'
+    FollowTarget followTarget;
     // Start is called before the first frame update
+
+    //DemonSpawning
+    DemonSpawner demonSpawner;
+
+    //Objective Text UI
+    ObjectiveUI objectiveUI;
+
     void OnEnable()    
     {
+        followTarget = FindObjectOfType<FollowTarget>();
         extraction = FindObjectOfType<Extraction>();
+        demonSpawner = FindObjectOfType<DemonSpawner>();
+        objectiveUI = FindObjectOfType<ObjectiveUI>();
         redMist.SetActive(true);
+
+        CamreaShake();
+        OppenCracks();
+
+    }
+
+    void CamreaShake()  
+    {
+        followTarget.StartShake(1.3f, 0.2f);
+    }
+
+    void OppenCracks() 
+    {
+        demonSpawner.DemonSpawnInitiate();
+        objectiveUI.GetOutText();
     }
 
     public void FillOpacity()

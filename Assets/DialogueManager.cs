@@ -10,47 +10,48 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private float textSpeed;
 
-    [SerializeField] private Dialog justATest;
+    [SerializeField] private Dialog[] dialogs;
     [SerializeField] GameObject dialogBox;
-
     Dialog dialog;
+
     int i = 0;
+    int d = 0;
     string line;
-   [SerializeField] bool isTalkingToPope = false;
+   
+    [SerializeField] bool isTalkingToPope = false;
 
     [SerializeField] Animator talkingAnimator;
 
     [SerializeField] private bool gameScene = false;
     [SerializeField] GameObject hellModeManager;
 
-    //DemonSpawning
-    DemonSpawner demonSpawner;
 
-    //Objective Text UI
-    ObjectiveUI objectiveUI;
 
-    //Follow Target for 'camerashake'
-    FollowTarget followTarget;
-
-    void Start()
+    void OnEnable()
     {
+        Debug.Log("Conversation Start");
         textComponent.text = string.Empty;
-        dialog = justATest;
+
+        dialog = dialogs[d];
+
         i = 0;
         line = dialog.Lines[i];
+
+
         StartCoroutine(TypeLine());
         isTalkingToPope = true;
 
-        demonSpawner = FindObjectOfType<DemonSpawner>();
-        objectiveUI = FindObjectOfType<ObjectiveUI>();
-        followTarget = FindObjectOfType<FollowTarget>();
+
+
     }
 
     void Update()
     {
+        if(dialog == null) { return; }
+
         if (Input.GetButtonDown("Jump"))
         {
-            if (textComponent.text == justATest.Lines[i]) 
+            if (textComponent.text == dialog.Lines[i]) 
             { 
               NextLine();
             }
@@ -58,7 +59,7 @@ public class DialogueManager : MonoBehaviour
             { 
                 StopAllCoroutines();
                 talkingAnimator.SetBool("isTalk", false);
-                textComponent.text = justATest.Lines[i];
+                textComponent.text = dialog.Lines[i];
             }
         }
 
@@ -67,6 +68,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeLine() 
     {
+        Debug.Log("Typing Line");
         if (gameScene) 
         {
             talkingAnimator.SetBool("isTalk", false);
@@ -93,7 +95,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (!gameScene) 
         {
-            if (i < justATest.Lines.Count - 1)
+            if (i < dialogs[d].Lines.Count - 1)
             {
                 i++;
                 Debug.Log("preseed button");
@@ -110,7 +112,7 @@ public class DialogueManager : MonoBehaviour
 
         if (gameScene) 
         {
-            if (i < justATest.Lines.Count - 1)
+            if (i < dialogs[d].Lines.Count - 1)
             {
                 i++;
                 Debug.Log("preseed button");
@@ -131,16 +133,20 @@ public class DialogueManager : MonoBehaviour
     private void StoppedDialogue()
     {
         isTalkingToPope = false;
-        AktivateHellMode();
+        d++;
+        Debug.Log(d);
+
+        if (dialog.lastChatBeforeHell == true) 
+        {
+            AktivateHellMode();
+        }
+
         dialogBox.gameObject.SetActive(false);
     }
 
     private void AktivateHellMode()
     {
-        followTarget.StartShake(1.3f, 0.2f);
 
-        demonSpawner.DemonSpawnInitiate();
-        objectiveUI.GetOutText();
         hellModeManager.gameObject.SetActive(true);
     }
 
@@ -148,4 +154,6 @@ public class DialogueManager : MonoBehaviour
     {
         return isTalkingToPope;
     }
+
+
 }
