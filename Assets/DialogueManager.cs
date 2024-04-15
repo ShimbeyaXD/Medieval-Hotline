@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
 
     int i = 0;
     int d = 0;
+
     string line;
    
     [SerializeField] bool isTalkingToPope = false;
@@ -29,29 +30,18 @@ public class DialogueManager : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("Conversation Start");
-        textComponent.text = string.Empty;
+        CheckpointDialogueUpdate();
 
-        dialog = dialogs[d];
+        textComponent.text = string.Empty;
 
         i = 0;
         line = dialog.Lines[i];
 
-
         StartCoroutine(TypeLine());
         isTalkingToPope = true;
 
-
-        SceneManager.sceneLoaded += OnSceneLoad;
-
-
-
     }
 
-    void OnSceneLoad(Scene scene, LoadSceneMode mode) 
-    { 
-      d = 0;
-    }
 
     void Update()
     {
@@ -122,7 +112,6 @@ public class DialogueManager : MonoBehaviour
             if (i < dialogs[d].Lines.Count - 1)
             {
                 i++;
-                Debug.Log("preseed button");
                 textComponent.text = string.Empty;
                 line = dialog.Lines[i];
                 StartCoroutine(TypeLine());
@@ -140,8 +129,10 @@ public class DialogueManager : MonoBehaviour
     private void StoppedDialogue()
     {
         isTalkingToPope = false;
-        d++;
-        Debug.Log(d);
+        Keeper keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+        keeper.NextDialogueObject();
+        //d = 1;
+
 
         if (dialog.lastChatBeforeHell == true) 
         {
@@ -162,9 +153,15 @@ public class DialogueManager : MonoBehaviour
         return isTalkingToPope;
     }
 
-    public void RespawnCheckpoint()
+    private void CheckpointDialogueUpdate() // Calls when player has touched the checkpoint
     {
-        d = 1;
+        d = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>().dialogueLine;
+
+        if (d >= dialogs.Length - 1)
+        {
+            d = dialogs.Length - 1;
+        }
+
         dialog = dialogs[d];
     }
 

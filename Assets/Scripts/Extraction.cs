@@ -109,13 +109,17 @@ public class Extraction : MonoBehaviour
 
         yield return new WaitForSeconds(reloadSceneDelay);
 
-        keeper.WipeLists();
-
         Scene scene = SceneManager.GetActiveScene();
 
         int sceneNum = SceneManager.GetActiveScene().buildIndex;
 
-        if (sceneChange) { SceneManager.LoadScene(sceneNum + 1); }
+        keeper.WipeLists();
+
+        if (sceneChange) 
+        { 
+            SceneManager.LoadScene(sceneNum + 1); 
+        }
+
         if (!sceneChange) { SceneManager.LoadScene(scene.name); }
     }
 

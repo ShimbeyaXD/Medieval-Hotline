@@ -49,9 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (keeper.GrantCheckpoint)
             {
-                Debug.Log("Spawning player at checkpoint");
                 transform.position = keeper.Checkpoint;
-                dialogueManager.RespawnCheckpoint();
             }
             else
             {
@@ -101,7 +99,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
-        return;
         if (once)
         {
             once = false;

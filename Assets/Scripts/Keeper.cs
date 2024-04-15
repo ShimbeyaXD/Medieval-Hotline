@@ -13,6 +13,8 @@ public class Keeper : MonoBehaviour
 
     [SerializeField] Vector3 objectScale = new Vector3(0.75f, 0.75f, 0.75f);
 
+    public int dialogueLine { get; private set; } = 0;
+
     GameObject systemObject;  // Managers
     GameObject demonObject;   // Objects from Demonphase
     GameObject cultistObject; // Objects from Cultistphase
@@ -47,11 +49,9 @@ public class Keeper : MonoBehaviour
         {
             Destroy(gameObject);
 
-            Debug.Log(gameObject.name + " is the isntace");
         }
         else
         {
-            Debug.Log("Destroying myself");
             keeperInstance = this;
 
         }
@@ -84,6 +84,8 @@ public class Keeper : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("GRantcheckpoint is " + GrantCheckpoint);
+
         CheckCurrentScene();
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -233,8 +235,15 @@ public class Keeper : MonoBehaviour
 
     public void RecieveCheckpoint(Vector2 position)
     {
+        NextDialogueObject();
+
         GrantCheckpoint = true;
         Checkpoint = position;
+    }
+
+    public void NextDialogueObject()
+    {
+        dialogueLine = 1;
     }
 
     public void StageEnd()
@@ -249,14 +258,17 @@ public class Keeper : MonoBehaviour
     {
         IsLevelCleared = false;
 
+        dialogueLine = 1;
 
         // If demonphase is true then wipe all lists from both the cultist and the demonobject
         // But if demonphase is false then only wipe the lists from the demonobject
+
 
         if (GrantCheckpoint)
         {
             for (int i = 0; i < demonObject.transform.childCount; i++)
             {
+                Debug.Log("Clearing demon list");
                 Destroy(demonObject.transform.GetChild(i).gameObject);
             }
         }
@@ -264,17 +276,22 @@ public class Keeper : MonoBehaviour
         {
             for (int i = 0; i < cultistObject.transform.childCount; i++)
             {
+                Debug.Log("Clearing cultist");
                 Destroy(cultistObject.transform.GetChild(i).gameObject);
             }
         }
 
         if (GrantCheckpoint) { return; }
 
+        Debug.Log("Clearing all lists");
+
         cultistList.Clear();
         weaponProjectiles.Clear();
         bloodManagers.Clear();
         enemyYes.Clear();
         doors.Clear();
+        dialogueLine = 0;
+
 
         for (int i = 0; i < cultistList.Count; i++)
         {

@@ -155,11 +155,14 @@ public class EnemyBehavior : MonoBehaviour
     {
         // alex var h�r
         //agent.isStopped = true;
-        agent.updatePosition = false;
-        isChasingTarget = false;
-
         legAnimator.SetBool("isWalking", false);
         if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
+
+        isChasingTarget = false;
+
+        if (agent == null) { return; }
+        agent.updatePosition = false; // potentai nuke
+
     }
 
     private void UpdateRotation()

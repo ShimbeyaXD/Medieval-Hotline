@@ -13,7 +13,6 @@ public class GamePause : MonoBehaviour
         if (paused) 
         { 
           Time.timeScale = 0f;
-            Debug.Log("Paused");
         }
         else    
         {
