@@ -27,11 +27,14 @@ public class Horse : MonoBehaviour
 
     private void Awake()
     {
+
         openingAnimator = endPosition.gameObject.GetComponent<Animator>();
         openingAnimator.enabled = false;
         playerLights = transform.GetChild(2).gameObject;
 
         keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+        if (keeper.SearchAndDestroy(gameObject)) Destroy(realHorse.gameObject);
+        keeper.LevelEnded = false;
 
         if (keeper.PlayOpeningAnimation)
         {
@@ -66,6 +69,8 @@ public class Horse : MonoBehaviour
 
                 endPosition.gameObject.SetActive(true);
                 realHorse.SetActive(true);
+                keeper.ManagerInstance(realHorse);
+
                 openingAnimator.enabled = true;
 
                 StartAnimation();
@@ -76,6 +81,8 @@ public class Horse : MonoBehaviour
 
     void StartAnimation()
     {
+        if (keeper.LevelEnded) return;
+
         canvas.enabled = true;
 
         if (sceneAnimationNumber[0])

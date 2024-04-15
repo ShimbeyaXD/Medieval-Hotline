@@ -34,6 +34,9 @@ public class Keeper : MonoBehaviour
 
     public bool IsLevelCleared { get; set; }
 
+    public bool LevelEnded { get; set; } 
+
+
     void Start()
     {
         DontDestroyOnLoad(this);
@@ -196,6 +199,14 @@ public class Keeper : MonoBehaviour
         }
     }
 
+    public void ManagerInstance(GameObject manager)
+    {
+        if (!SearchAndDestroy(manager))
+        {
+            manager.transform.parent = systemObject.transform;
+        }
+    }
+
     public void RecieveCheckpoint(Vector2 position)
     {
         GrantCheckpoint = true;
@@ -205,8 +216,6 @@ public class Keeper : MonoBehaviour
     public void StageEnd()
     {
         GrantCheckpoint = false;
-        GrantCheckpoint = false;
-        IsLevelCleared = false;
         PlayOpeningAnimation = true;
 
         WipeLists();
@@ -214,6 +223,7 @@ public class Keeper : MonoBehaviour
 
     public void WipeLists() 
     {
+        IsLevelCleared = false;
 
 
         // If demonphase is true then wipe all lists from both the cultist and the demonobject
