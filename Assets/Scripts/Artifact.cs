@@ -1,6 +1,7 @@
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Artifact : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Artifact : MonoBehaviour
 
     [Header("DialogueSystem")]
     [SerializeField] GameObject dialogueManager;
+
+    [Header("Hellmode Reference")]
+    [SerializeField] GameObject hellModeManager;
 
     PlayerMovement playerMovement;
     ObjectiveUI objectiveUI;
@@ -45,6 +49,11 @@ public class Artifact : MonoBehaviour
             other.gameObject.SetActive(false);
 
             keeper.IsLevelCleared = true;
+
+            if (SceneManager.GetActiveScene().buildIndex != 2)
+            {
+                hellModeManager.gameObject.SetActive(true);
+            }
         }
         if (other.gameObject.CompareTag("Checkpoint") && once)
         {
@@ -57,7 +66,7 @@ public class Artifact : MonoBehaviour
     void Checkpoint(GameObject other)
     {
         keeper.RecieveCheckpoint(other.transform.position);
-        
+
     }
 
 }
