@@ -27,13 +27,14 @@ public class Horse : MonoBehaviour
 
     private void Awake()
     {
+        endPosition.gameObject.SetActive(true);
 
         openingAnimator = endPosition.gameObject.GetComponent<Animator>();
         openingAnimator.enabled = false;
         playerLights = transform.GetChild(2).gameObject;
 
         keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
-        if (keeper.SearchAndDestroy(gameObject)) Destroy(realHorse.gameObject);
+        if (keeper.SearchAndDestroy(realHorse)) Destroy(realHorse.gameObject);
         keeper.LevelEnded = false;
 
         if (keeper.PlayOpeningAnimation)

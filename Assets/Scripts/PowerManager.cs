@@ -50,14 +50,16 @@ public class PowerManager : MonoBehaviour
             if (playerObject != null)
             {
                 player = playerObject;
+                weaponManager = playerObject.GetComponent<NewWeaponManager>();
+                playerMovement = playerObject.GetComponent<PlayerMovement>();
+                playerAttack = playerObject.GetComponent<Attack>();
+                break;
             }
 
             yield return new WaitForSeconds(1f);
         }
 
-        weaponManager = FindObjectOfType<NewWeaponManager>();
-        playerMovement = FindObjectOfType<PlayerMovement>();
-        playerAttack = FindObjectOfType<Attack>();
+
     }
 
     private void Update()
