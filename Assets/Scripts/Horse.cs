@@ -99,7 +99,6 @@ public class Horse : MonoBehaviour
             openingAnimator.SetBool("isScene2", true);
 
         }
-
         if (sceneAnimationNumber[2])
         {
             openingAnimator.SetBool("isScene3", true);
