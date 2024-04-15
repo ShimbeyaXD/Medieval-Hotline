@@ -264,7 +264,7 @@ public class Keeper : MonoBehaviour
         // But if demonphase is false then only wipe the lists from the demonobject
 
 
-        if (GrantCheckpoint || wipeAll)
+        if (GrantCheckpoint)
         {
             for (int i = 0; i < demonObject.transform.childCount; i++)
             {
@@ -272,12 +272,20 @@ public class Keeper : MonoBehaviour
                 Destroy(demonObject.transform.GetChild(i).gameObject);
             }
         }
-        if (!GrantCheckpoint || wipeAll)
+        if (!GrantCheckpoint)
         {
             for (int i = 0; i < cultistObject.transform.childCount; i++)
             {
                 Debug.Log("Clearing cultist");
                 Destroy(cultistObject.transform.GetChild(i).gameObject);
+            }
+        }
+        if (wipeAll)
+        {
+            for (int i = 0; i < systemObject.transform.childCount; i++)
+            {
+                Debug.Log("Clearing system objects");
+                Destroy(systemObject.transform.GetChild(i).gameObject);
             }
         }
 
