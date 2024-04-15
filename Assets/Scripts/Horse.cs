@@ -10,6 +10,8 @@ public class Horse : MonoBehaviour
     [SerializeField] Transform myTransfrom;
     [SerializeField] Transform endPosition;
     [SerializeField] GameObject realHorse;
+    [SerializeField] Canvas normalCanvas;
+    [SerializeField] Canvas extraCanvas;
 
     [Header("PlayerOffset")]
     [SerializeField] float xOffset;
@@ -22,7 +24,6 @@ public class Horse : MonoBehaviour
 
     Keeper keeper;
     Animator openingAnimator;
-    Canvas canvas;
     GameObject playerLights;
 
     private void Awake()
@@ -42,8 +43,8 @@ public class Horse : MonoBehaviour
 
         if (keeper.PlayOpeningAnimation)
         {
-            canvas = FindObjectOfType<Canvas>();
-            canvas.enabled = false;
+
+            normalCanvas.enabled = false;
             playerLights.SetActive(true);
         }
         else
@@ -86,7 +87,7 @@ public class Horse : MonoBehaviour
     {
         if (keeper.LevelEnded) return;
 
-        canvas.enabled = true;
+        normalCanvas.enabled = true;
 
         if (sceneAnimationNumber[0])
         {
@@ -98,6 +99,7 @@ public class Horse : MonoBehaviour
             openingAnimator.SetBool("isScene2", true);
 
         }
+
         else
         {
             Debug.LogWarning("No scene animation");
