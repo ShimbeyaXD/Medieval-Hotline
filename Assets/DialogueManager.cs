@@ -41,6 +41,16 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeLine());
         isTalkingToPope = true;
 
+
+        SceneManager.sceneLoaded += OnSceneLoad;
+
+
+
+    }
+
+    void OnSceneLoad(Scene scene, LoadSceneMode mode) 
+    { 
+      d = 0;
     }
 
     void Update()
