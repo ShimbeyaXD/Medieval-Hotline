@@ -1,4 +1,3 @@
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -45,15 +44,19 @@ public class Artifact : MonoBehaviour
         {
             artifactImage.enabled = true;
             artifactImage.sprite = artifactSprite;
-            dialogueManager.SetActive(true);
+            keeper.IsLevelCleared = true;
             other.gameObject.SetActive(false);
 
-            keeper.IsLevelCleared = true;
+            if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                dialogueManager.SetActive(true);
+            }
 
             if (SceneManager.GetActiveScene().buildIndex != 2)
             {
                 hellModeManager.gameObject.SetActive(true);
             }
+
         }
         if (other.gameObject.CompareTag("Checkpoint") && once)
         {

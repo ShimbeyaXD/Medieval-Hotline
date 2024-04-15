@@ -1,9 +1,7 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Extraction : MonoBehaviour
 {
@@ -31,6 +29,8 @@ public class Extraction : MonoBehaviour
 
     void Start()
     {
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+
         text = restartText.GetComponent<TextMeshProUGUI>();
 
         text.enabled = false;
@@ -41,16 +41,14 @@ public class Extraction : MonoBehaviour
         powerManager = FindObjectOfType<PowerManager>();
         artifact = GetComponent<Artifact>();
         playerMovement = GetComponent<PlayerMovement>();
-
-        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
     }
 
     void Update()
     {
         Extracting();
 
-        if (Input.GetButtonDown("Jump") && inputIntermission && playerMovement.Dead) { StartCoroutine(ReloadScene(false)); StopCoroutine(InputIntermission()); }
-        if (Input.GetButtonDown("Jump") && inputIntermission && !playerMovement.Dead) { StartCoroutine(ReloadScene(true)); StopCoroutine(InputIntermission()); }
+        if (Input.GetButtonDown("Fire1") && inputIntermission && playerMovement.Dead) { StartCoroutine(ReloadScene(false)); StopCoroutine(InputIntermission()); }
+        if (Input.GetButtonDown("Fire1") && inputIntermission && !playerMovement.Dead) { StartCoroutine(ReloadScene(true)); StopCoroutine(InputIntermission()); }
 
     }
 
@@ -67,6 +65,7 @@ public class Extraction : MonoBehaviour
                 continueButton.gameObject.SetActive(true);
                 powerManager.ShowKillText();
                 keeper.StageEnd();
+                keeper.PlayOpeningAnimation = true;
 
                 StartCoroutine(InputIntermission());
                 
