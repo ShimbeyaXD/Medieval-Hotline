@@ -3393,6 +3393,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5163749108050845210, guid: a21fb3183f56a0a4ebf81fc975bb7199, type: 3}
+      propertyPath: dialogs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163749108050845210, guid: a21fb3183f56a0a4ebf81fc975bb7199, type: 3}
+      propertyPath: dialogs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 19601b8bf8f040b428f3365202d60089, type: 2}
     - target: {fileID: 8809571200949583624, guid: a21fb3183f56a0a4ebf81fc975bb7199, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

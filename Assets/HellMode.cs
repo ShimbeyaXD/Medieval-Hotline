@@ -41,6 +41,7 @@ public class HellMode : MonoBehaviour
     void OppenCracks() 
     {
         demonSpawner.DemonSpawnInitiate();
+        Debug.Log("objectiveui is " + objectiveUI);
         objectiveUI.GetOutText();
     }
 
