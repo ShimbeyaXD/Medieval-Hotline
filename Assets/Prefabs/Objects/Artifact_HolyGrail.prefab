@@ -89,6 +89,14 @@ PrefabInstance:
       value: Artifact_HolyGrail
       objectReference: {fileID: 0}
     - target: {fileID: 8241312844600383734, guid: ea0528ddb7ab4b747b03c6f04ff0f266, type: 3}
+      propertyPath: m_Size.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241312844600383734, guid: ea0528ddb7ab4b747b03c6f04ff0f266, type: 3}
+      propertyPath: m_Size.y
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241312844600383734, guid: ea0528ddb7ab4b747b03c6f04ff0f266, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 32c15ab855348494f9fed8cbb8dd603c, type: 3}

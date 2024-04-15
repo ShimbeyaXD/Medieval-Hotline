@@ -155,7 +155,10 @@ public class DialogueManager : MonoBehaviour
 
     private void CheckpointDialogueUpdate() // Calls when player has touched the checkpoint
     {
-        d = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>().dialogueLine;
+        if(gameScene) {
+
+            d = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>().dialogueLine;
+        }
 
         if (d >= dialogs.Length - 1)
         {
