@@ -7,6 +7,7 @@ public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private float textSpeed;
+    [SerializeField] private string levelToLoad;
 
     [SerializeField] private Dialog[] dialogs;
     [SerializeField] GameObject dialogBox;
@@ -20,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] bool isTalkingToPope = false;
 
     [SerializeField] Animator talkingAnimator;
+    [SerializeField] Animator fadeOutAnimator;
 
     [SerializeField] private bool gameScene = false;
     [SerializeField] GameObject hellModeManager;
@@ -34,9 +36,22 @@ public class DialogueManager : MonoBehaviour
 
         i = 0;
         line = dialog.Lines[i];
-
-        StartCoroutine(TypeLine());
+        if (!gameScene) { new WaitForSeconds(1f); }
+        StartCoroutine(CallTypeLine());
         isTalkingToPope = true;
+
+    }
+
+    IEnumerator CallTypeLine() 
+    {
+        if (gameScene) 
+        {
+            StartCoroutine(TypeLine());
+            yield return null;
+        }
+      
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(TypeLine());
 
     }
 
@@ -101,7 +116,8 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("Level1");
+                fadeOutAnimator.SetBool("FadeOut", true);
+                StartCoroutine(LoadNextScene());
             }
         }
 
@@ -122,6 +138,12 @@ public class DialogueManager : MonoBehaviour
                 
         }
 
+    }
+
+    private IEnumerator LoadNextScene() 
+    {
+        yield return new WaitForSeconds(1.2f);
+        SceneManager.LoadScene(levelToLoad);
     }
 
     private void StoppedDialogue()

@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f9abf3a67b3385469c87e27869a1bbe, type: 3}
-  m_Name: Op dialog
+  m_Name: Pope3
   m_EditorClassIdentifier: 
   lastChatBeforeHell: 0
   Lines:
-  - 'What Ho! '
-  - Pray thee my peerless paramour knight.
-  - 'I''m in trubble and i needeth thy help '
-  - My artifacts have been stolen by an Evil cult
-  - 'So go forth my peerless knight. '
-  - Bring back my artifacts and KILL ALL THOSE SINNERS
+  - Noice Work.
+  - 'Thou cleared the second stage in X and killed X sinners. '
+  - Now on to the last artifact. The Holy Comandments.
