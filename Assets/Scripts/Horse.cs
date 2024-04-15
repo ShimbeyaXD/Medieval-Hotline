@@ -34,7 +34,10 @@ public class Horse : MonoBehaviour
         playerLights = transform.GetChild(2).gameObject;
 
         keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
-        if (keeper.SearchAndDestroy(realHorse)) Destroy(realHorse.gameObject);
+
+        keeper.ManagerInstance(realHorse);
+
+        //if (keeper.SearchAndDestroy(realHorse)) Destroy(realHorse.gameObject);
         keeper.LevelEnded = false;
 
         if (keeper.PlayOpeningAnimation)
@@ -70,7 +73,6 @@ public class Horse : MonoBehaviour
 
                 endPosition.gameObject.SetActive(true);
                 realHorse.SetActive(true);
-                keeper.ManagerInstance(realHorse);
 
                 openingAnimator.enabled = true;
 

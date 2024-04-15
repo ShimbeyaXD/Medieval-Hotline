@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Keeper : MonoBehaviour
 {
+    private static Keeper keeperInstance;
+
     int currentScene;
     int duplicates = 0;
     bool destroyMyself = false;
@@ -34,12 +36,29 @@ public class Keeper : MonoBehaviour
 
     public bool IsLevelCleared { get; set; }
 
-    public bool LevelEnded { get; set; } 
+    public bool LevelEnded { get; set; }
 
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+
+        if (keeperInstance != null)
+        {
+            Destroy(gameObject);
+
+            Debug.Log(gameObject.name + " is the isntace");
+        }
+        else
+        {
+            Debug.Log("Destroying myself");
+            keeperInstance = this;
+
+        }
+    }
 
     void Start()
     {
-        DontDestroyOnLoad(this);
 
         systemObject = transform.GetChild(0).gameObject;
         demonObject = transform.GetChild(1).gameObject;
@@ -47,21 +66,24 @@ public class Keeper : MonoBehaviour
 
         currentScene = SceneManager.GetActiveScene().buildIndex;
 
+
+
+        /*
         GameObject[] allKeepers = GameObject.FindGameObjectsWithTag("Keeper");
 
         if (allKeepers.Length > 1)
         {
-            Destroy(gameObject);
+            Debug.Log("destroying myself");
+            Destroy(this.gameObject);
         }
-
+        */
+        
 
         
     }
 
     void Update()
     {
-        Debug.Log("DemonPhase " + GrantCheckpoint);
-
         CheckCurrentScene();
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -74,7 +96,7 @@ public class Keeper : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != currentScene)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -203,6 +225,8 @@ public class Keeper : MonoBehaviour
     {
         if (!SearchAndDestroy(manager))
         {
+            systemObject = transform.GetChild(0).gameObject;
+
             manager.transform.parent = systemObject.transform;
         }
     }

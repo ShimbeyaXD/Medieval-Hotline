@@ -76,7 +76,6 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeLine() 
     {
-        Debug.Log("Typing Line");
         if (gameScene) 
         {
             talkingAnimator.SetBool("isTalk", false);
