@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -230,6 +229,8 @@ public class Keeper : MonoBehaviour
             systemObject = transform.GetChild(0).gameObject;
 
             manager.transform.parent = systemObject.transform;
+
+            cultistList.Add(manager);
         }
     }
 
@@ -249,7 +250,6 @@ public class Keeper : MonoBehaviour
     public void StageEnd()
     {
         GrantCheckpoint = false;
-        PlayOpeningAnimation = true;
 
         WipeLists(true);
     }
