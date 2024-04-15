@@ -23,6 +23,7 @@ public class Extraction : MonoBehaviour
     Keeper keeper;
     PlayerMovement playerMovement;
     TextMeshProUGUI text;
+    SceneLoader sceneLoader;
 
     bool inputIntermission = false;
 
@@ -48,7 +49,8 @@ public class Extraction : MonoBehaviour
     {
         Extracting();
 
-        if (Input.GetButtonDown("Jump") && inputIntermission) { Debug.Log("hey jump pressed"); StartCoroutine(ReloadScene()); StopCoroutine(InputIntermission()); }
+        if (Input.GetButtonDown("Jump") && inputIntermission && playerMovement.Dead) { StartCoroutine(ReloadScene(false)); StopCoroutine(InputIntermission()); }
+        if (Input.GetButtonDown("Jump") && inputIntermission && !playerMovement.Dead) { StartCoroutine(ReloadScene(true)); StopCoroutine(InputIntermission()); }
 
     }
 
@@ -61,10 +63,13 @@ public class Extraction : MonoBehaviour
 
             if (ray.collider != null)
             {
-                LevelEnded = true;
+                keeper.LevelEnded = true;
                 continueButton.gameObject.SetActive(true);
                 powerManager.ShowKillText();
                 keeper.StageEnd();
+
+                StartCoroutine(InputIntermission());
+                
             }
         }
     }
@@ -82,7 +87,7 @@ public class Extraction : MonoBehaviour
 
     IEnumerator TextAppearCooldown()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.2f);
 
         restartText.GetComponent<TextMeshProUGUI>().enabled = true;
     }
@@ -98,7 +103,7 @@ public class Extraction : MonoBehaviour
         }
     }
 
-    IEnumerator ReloadScene()
+    IEnumerator ReloadScene(bool sceneChange)
     {
         animatorUI.SetBool("isFading", true);
 
@@ -107,7 +112,11 @@ public class Extraction : MonoBehaviour
         keeper.WipeLists();
 
         Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+
+        int sceneNum = SceneManager.GetActiveScene().buildIndex;
+
+        if (sceneChange) { SceneManager.LoadScene(sceneNum + 1); }
+        if (!sceneChange) { SceneManager.LoadScene(scene.name); }
     }
 
 }

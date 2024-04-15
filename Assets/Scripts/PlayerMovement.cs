@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
    
     [SerializeField] GameObject dialogManger;
 
+    [SerializeField] DialogueManager dialogueManager;
+
     public bool Dead { get; private set; }
 
     float horizontal;
@@ -38,9 +40,8 @@ public class PlayerMovement : MonoBehaviour
         extraction = GetComponent<Extraction>();
         originalSpeed = movementSpeed;
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
-        
-        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
 
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
 
         if (!keeper.PlayOpeningAnimation)
         {
@@ -50,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("Spawning player at checkpoint");
                 transform.position = keeper.Checkpoint;
+                dialogueManager.RespawnCheckpoint();
             }
             else
             {
@@ -66,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (extraction.LevelEnded || Dead) return;
+        if (keeper.LevelEnded || Dead) return;
         Move();
     }
 
@@ -99,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
+        return;
         if (once)
         {
             once = false;

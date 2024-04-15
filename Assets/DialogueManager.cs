@@ -41,6 +41,7 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeLine());
         isTalkingToPope = true;
 
+
         SceneManager.sceneLoaded += OnSceneLoad;
 
 
@@ -162,5 +163,10 @@ public class DialogueManager : MonoBehaviour
         return isTalkingToPope;
     }
 
+    public void RespawnCheckpoint()
+    {
+        d = 1;
+        dialog = dialogs[d];
+    }
 
 }
