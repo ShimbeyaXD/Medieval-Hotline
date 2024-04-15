@@ -10,11 +10,24 @@ public class SceneTitleText : MonoBehaviour
 
     TextMeshProUGUI stageNumberText;
     TextMeshProUGUI stageNameText;
+    Animator textFadeAnimator;
+    Animator textFadeAnimatorParent;
+    Keeper keeper;
 
     private void Awake()
     {
         stageNumberText = GetComponent<TextMeshProUGUI>();
         stageNameText = gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        textFadeAnimator = stageNameText.GetComponent<Animator>();
+        textFadeAnimatorParent = GetComponent<Animator>();
+        keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+
+        if (!keeper.GrantCheckpoint)
+        {
+            textFadeAnimator.SetBool("ShowText", true);
+            textFadeAnimatorParent.SetBool("ShowText", true);
+        }
+        else { return; }
 
         if (sceneTitleNumber[0]) 
         {
@@ -28,12 +41,12 @@ public class SceneTitleText : MonoBehaviour
         }
         if (sceneTitleNumber[2])
         {
-            stageNumberText.text = "STAGE THERE";
-            stageNameText.text = "-The Holy Comandments-";
+            stageNumberText.text = "STAGE THREE";
+            stageNameText.text = "-The Holy Commandments-";
         }
         else 
         {
-            Debug.LogWarning("No Title Text Asignd");
+            Debug.LogWarning("No Title Text Assigned or player has passed the checkpoint");
         }
     }
 

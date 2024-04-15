@@ -155,12 +155,15 @@ public class EnemyBehavior : MonoBehaviour
     {
         // alex var h�r
         //agent.isStopped = true;
-        if(legAnimator != false) 
+        if(legAnimator != null) 
         {
             legAnimator.SetBool("isWalking", false);
         }
 
-        if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
+        if (enemyYes != null)
+        {
+            if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
+        }
 
         isChasingTarget = false;
 

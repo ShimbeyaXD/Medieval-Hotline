@@ -137,6 +137,6 @@ public class PowerManager : MonoBehaviour
 
     public void ShowKillText()
     {
-        killText.gameObject.SetActive(true);
+        //killText.gameObject.SetActive(true);
     }
 }
