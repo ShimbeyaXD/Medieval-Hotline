@@ -100,6 +100,12 @@ public class Horse : MonoBehaviour
 
         }
 
+        if (sceneAnimationNumber[2])
+        {
+            openingAnimator.SetBool("isScene3", true);
+
+        }
+
         else
         {
             Debug.LogWarning("No scene animation");

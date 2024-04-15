@@ -113,7 +113,7 @@ public class Extraction : MonoBehaviour
 
         int sceneNum = SceneManager.GetActiveScene().buildIndex;
 
-        keeper.WipeLists();
+        keeper.WipeLists(false);
 
         if (sceneChange) 
         { 

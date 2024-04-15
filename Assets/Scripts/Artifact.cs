@@ -48,6 +48,7 @@ public class Artifact : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Checkpoint") && once)
         {
+            Debug.Log("FOund checkpoiunt");
             once = false;
             Checkpoint(other.gameObject);
         }

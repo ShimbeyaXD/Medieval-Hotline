@@ -251,10 +251,10 @@ public class Keeper : MonoBehaviour
         GrantCheckpoint = false;
         PlayOpeningAnimation = true;
 
-        WipeLists();
+        WipeLists(true);
     }
 
-    public void WipeLists() 
+    public void WipeLists(bool wipeAll) 
     {
         IsLevelCleared = false;
 
@@ -264,7 +264,7 @@ public class Keeper : MonoBehaviour
         // But if demonphase is false then only wipe the lists from the demonobject
 
 
-        if (GrantCheckpoint)
+        if (GrantCheckpoint || wipeAll)
         {
             for (int i = 0; i < demonObject.transform.childCount; i++)
             {
@@ -272,7 +272,7 @@ public class Keeper : MonoBehaviour
                 Destroy(demonObject.transform.GetChild(i).gameObject);
             }
         }
-        if (!GrantCheckpoint)
+        if (!GrantCheckpoint || wipeAll)
         {
             for (int i = 0; i < cultistObject.transform.childCount; i++)
             {
