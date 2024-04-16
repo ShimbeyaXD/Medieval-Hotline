@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = transform.GetChild(0).transform.GetChild(1).GetComponent<Animator>();
-        extraction = GetComponent<Extraction>();
+        extraction = FindObjectOfType<Extraction>();
         originalSpeed = movementSpeed;
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
 
@@ -96,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
-        return;
         if (once)
         {
             once = false;
@@ -104,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
             Dead = true;
             myRigidbody.velocity = Vector3.zero;
             newWeaponManager.SetDeadAnimator();
-            extraction.DeathScreen();
+            FindObjectOfType<Extraction>().DeathScreen();
 
             /*
             if (GameObject.Find("HellModeManager") != null)

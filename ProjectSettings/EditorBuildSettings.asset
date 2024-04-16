@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: a952a77a8520bdc40b16be2d884321fe
   - enabled: 1
-    path: Assets/Scenes/Simon2Scene2.unity
+    path: Assets/Scenes/Pope1.unity
     guid: c6aba4470a2e7c44094b3c260d6cbbc9
   - enabled: 1
     path: Assets/Scenes/Level1.unity

@@ -20,6 +20,7 @@ TagManager:
   - Keeper
   - Door
   - Checkpoint
+  - RestartText
   layers:
   - Default
   - TransparentFX

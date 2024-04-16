@@ -5,106 +5,106 @@ using UnityEngine.SceneManagement;
 
 public class Extraction : MonoBehaviour
 {
-    [Header("Extracting Stage")]
-    [SerializeField] LayerMask exitLayer;
-    [SerializeField] float detectionDistance = 2;
-    [SerializeField] GameObject continueButton;
+    [Header("Extraction Stage")]
+    [SerializeField] LayerMask playerLayer;
+    [SerializeField] float detectionDistance = 0.8f;
+    [SerializeField] GameObject nextLevelButtonObject;
 
     [Header("Reloading Stage")]
-    [SerializeField] float reloadSceneDelay = 2;
+    [SerializeField] float reloadSceneDelay = 1.5f;
     [SerializeField] GameObject restartText;
-    [SerializeField] Animator animatorUI;
+    [SerializeField] Animator restartTextAnimator;
 
-    Artifact artifact;
-    RoundTimer roundTimer;
+
     PowerManager powerManager;
     Keeper keeper;
-    PlayerMovement playerMovement;
     TextMeshProUGUI text;
-    SceneLoader sceneLoader;
 
-    bool inputIntermission = false;
+    bool deathScreen = false;
 
     public bool LevelEnded { get; private set; }
 
-    void Start()
+    void OnEnable()
     {
         keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
 
-        text = restartText.GetComponent<TextMeshProUGUI>();
+        //restartText = GameObject.Find("RestartText");
+        //animatorUI = restartText.GetComponent<Animator>();
 
+        deathScreen = false;
+        text = restartText.GetComponent<TextMeshProUGUI>();
         text.enabled = false;
         restartText.SetActive(false);
-        continueButton.gameObject.SetActive(false);
+        nextLevelButtonObject.gameObject.SetActive(false);
 
-        roundTimer = FindObjectOfType<RoundTimer>();
-        powerManager = FindObjectOfType<PowerManager>();
-        artifact = GetComponent<Artifact>();
-        playerMovement = GetComponent<PlayerMovement>();
+        powerManager = FindAnyObjectByType<PowerManager>();
     }
 
     void Update()
     {
-        Extracting();
+        if (Physics2D.OverlapCircle(transform.position, detectionDistance, playerLayer) && keeper.IsLevelCleared) // Player Extracted
+        {
+            if (nextLevelButtonObject == null) { nextLevelButtonObject = GameObject.Find("NextLevelButton"); }            
 
-        if (Input.GetButtonDown("Fire1") && inputIntermission && playerMovement.Dead) { StartCoroutine(ReloadScene(false)); StopCoroutine(InputIntermission()); }
-        if (Input.GetButtonDown("Fire1") && inputIntermission && !playerMovement.Dead) { StartCoroutine(ReloadScene(true)); StopCoroutine(InputIntermission()); }
+            nextLevelButtonObject.SetActive(true);
+
+            if (Input.GetButtonDown("Jump")) // Space on keyboard
+            {
+                StartCoroutine(ReloadScene(true));
+                keeper.LevelEnded = true;
+                powerManager.ShowKillText();
+                keeper.StageEnd();
+                keeper.PlayOpeningAnimation = true;
+            }
+        }
+        if (!Physics2D.OverlapCircle(transform.position, detectionDistance, playerLayer))
+        {
+            nextLevelButtonObject.SetActive(false);
+        }
+
+        if (Input.GetButtonDown("Fire1") && deathScreen) { StartCoroutine(ReloadScene(false)); }
+
+        //if (Input.GetButtonDown("Fire1") && deathScreen && !playerMovement.Dead) { StartCoroutine(ReloadScene(true)); }
 
     }
 
 
     void Extracting()
     {
+        /*
         if (Input.GetButtonDown("Submit") && keeper.IsLevelCleared)
         {
             RaycastHit2D ray = Physics2D.BoxCast(transform.position, new Vector2(2, 2), 0, Vector2.up, detectionDistance, exitLayer);
 
             if (ray.collider != null)
             {
-                keeper.LevelEnded = true;
-                continueButton.gameObject.SetActive(true);
-                powerManager.ShowKillText();
-                keeper.StageEnd();
-                keeper.PlayOpeningAnimation = true;
 
                 StartCoroutine(InputIntermission());
                 
             }
         }
+        */
     }
     
     public void DeathScreen()
     {
-        if (playerMovement.Dead)
-        {
-            restartText.SetActive(true);
+        deathScreen = true;
+        restartText.SetActive(true);
 
-            StartCoroutine(InputIntermission());
-            StartCoroutine(TextAppearCooldown());
-        }
+        StartCoroutine(TextAppearCooldown());
+        //StartCoroutine(InputIntermission());
     }
 
     IEnumerator TextAppearCooldown()
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.5f);
 
-        restartText.GetComponent<TextMeshProUGUI>().enabled = true;
-    }
-
-    IEnumerator InputIntermission()
-    {
-        while (true)
-        {
-            inputIntermission = true;
-
-            yield return new WaitForEndOfFrame();
-
-        }
+        text.enabled = true;
     }
 
     IEnumerator ReloadScene(bool sceneChange)
     {
-        animatorUI.SetBool("isFading", true);
+        restartTextAnimator.SetBool("isFading", true);
 
         yield return new WaitForSeconds(reloadSceneDelay);
 

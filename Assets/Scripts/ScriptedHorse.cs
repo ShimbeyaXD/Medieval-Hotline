@@ -59,7 +59,7 @@ public class ScriptedHorse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!reachedEnd && keeper.PlayOpeningAnimation)
+        if (!reachedEnd && keeper.PlayOpeningAnimation && !keeper.IsLevelCleared)
         {
             openingAnimator.enabled = true;
 

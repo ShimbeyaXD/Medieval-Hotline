@@ -230,7 +230,7 @@ public class Keeper : MonoBehaviour
 
             manager.transform.parent = systemObject.transform;
 
-            cultistList.Add(manager);
+            //cultistList.Add(manager);
         }
     }
 
@@ -250,13 +250,13 @@ public class Keeper : MonoBehaviour
     public void StageEnd()
     {
         GrantCheckpoint = false;
+        IsLevelCleared = false;
 
         WipeLists(true);
     }
 
     public void WipeLists(bool wipeAll) 
     {
-        IsLevelCleared = false;
 
         dialogueLine = 1;
 
@@ -280,6 +280,17 @@ public class Keeper : MonoBehaviour
                 Destroy(cultistObject.transform.GetChild(i).gameObject);
             }
         }
+
+        /*
+        if (wipeAll)
+        {
+            for (int i = 0; i < systemObject.transform.childCount; i++)
+            {
+                Debug.Log("Clearing system objects");
+                Destroy(systemObject.transform.GetChild(i).gameObject);
+            }
+        }
+        */
 
         if (GrantCheckpoint) { return; }
 

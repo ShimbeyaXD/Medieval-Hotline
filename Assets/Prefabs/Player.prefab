@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 6967533776143097741}
   - component: {fileID: 1767330878381990139}
   - component: {fileID: 5079720855406137778}
-  - component: {fileID: 7257305399288384896}
   - component: {fileID: 698454624390147535}
   - component: {fileID: 7978127273476225160}
   m_Layer: 8
@@ -214,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8469019716099702473
 Transform:
   m_ObjectHideFlags: 0
@@ -365,7 +364,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 12
   chargingSpeed: 18
-  reloadSceneDelay: 2
+  startPoint: {fileID: 0}
+  dialogManger: {fileID: 0}
+  dialogueManager: {fileID: 0}
 --- !u!114 &6967533776143097741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,25 +447,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   artifactImage: {fileID: 0}
-  artifactSprite: {fileID: 21300000, guid: 65b5a18566d0e9441875101286e41dc1, type: 3}
+  artifactSprite: {fileID: 21300000, guid: 8f7bcdc0ac92b4346b43c505a0011f72, type: 3}
   dialogueManager: {fileID: 0}
---- !u!114 &7257305399288384896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1375415280249971910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286dfcb64ddaf19409746769a48ec4d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  exitLayer:
-    serializedVersion: 2
-    m_Bits: 8192
-  detectionDistance: 2
-  continueButton: {fileID: 0}
+  hellModeManager: {fileID: 0}
 --- !u!114 &698454624390147535
 MonoBehaviour:
   m_ObjectHideFlags: 0

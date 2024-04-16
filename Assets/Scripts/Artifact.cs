@@ -11,6 +11,7 @@ public class Artifact : MonoBehaviour
     [SerializeField] LayerMask artifactLayer;
     [SerializeField] Image artifactImage;
     [SerializeField] Sprite artifactSprite;
+    [SerializeField] ObjectiveUI objectiveUI;
 
     [Header("DialogueSystem")]
     [SerializeField] GameObject dialogueManager;
@@ -19,7 +20,6 @@ public class Artifact : MonoBehaviour
     [SerializeField] GameObject hellModeManager;
 
     PlayerMovement playerMovement;
-    ObjectiveUI objectiveUI;
 
     Keeper keeper;
 
@@ -32,7 +32,6 @@ public class Artifact : MonoBehaviour
         artifactImage.enabled = false;
         playerMovement = GetComponent<PlayerMovement>();
 
-        objectiveUI = FindObjectOfType<ObjectiveUI>();
         objectiveUI.ObjectiveImage(artifactSprite);
     }
 
