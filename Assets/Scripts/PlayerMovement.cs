@@ -72,13 +72,13 @@ public class PlayerMovement : MonoBehaviour
         if (movementVector.magnitude <= Mathf.Epsilon && !IsOpeningAnim)
         {
             myAnimator.SetBool("isWalking", false);
-            FindObjectOfType<SFXManager>().RunningSFX(false);
+            //FindObjectOfType<SFXManager>().RunningSFX(false);
             IsWalking = false;
         }
         else
         {
             myAnimator.SetBool("isWalking", true);
-            FindObjectOfType<SFXManager>().RunningSFX(true);
+            //FindObjectOfType<SFXManager>().RunningSFX(true);
             IsWalking = true;
         }
 

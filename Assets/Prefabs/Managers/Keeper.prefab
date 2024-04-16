@@ -149,6 +149,39 @@ MonoBehaviour:
   statScene: 8
   cultistList: []
   demonList: []
+  cultistList: []
+  demonList: []
+  audioDataArrey:
+  - audioName: EnemyDeath
+    audioClip: {fileID: 8300000, guid: b5abc7d88399ed8408bbb42622204176, type: 3}
+    volume: 1
+  - audioName: Attack
+    audioClip: {fileID: 8300000, guid: f8e310b5c849bec4891f5e3b9e14c185, type: 3}
+    volume: 1
+  - audioName: Throw
+    audioClip: {fileID: 8300000, guid: bf0fd796848701148980df15958c4e8e, type: 3}
+    volume: 1
+  - audioName: OppenDoor
+    audioClip: {fileID: 8300000, guid: 7778368ce588cff48a182e7fbd61ef87, type: 3}
+    volume: 1
+  - audioName: RiftOppen
+    audioClip: {fileID: 8300000, guid: cad4e668d7b2ca94e89a88769c1a2a58, type: 3}
+    volume: 0.1
+  - audioName: DemonAttack
+    audioClip: {fileID: 8300000, guid: 1bf1648238579dd488057908bb67592f, type: 3}
+    volume: 1
+  - audioName: PickUp
+    audioClip: {fileID: 8300000, guid: 982187f799d9cf043b78f787e30a6eee, type: 3}
+    volume: 1
+  - audioName: 
+    audioClip: {fileID: 0}
+    volume: 0
+  - audioName: 
+    audioClip: {fileID: 0}
+    volume: 0
+  - audioName: 
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!1 &7755016790006752689
 GameObject:
   m_ObjectHideFlags: 0

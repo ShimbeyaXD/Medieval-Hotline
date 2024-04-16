@@ -106,6 +106,8 @@ public class NewWeaponManager : MonoBehaviour
 
         if (ray.collider == null) return;
 
+        SoundManager.PlaySound("PickUp");
+
         switch (ray.collider.tag)
         {
             case "Sword":
@@ -174,7 +176,7 @@ public class NewWeaponManager : MonoBehaviour
 
     void WeaponThrow()
     {
-
+        SoundManager.PlaySound("Throw");
         if (HasCrossbow) attack.CurrentArrows = 5;
 
         torsoAnimator.SetBool("Sword", false);

@@ -152,6 +152,7 @@ public class EnemyBehavior : MonoBehaviour
 
     public void StopFollowing()
     {
+
         // alex var h�r
         //agent.isStopped = true;
         if(legAnimator != null) 

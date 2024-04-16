@@ -40,6 +40,7 @@ public class EnemyAttackCollider : MonoBehaviour
     {
         if (other.CompareTag("Player") && !playerAttack.PlayerIsCharging)
         {
+            SoundManager.PlaySound("DemonAttck");
             if (enemyYes.ReturnDemonType())
             {
                 int randomNum = Random.Range(0, 2);

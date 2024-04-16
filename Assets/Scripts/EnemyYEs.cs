@@ -61,7 +61,6 @@ public class EnemyYEs : MonoBehaviour
     Animator spriteAnimator;
     Animator stunAnimator;
     EnemyBehavior enemyBehavior;
-    SFXManager sfxManager;
     Attack playerAttack;
     FollowMouse followMouse;
     Keeper keeper;
@@ -87,7 +86,6 @@ public class EnemyYEs : MonoBehaviour
         powerManager = FindObjectOfType<PowerManager>();
         followTarget = FindObjectOfType<FollowTarget>();
         audioSource = GetComponent<AudioSource>();
-        sfxManager = FindAnyObjectByType<SFXManager>();
         myRigidbody = GetComponent<Rigidbody2D>();
         
 
@@ -203,7 +201,6 @@ public class EnemyYEs : MonoBehaviour
             FindObjectOfType<PowerManager>().AddHoliness(20f);
 
             powerManager.KillCount = powerManager.KillCount + 1;
-            sfxManager.EnemyDeathSound();
             Death();
 
         }
@@ -211,6 +208,7 @@ public class EnemyYEs : MonoBehaviour
 
     private void Death()
     {
+        SoundManager.PlaySound("EnemyDeath");
         gameObject.SetActive(false);
     }
 

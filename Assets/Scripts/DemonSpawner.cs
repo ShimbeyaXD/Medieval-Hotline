@@ -59,6 +59,8 @@ public class DemonSpawner : MonoBehaviour
     {
         for (int i = 0; i < pentagramList.Count; i++)
         {
+            SoundManager.PlaySound("RiftOppen");
+
             demonAnimator = pentagramList[i].transform.GetComponent<Animator>();
             demonAnimator.SetBool("isCracking", true);
         }
