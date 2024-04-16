@@ -23,19 +23,23 @@ public class Keeper : MonoBehaviour
 
     List<EnemyYEs> enemyYes = new List<EnemyYEs>();
 
-    public int currentScene;
+    [Header("Scenes")]
     [SerializeField] int level1Scene;
     [SerializeField] int level2Scene;
     [SerializeField] int level3Scene;
     [SerializeField] int statScene;
     [SerializeField] int mainMenuScene;
     [SerializeField] List<int> popeScenes;
+    int currentScene;
 
+    [Header("Audio")]
     [SerializeField] AudioClip level1Theme;
     [SerializeField] AudioClip level2Theme;
     [SerializeField] AudioClip level3Theme;
     [SerializeField] AudioClip menuTheme;
     [SerializeField] AudioClip popeTheme;
+    [Range(0,1)]
+    [SerializeField] float volume;
     AudioSource audioStereo;
 
     int duplicates = 0;
@@ -86,16 +90,12 @@ public class Keeper : MonoBehaviour
         horseObject = transform.GetChild(1).gameObject;
         demonObject = transform.GetChild(2).gameObject;
         cultistObject = transform.GetChild(3).gameObject;
+        audioStereo = transform.GetChild(0).transform.GetChild(0).GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        UpdateCurrentScene();
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        audioStereo.volume = volume;
     }
 
     public void UpdateCurrentScene()
@@ -104,7 +104,6 @@ public class Keeper : MonoBehaviour
 
         if (currentScene == 0)
         {
-            Debug.Log("Resetting deathpoll");
             deathCount1 = 0;
             deathCount2 = 0;
             deathCount3 = 0;
@@ -113,19 +112,26 @@ public class Keeper : MonoBehaviour
 
     public void MusicStereo()
     {
-        audioStereo = transform.GetChild(0).transform.GetChild(0).GetComponent<AudioSource>();
+        UpdateCurrentScene();
+
+        Debug.Log(currentScene + " is the currentscene");
+
 
         if (currentScene == level1Scene && audioStereo.clip != level1Theme)
         {
             audioStereo.Stop();
             audioStereo.clip = level1Theme;
             audioStereo.Play();
+            Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
+
             return;
         }
         if (currentScene == level2Scene && audioStereo.clip != level2Theme)
         {
+            audioStereo.Stop();
             audioStereo.clip = level2Theme;
             audioStereo.Play();
+            Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
             return;
         }
         if (currentScene == level3Scene && audioStereo.clip != level3Theme)
@@ -133,43 +139,27 @@ public class Keeper : MonoBehaviour
             audioStereo.Stop();
             audioStereo.clip = level3Theme;
             audioStereo.Play();
+            Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
             return;
         }
         if (currentScene == mainMenuScene && audioStereo.clip != menuTheme)
         {
-            Debug.Log("uibrver");
             audioStereo.Stop();
             audioStereo.clip = menuTheme;
             audioStereo.Play();
+            Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
+
             return;
         }
-        if (currentScene == 1 && audioStereo.clip != popeTheme)
+        for (int i = 0; i < popeScenes.Count; i++)
         {
-            audioStereo.Stop();
-            audioStereo.clip = popeTheme;
-            audioStereo.Play();
-            return;
-        }
-        if (currentScene == 3 && audioStereo.clip != popeTheme)
-        {
-            audioStereo.Stop();
-            audioStereo.clip = popeTheme;
-            audioStereo.Play();
-            return;
-        }
-        if (currentScene == 5 && audioStereo.clip != popeTheme)
-        {
-            audioStereo.Stop();
-            audioStereo.clip = popeTheme;
-            audioStereo.Play();
-            return;
-        }
-        if (currentScene == 7 && audioStereo.clip != popeTheme)
-        {
-            audioStereo.Stop();
-            audioStereo.clip = popeTheme;
-            audioStereo.Play();
-            return;
+            if (currentScene == popeScenes[i] && audioStereo.clip != popeTheme)
+            {
+                audioStereo.Stop();
+                audioStereo.clip = popeTheme;
+                audioStereo.Play();
+                Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
+            }
         }
     }
 
@@ -323,19 +313,14 @@ public class Keeper : MonoBehaviour
         if (currentScene == level1Scene)
         {
             deathCount1++;
-            Debug.Log("Deathcount1 is " + deathCount1);
         }
         if (currentScene == level2Scene)
         {
             deathCount2++;
-            Debug.Log("Deathcount2 is " + deathCount2);
-
         }
         if (currentScene == level3Scene)
         {
             deathCount3++;
-            Debug.Log("Deathcount3 is " + deathCount3);
-
         }
     }
 
@@ -365,7 +350,6 @@ public class Keeper : MonoBehaviour
         {
             for (int i = 0; i < demonObject.transform.childCount; i++)
             {
-                Debug.Log("Clearing demon list");
                 Destroy(demonObject.transform.GetChild(i).gameObject);
             }
         }
@@ -373,7 +357,6 @@ public class Keeper : MonoBehaviour
         {
             for (int i = 0; i < cultistObject.transform.childCount; i++)
             {
-                Debug.Log("Clearing cultist");
                 Destroy(cultistObject.transform.GetChild(i).gameObject);
             }
         }
@@ -382,7 +365,6 @@ public class Keeper : MonoBehaviour
         {
             for (int i = 0; i < horseObject.transform.childCount; i++)
             {
-                Debug.Log("Clearing horse objects");
                 Destroy(horseObject.transform.GetChild(i).gameObject);
             }
         }

@@ -24,7 +24,6 @@ public class StatsGrabber : MonoBehaviour
 
     public void GrabStats()
     {
-        Debug.Log(keeper.deathCount3.ToString()+ " is the deathcount3");
         deathText1.text = keeper.deathCount1.ToString();
         deathText2.text = keeper.deathCount2.ToString();
         deathText3.text = keeper.deathCount3.ToString();

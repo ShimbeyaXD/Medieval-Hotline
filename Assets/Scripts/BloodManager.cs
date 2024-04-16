@@ -9,9 +9,6 @@ public class BloodManager : MonoBehaviour
     [SerializeField] Sprite demonSprite;
     [SerializeField] Material defultMaterial;
 
-    [SerializeField] CapsuleCollider2D corpseCollider;
-    [SerializeField] BoxCollider2D bloodCollider;
-
     [SerializeField] float objectSize = 0.8f;
     [SerializeField] int numInSortingLayer = -25;
 
@@ -45,7 +42,6 @@ public class BloodManager : MonoBehaviour
         sp.sprite = boodSprites[i];
         sp.sortingOrder = numInSortingLayer;
 
-
         if(sp.material != defultMaterial) 
         { 
           sp.material = defultMaterial;
@@ -63,7 +59,6 @@ public class BloodManager : MonoBehaviour
         corpse.transform.localScale = new Vector2(objectSize, objectSize);
         corpse.name = new string(corpse.name + corpseNum);
         SpriteRenderer sp = corpse.AddComponent<SpriteRenderer>();
-
 
         if (enemy.GetComponent<EnemyYEs>().ReturnDemonType())
         {
