@@ -250,13 +250,13 @@ public class Keeper : MonoBehaviour
     public void StageEnd()
     {
         GrantCheckpoint = false;
+        IsLevelCleared = false;
 
         WipeLists(true);
     }
 
     public void WipeLists(bool wipeAll) 
     {
-        IsLevelCleared = false;
 
         dialogueLine = 1;
 

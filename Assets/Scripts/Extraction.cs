@@ -7,8 +7,8 @@ public class Extraction : MonoBehaviour
 {
     [Header("Extraction Stage")]
     [SerializeField] LayerMask playerLayer;
-    [SerializeField] float detectionDistance = 2;
-    [SerializeField] GameObject restartObject;
+    [SerializeField] float detectionDistance = 0.8f;
+    [SerializeField] GameObject nextLevelButtonObject;
 
     [Header("Reloading Stage")]
     [SerializeField] float reloadSceneDelay = 1.5f;
@@ -35,7 +35,7 @@ public class Extraction : MonoBehaviour
         text = restartText.GetComponent<TextMeshProUGUI>();
         text.enabled = false;
         restartText.SetActive(false);
-        restartObject.gameObject.SetActive(false);
+        nextLevelButtonObject.gameObject.SetActive(false);
 
         powerManager = FindAnyObjectByType<PowerManager>();
     }
@@ -44,9 +44,9 @@ public class Extraction : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(transform.position, detectionDistance, playerLayer) && keeper.IsLevelCleared) // Player Extracted
         {
-            if (restartObject == null) { restartObject = GameObject.Find("NextLevelButton"); }            
+            if (nextLevelButtonObject == null) { nextLevelButtonObject = GameObject.Find("NextLevelButton"); }            
 
-            restartObject.SetActive(true);
+            nextLevelButtonObject.SetActive(true);
 
             if (Input.GetButtonDown("Jump")) // Space on keyboard
             {
@@ -59,7 +59,7 @@ public class Extraction : MonoBehaviour
         }
         if (!Physics2D.OverlapCircle(transform.position, detectionDistance, playerLayer))
         {
-            restartObject.SetActive(false);
+            nextLevelButtonObject.SetActive(false);
         }
 
         if (Input.GetButtonDown("Fire1") && deathScreen) { StartCoroutine(ReloadScene(false)); }
