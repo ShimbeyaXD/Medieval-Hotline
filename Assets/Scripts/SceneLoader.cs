@@ -79,4 +79,9 @@ public class SceneLoader : MonoBehaviour
         Debug.Log("Quitting game!");
         Application.Quit();
     }
+
+    public void Click() 
+    {
+        SoundManager.PlaySound("Click");
+    }
 }

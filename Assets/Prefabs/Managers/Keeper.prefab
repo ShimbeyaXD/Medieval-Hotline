@@ -310,9 +310,9 @@ MonoBehaviour:
   - audioName: ArtifactFickUp
     audioClip: {fileID: 8300000, guid: 8f6a477ed72c9f941a5c6e183747b6da, type: 3}
     volume: 1
-  - audioName: 
-    audioClip: {fileID: 0}
-    volume: 0
+  - audioName: Click
+    audioClip: {fileID: 8300000, guid: dd89977a7c991054dae5b16bfef84548, type: 3}
+    volume: 0.511
   - audioName: 
     audioClip: {fileID: 0}
     volume: 0
