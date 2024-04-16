@@ -101,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
             once = false;
             myRigidbody.isKinematic = true;
             Dead = true;
+            keeper.RecieveDeath();
             myRigidbody.velocity = Vector3.zero;
             newWeaponManager.SetDeadAnimator();
             FindObjectOfType<Extraction>().DeathScreen();

@@ -677,41 +677,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 419223037385832873, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4086552229279740453, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -99
-      objectReference: {fileID: 0}
-    - target: {fileID: 4505588797815433295, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4505588797815433295, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -64
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776675735581021970, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -142
-      objectReference: {fileID: 0}
     - target: {fileID: 5596088876776187725, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
       propertyPath: m_Name
       value: PopeCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7098466570164657281, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
-      propertyPath: levelToLoad
-      value: Level1
       objectReference: {fileID: 0}
     - target: {fileID: 7098466570164657281, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
       propertyPath: fadeOutAnimator
       value: 
       objectReference: {fileID: 1685798003}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6149239354089236976, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b62ef33d093179640aaa05e4b34751cd, type: 3}
