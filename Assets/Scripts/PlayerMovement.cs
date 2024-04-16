@@ -96,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
+        return;
         if (once)
         {
             once = false;

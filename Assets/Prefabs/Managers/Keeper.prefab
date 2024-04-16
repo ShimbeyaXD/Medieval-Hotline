@@ -307,9 +307,9 @@ MonoBehaviour:
   - audioName: PickUp
     audioClip: {fileID: 8300000, guid: 982187f799d9cf043b78f787e30a6eee, type: 3}
     volume: 1
-  - audioName: 
-    audioClip: {fileID: 0}
-    volume: 0
+  - audioName: ArtifactFickUp
+    audioClip: {fileID: 8300000, guid: 8f6a477ed72c9f941a5c6e183747b6da, type: 3}
+    volume: 1
   - audioName: 
     audioClip: {fileID: 0}
     volume: 0
