@@ -57,6 +57,7 @@ public class Extraction : MonoBehaviour
                 keeper.StageEnd();
                 keeper.PlayOpeningAnimation = true;
                 fadeAnimator.SetTrigger("BlackScreen");
+                Debug.Log("fade animator, settrigger black screen");
             }
         }
         if (!Physics2D.OverlapCircle(transform.position, detectionDistance, playerLayer))

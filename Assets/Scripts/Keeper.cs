@@ -114,15 +114,11 @@ public class Keeper : MonoBehaviour
     {
         UpdateCurrentScene();
 
-        Debug.Log(currentScene + " is the currentscene");
-
-
         if (currentScene == level1Scene && audioStereo.clip != level1Theme)
         {
             audioStereo.Stop();
             audioStereo.clip = level1Theme;
             audioStereo.Play();
-            Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
 
             return;
         }
@@ -131,7 +127,7 @@ public class Keeper : MonoBehaviour
             audioStereo.Stop();
             audioStereo.clip = level2Theme;
             audioStereo.Play();
-            Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
+
             return;
         }
         if (currentScene == level3Scene && audioStereo.clip != level3Theme)
@@ -139,7 +135,7 @@ public class Keeper : MonoBehaviour
             audioStereo.Stop();
             audioStereo.clip = level3Theme;
             audioStereo.Play();
-            Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
+
             return;
         }
         if (currentScene == mainMenuScene && audioStereo.clip != menuTheme)
@@ -147,7 +143,6 @@ public class Keeper : MonoBehaviour
             audioStereo.Stop();
             audioStereo.clip = menuTheme;
             audioStereo.Play();
-            Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
 
             return;
         }
@@ -158,7 +153,8 @@ public class Keeper : MonoBehaviour
                 audioStereo.Stop();
                 audioStereo.clip = popeTheme;
                 audioStereo.Play();
-                Debug.Log("current scene is " + currentScene + ", playing " + audioStereo.clip.name);
+
+                return;
             }
         }
     }

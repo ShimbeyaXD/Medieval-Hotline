@@ -37,7 +37,6 @@ public class AudioHolder : MonoBehaviour
 
         soundGameObject.GetComponent<AudioSource>().Stop();
 
-        Debug.Log(soundGameObject + " Was destroyed");
         GameObject.Destroy(soundGameObject);
     }
 

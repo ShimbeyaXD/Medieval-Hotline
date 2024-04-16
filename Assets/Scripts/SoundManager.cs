@@ -31,7 +31,6 @@ public static class SoundManager
             {
                 if(audioFile.audioClip != null) 
                 {
-                    Debug.Log("Audio Clip " +  " was found");
                     return audioFile.audioClip;
                 }
                 else 
