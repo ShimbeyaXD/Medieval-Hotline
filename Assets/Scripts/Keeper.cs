@@ -230,7 +230,7 @@ public class Keeper : MonoBehaviour
 
             manager.transform.parent = systemObject.transform;
 
-            cultistList.Add(manager);
+            //cultistList.Add(manager);
         }
     }
 
@@ -280,6 +280,8 @@ public class Keeper : MonoBehaviour
                 Destroy(cultistObject.transform.GetChild(i).gameObject);
             }
         }
+
+        /*
         if (wipeAll)
         {
             for (int i = 0; i < systemObject.transform.childCount; i++)
@@ -288,6 +290,7 @@ public class Keeper : MonoBehaviour
                 Destroy(systemObject.transform.GetChild(i).gameObject);
             }
         }
+        */
 
         if (GrantCheckpoint) { return; }
 
