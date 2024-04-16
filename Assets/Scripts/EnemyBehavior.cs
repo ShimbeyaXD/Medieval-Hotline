@@ -6,6 +6,8 @@ public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float detectionAndSightRange = 5f;
+    [SerializeField] float cultistChaseTime = 12;
+    [SerializeField] float demonChaseTime = 21;
     [SerializeField] Animator legAnimator;
     [SerializeField] Animator torsoAnimator;
     [SerializeField] NavMeshAgent agent;
@@ -19,6 +21,7 @@ public class EnemyBehavior : MonoBehaviour
     Rigidbody2D myRigidbody;
 
     bool once = true;
+    float chaseTime;
 
     public bool isChasingTarget { get; private set; }
 
@@ -34,8 +37,9 @@ public class EnemyBehavior : MonoBehaviour
         agent.updateUpAxis = false;
 
         legAnimator.SetBool("isWalking", false);
-        if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); }
 
+        if (enemyYes.ReturnDemonType()) { torsoAnimator.SetBool("isWalking", false); chaseTime = demonChaseTime; }
+        else { chaseTime = cultistChaseTime; }
     }
 
     IEnumerator LookForTarget()
@@ -136,7 +140,7 @@ public class EnemyBehavior : MonoBehaviour
 
         float timeSinceStarted = 0f;
 
-        while (timeSinceStarted < 7f)
+        while (timeSinceStarted < cultistChaseTime)
         {
             FollowTarget();
             UpdateRotation();

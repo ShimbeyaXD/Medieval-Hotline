@@ -92,16 +92,20 @@ public class Keeper : MonoBehaviour
         horseObject = transform.GetChild(1).gameObject;
         demonObject = transform.GetChild(2).gameObject;
         cultistObject = transform.GetChild(3).gameObject;
+
         
+
     }
 
     void Update()
     {
-        if(audioStereo == null) 
+
+
+        if (audioStereo == null)
         {
             audioStereo = transform.GetChild(0).transform.GetChild(0).GetComponent<AudioSource>();
         }
-        
+
         audioStereo.volume = volume;
 
     }
