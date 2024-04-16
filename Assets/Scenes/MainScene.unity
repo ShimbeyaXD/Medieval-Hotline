@@ -937,7 +937,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &911315097
 RectTransform:
@@ -946,19 +946,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911315093}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.0516555, y: 3.0516555, z: 3.0516555}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 851810601}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2111711932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 959.74567, y: 540.1431}
+  m_SizeDelta: {x: 629, y: 354.00006}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &957366356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,6 +1791,7 @@ RectTransform:
   - {fileID: 2123814105}
   - {fileID: 411011290}
   - {fileID: 1986085507}
+  - {fileID: 911315097}
   - {fileID: 1357743551}
   - {fileID: 1724230699}
   - {fileID: 91386792}
@@ -1985,4 +1986,3 @@ SceneRoots:
   - {fileID: 2111711932}
   - {fileID: 1655667817}
   - {fileID: 142166826}
-  - {fileID: 911315097}

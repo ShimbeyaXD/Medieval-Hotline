@@ -6,6 +6,7 @@ public class BloodManager : MonoBehaviour
     [SerializeField] List<Sprite> boodSprites = new List<Sprite>();
     [SerializeField] List<Sprite> corpseSprite = new List<Sprite>();
     [SerializeField] Sprite demonSprite;
+    [SerializeField] Material defultMaterial;
 
     [SerializeField] float objectSize = 0.8f;
     [SerializeField] int numInSortingLayer = -25;
@@ -40,6 +41,11 @@ public class BloodManager : MonoBehaviour
         sp.sprite = boodSprites[i];
         sp.sortingOrder = numInSortingLayer;
 
+        if(sp.material != defultMaterial) 
+        { 
+          sp.material = defultMaterial;
+        }
+
         keeper.BloodInstance(GetComponent<BloodManager>(), blood);
     }
 
@@ -52,6 +58,7 @@ public class BloodManager : MonoBehaviour
         corpse.transform.localScale = new Vector2(objectSize, objectSize);
         corpse.name = new string(corpse.name + corpseNum);
         SpriteRenderer sp = corpse.AddComponent<SpriteRenderer>();
+
 
         if (enemy.GetComponent<EnemyYEs>().ReturnDemonType())
         {
@@ -67,6 +74,12 @@ public class BloodManager : MonoBehaviour
         int newCorpsSortingLayer = numInSortingLayer;
         newCorpsSortingLayer++;
         sp.sortingOrder = newCorpsSortingLayer;
+
+        if (sp.material != defultMaterial)
+        {
+            sp.material = defultMaterial;
+
+        }
 
         keeper.CorpseInstance(GetComponent<BloodManager>(), corpse);
         keeper.EnemyInstance(enemyYes, sender);
