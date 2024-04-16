@@ -82,6 +82,7 @@ public class Keeper : MonoBehaviour
         {
             keeperInstance = this;
         }
+        audioStereo = transform.GetChild(0).transform.GetChild(0).GetComponent<AudioSource>();
     }
 
     void Start()
@@ -90,11 +91,14 @@ public class Keeper : MonoBehaviour
         horseObject = transform.GetChild(1).gameObject;
         demonObject = transform.GetChild(2).gameObject;
         cultistObject = transform.GetChild(3).gameObject;
-        audioStereo = transform.GetChild(0).transform.GetChild(0).GetComponent<AudioSource>();
     }
 
     void Update()
     {
+        if (audioStereo == null)
+        {
+            audioStereo = transform.GetChild(0).transform.GetChild(0).GetComponent<AudioSource>();
+        }
         audioStereo.volume = volume;
     }
 
