@@ -347,7 +347,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.2, y: 2.5}
+  m_Size: {x: 1.4, y: 2.7}
   m_Direction: 0
 --- !u!61 &6977533090443228656
 BoxCollider2D:
@@ -449,6 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   detectionAndSightRange: 20
+  cultistChaseTime: 12
+  demonChaseTime: 21
   legAnimator: {fileID: 0}
   torsoAnimator: {fileID: 0}
   agent: {fileID: 0}

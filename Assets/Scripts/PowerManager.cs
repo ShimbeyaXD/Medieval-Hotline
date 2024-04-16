@@ -83,7 +83,7 @@ public class PowerManager : MonoBehaviour
             glockImage.gameObject.SetActive(false);
         }
 
-        if (Input.GetButtonDown("Fire3") && !playerAttack.PlayerIsAttacking && playerMovement.IsWalking && canRecieveGlock) // Charge
+        if (Input.GetButtonDown("Fire3") && !playerAttack.PlayerIsAttacking && playerMovement.IsWalking && canRecieveGlock && !playerMovement.Dead) // Charge
         {
             playerAttack.EnableCharge();
             //RecieveGlock();
