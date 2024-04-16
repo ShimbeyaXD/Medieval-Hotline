@@ -18,7 +18,6 @@ public class AudioHolder : MonoBehaviour
         Destroy(gameObject.transform.GetChild(i));
         yield return null;
       }
-        Debug.Log("Children Desrtoyed = " + i);
     }
 
 

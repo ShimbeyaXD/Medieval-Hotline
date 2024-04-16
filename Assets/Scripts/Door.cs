@@ -34,7 +34,6 @@ public class Door : MonoBehaviour
 
     public void Replace()
     {
-        Debug.Log("Destroying myself " + transform.name);
         Destroy(gameObject);
     }
 }

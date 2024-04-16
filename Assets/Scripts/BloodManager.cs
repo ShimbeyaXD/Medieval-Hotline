@@ -8,9 +8,6 @@ public class BloodManager : MonoBehaviour
     [SerializeField] List<Sprite> corpseSprite = new List<Sprite>();
     [SerializeField] Sprite demonSprite;
 
-    [SerializeField] CapsuleCollider2D corpseCollider;
-    [SerializeField] BoxCollider2D bloodCollider;
-
     [SerializeField] float objectSize = 0.8f;
     [SerializeField] int numInSortingLayer = -25;
 
@@ -44,12 +41,6 @@ public class BloodManager : MonoBehaviour
         sp.sprite = boodSprites[i];
         sp.sortingOrder = numInSortingLayer;
 
-        BoxCollider2D bc = blood.AddComponent<BoxCollider2D>();
-        bc.size = bloodCollider.size;
-
-        Rigidbody2D rb = blood.AddComponent<Rigidbody2D>();
-        rb.isKinematic = true;
-
         keeper.BloodInstance(GetComponent<BloodManager>(), blood);
     }
 
@@ -62,13 +53,6 @@ public class BloodManager : MonoBehaviour
         corpse.transform.localScale = new Vector2(objectSize, objectSize);
         corpse.name = new string(corpse.name + corpseNum);
         SpriteRenderer sp = corpse.AddComponent<SpriteRenderer>();
-
-        CapsuleCollider2D pc = corpse.AddComponent<CapsuleCollider2D>();
-        pc.size = corpseCollider.size;
-        pc.direction = corpseCollider.direction;
-
-        Rigidbody2D rb = corpse.AddComponent<Rigidbody2D>();
-        rb.isKinematic = true;
 
         if (enemy.GetComponent<EnemyYEs>().ReturnDemonType())
         {

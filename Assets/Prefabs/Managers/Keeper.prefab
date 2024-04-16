@@ -271,7 +271,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectScale: {x: 0.75, y: 0.75, z: 0.75}
-  currentScene: 0
   level1Scene: 2
   level2Scene: 4
   level3Scene: 6
@@ -283,6 +282,7 @@ MonoBehaviour:
   level3Theme: {fileID: 8300000, guid: fd2229063ab01b14d88e72a9edc71292, type: 3}
   menuTheme: {fileID: 8300000, guid: 14a618d7fda30484f829aaf4a3da0f8a, type: 3}
   popeTheme: {fileID: 8300000, guid: 13aa149a770f0bd499615065099cf369, type: 3}
+  volume: 0.3
   cultistList: []
   demonList: []
   audioDataArrey:
