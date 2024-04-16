@@ -326,4 +326,17 @@ public class Keeper : MonoBehaviour
             //enemyYes[i].Replace();
         }
     }
+
+    [Header("Audio")]
+    public AudioFileData[] audioDataArrey;
+
+    [System.Serializable]
+    public class AudioFileData
+    {
+        public string audioName;
+        public AudioClip audioClip;
+        [Range(0f, 1f)]
+        public float volume;
+    }
+
 }

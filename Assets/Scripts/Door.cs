@@ -23,6 +23,8 @@ public class Door : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(transform.position, triggerDistance, targetLayer) && Input.GetButtonDown("Submit") && !animator.GetBool("Open"))
         {
+            SoundManager.PlaySound("OppenDoor");
+
             boxCollider.isTrigger = true;
             animator.SetBool("Open", true);
 

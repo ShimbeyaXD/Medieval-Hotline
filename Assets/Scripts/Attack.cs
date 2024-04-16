@@ -80,7 +80,7 @@ public class Attack : MonoBehaviour
             {
                 EnableMelee();
                 PlayerIsAttacking = true;
-                FindObjectOfType<SFXManager>().PlaySFX("slash");
+                //FindObjectOfType<SFXManager>().PlaySFX("slash");
                 newWeaponManager.SetAttackAnimator();
             }
             if (newWeaponManager.HasCrossbow) 
@@ -95,7 +95,7 @@ public class Attack : MonoBehaviour
                 if (CurrentArrows-- > 0)
                 {
                     followTarget.StartShake(0.4f, 1.7f);
-                    FindObjectOfType<SFXManager>().PlaySFX("Gun");
+                    //FindObjectOfType<SFXManager>().PlaySFX("Gun");
                     ShootArrow(bullet);
                 }
             }
@@ -144,6 +144,7 @@ public class Attack : MonoBehaviour
 
     IEnumerator AttackRay()
     {
+        SoundManager.PlaySound("Attack");
         while (true)
         {
             Vector2 mousePosition = followMouse.MousePosition();
@@ -163,6 +164,7 @@ public class Attack : MonoBehaviour
                     collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
                     yield return new WaitForEndOfFrame();
                 }
+
             }
             if (!PlayerIsAttacking) { yield break; }
 
