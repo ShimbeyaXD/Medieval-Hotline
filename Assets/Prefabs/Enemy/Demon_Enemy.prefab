@@ -254,9 +254,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  detectionAndSightRange: 20
+  detectionAndSightRange: 50
   legAnimator: {fileID: 3012693387672182182}
   torsoAnimator: {fileID: 6049514800949504783}
+  agent: {fileID: 0}
   knockbackCooldown: 3
   knockbackForce: 350
   wallLayer:
@@ -298,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRangedEnemy: 0
   isDemonEnemy: 1
+  playerTransform: {fileID: 0}
   player: {fileID: 0}
   weapon: {fileID: 4626417451826159753, guid: 111c4c0f1bb7b1841b7368b5071bd531, type: 3}
   speed: 2

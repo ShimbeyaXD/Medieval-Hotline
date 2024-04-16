@@ -36,7 +36,6 @@ public class PowerManager : MonoBehaviour
         killText.gameObject.SetActive(false);
         //glockImage.gameObject.SetActive(false);
         StartCoroutine(HolynessFade());
-        currentHolyness = 100;
    }
 
     IEnumerator LookForPlayer()

@@ -9,6 +9,7 @@ public class Extraction : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] float detectionDistance = 0.8f;
     [SerializeField] GameObject nextLevelButtonObject;
+    [SerializeField] Animator fadeAnimator;
 
     [Header("Reloading Stage")]
     [SerializeField] float reloadSceneDelay = 1.5f;
@@ -55,6 +56,7 @@ public class Extraction : MonoBehaviour
                 powerManager.ShowKillText();
                 keeper.StageEnd();
                 keeper.PlayOpeningAnimation = true;
+                fadeAnimator.SetTrigger("BlackScreen");
             }
         }
         if (!Physics2D.OverlapCircle(transform.position, detectionDistance, playerLayer))
@@ -115,7 +117,8 @@ public class Extraction : MonoBehaviour
         keeper.WipeLists(false);
 
         if (sceneChange) 
-        { 
+        {
+            keeper.IsLevelCleared = false;
             SceneManager.LoadScene(sceneNum + 1); 
         }
 

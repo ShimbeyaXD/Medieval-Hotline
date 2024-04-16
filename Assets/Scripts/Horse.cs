@@ -8,6 +8,6 @@ public class Horse : MonoBehaviour
 
         if (keeper.SearchAndDestroy(this.gameObject)) { Destroy(this.gameObject); }
 
-        keeper.ManagerInstance(this.gameObject);
+        keeper.HorseInstance(this.gameObject);
     }
 }

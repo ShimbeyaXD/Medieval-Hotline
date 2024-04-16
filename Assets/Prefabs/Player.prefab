@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932113b11c66f0f4bb6fc5585e6f9cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 2
+  attackRange: 2.5
   shootForce: 8000
   maxArrows: 5
   knockbackCooldown: 3
@@ -448,6 +448,7 @@ MonoBehaviour:
     m_Bits: 4096
   artifactImage: {fileID: 0}
   artifactSprite: {fileID: 21300000, guid: 8f7bcdc0ac92b4346b43c505a0011f72, type: 3}
+  objectiveUI: {fileID: 0}
   dialogueManager: {fileID: 0}
   hellModeManager: {fileID: 0}
 --- !u!114 &698454624390147535

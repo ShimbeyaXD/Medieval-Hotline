@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BloodManager : MonoBehaviour
@@ -7,6 +8,9 @@ public class BloodManager : MonoBehaviour
     [SerializeField] List<Sprite> corpseSprite = new List<Sprite>();
     [SerializeField] Sprite demonSprite;
     [SerializeField] Material defultMaterial;
+
+    [SerializeField] CapsuleCollider2D corpseCollider;
+    [SerializeField] BoxCollider2D bloodCollider;
 
     [SerializeField] float objectSize = 0.8f;
     [SerializeField] int numInSortingLayer = -25;
@@ -40,6 +44,7 @@ public class BloodManager : MonoBehaviour
         SpriteRenderer sp = blood.AddComponent<SpriteRenderer>();
         sp.sprite = boodSprites[i];
         sp.sortingOrder = numInSortingLayer;
+
 
         if(sp.material != defultMaterial) 
         { 

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,15 +8,10 @@ public class Keeper : MonoBehaviour
 {
     private static Keeper keeperInstance;
 
-    int currentScene;
-    int duplicates = 0;
-    bool destroyMyself = false;
-
     [SerializeField] Vector3 objectScale = new Vector3(0.75f, 0.75f, 0.75f);
 
-    public int dialogueLine { get; private set; } = 0;
-
     GameObject systemObject;  // Managers
+    GameObject horseObject;   // Horse 
     GameObject demonObject;   // Objects from Demonphase
     GameObject cultistObject; // Objects from Cultistphase
 
@@ -22,18 +19,47 @@ public class Keeper : MonoBehaviour
 
     List<WeaponProjectile> weaponProjectiles = new List<WeaponProjectile>();
 
-    List<BloodManager> bloodManagers = new List<BloodManager>(); 
+    List<BloodManager> bloodManagers = new List<BloodManager>();
 
     List<EnemyYEs> enemyYes = new List<EnemyYEs>();
+
+    public int currentScene;
+    [SerializeField] int level1Scene;
+    [SerializeField] int level2Scene;
+    [SerializeField] int level3Scene;
+    [SerializeField] int statScene;
+    [SerializeField] int mainMenuScene;
+    [SerializeField] List<int> popeScenes;
+
+    [SerializeField] AudioClip level1Theme;
+    [SerializeField] AudioClip level2Theme;
+    [SerializeField] AudioClip level3Theme;
+    [SerializeField] AudioClip menuTheme;
+    [SerializeField] AudioClip popeTheme;
+    AudioSource audioStereo;
+
+    int duplicates = 0;
+    bool destroyMyself = false;
 
     public List<GameObject> cultistList;
     public List<GameObject> demonList;
 
+    // KILLS, DEATHS, AND TIME
+    public int deathCount1 { get; private set; }
+
+    public int deathCount2 { get; private set; }
+
+    public int deathCount3 { get; private set; }
+    
+    // KILLS, DEATHS, AND TIMEset; } 
+
     public bool GrantCheckpoint { get; set; } = false;
 
-    public Vector2 Checkpoint { get; private set; }
-
     public bool PlayOpeningAnimation { get; set; } = true;
+
+    public int dialogueLine { get; private set; } = 0;
+
+    public Vector2 Checkpoint { get; private set; }
 
     public bool IsLevelCleared { get; set; }
 
@@ -47,45 +73,24 @@ public class Keeper : MonoBehaviour
         if (keeperInstance != null)
         {
             Destroy(gameObject);
-
         }
         else
         {
             keeperInstance = this;
-
         }
     }
 
     void Start()
     {
-
         systemObject = transform.GetChild(0).gameObject;
-        demonObject = transform.GetChild(1).gameObject;
-        cultistObject = transform.GetChild(2).gameObject;
-
-        currentScene = SceneManager.GetActiveScene().buildIndex;
-
-
-
-        /*
-        GameObject[] allKeepers = GameObject.FindGameObjectsWithTag("Keeper");
-
-        if (allKeepers.Length > 1)
-        {
-            Debug.Log("destroying myself");
-            Destroy(this.gameObject);
-        }
-        */
-        
-
-        
+        horseObject = transform.GetChild(1).gameObject;
+        demonObject = transform.GetChild(2).gameObject;
+        cultistObject = transform.GetChild(3).gameObject;
     }
 
     void Update()
     {
-        Debug.Log("GRantcheckpoint is " + GrantCheckpoint);
-
-        CheckCurrentScene();
+        UpdateCurrentScene();
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -93,11 +98,78 @@ public class Keeper : MonoBehaviour
         }
     }
 
-    void CheckCurrentScene()
+    public void UpdateCurrentScene()
     {
-        if (SceneManager.GetActiveScene().buildIndex != currentScene)
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentScene == 0)
         {
-            //Destroy(gameObject);
+            Debug.Log("Resetting deathpoll");
+            deathCount1 = 0;
+            deathCount2 = 0;
+            deathCount3 = 0;
+        }
+    }
+
+    public void MusicStereo()
+    {
+        audioStereo = transform.GetChild(0).transform.GetChild(0).GetComponent<AudioSource>();
+
+        if (currentScene == level1Scene && audioStereo.clip != level1Theme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = level1Theme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == level2Scene && audioStereo.clip != level2Theme)
+        {
+            audioStereo.clip = level2Theme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == level3Scene && audioStereo.clip != level3Theme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = level3Theme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == mainMenuScene && audioStereo.clip != menuTheme)
+        {
+            Debug.Log("uibrver");
+            audioStereo.Stop();
+            audioStereo.clip = menuTheme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == 1 && audioStereo.clip != popeTheme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = popeTheme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == 3 && audioStereo.clip != popeTheme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = popeTheme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == 5 && audioStereo.clip != popeTheme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = popeTheme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == 7 && audioStereo.clip != popeTheme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = popeTheme;
+            audioStereo.Play();
+            return;
         }
     }
 
@@ -172,11 +244,13 @@ public class Keeper : MonoBehaviour
             {
                 gameObject.transform.parent = demonObject.transform;
                 demonList.Add(gameObject);
+                gameObject.layer = LayerMask.NameToLayer("Blood"); 
             }
             if (!GrantCheckpoint)
             {
                 gameObject.transform.parent = cultistObject.transform;
                 cultistList.Add(gameObject);
+                gameObject.layer = LayerMask.NameToLayer("Blood"); 
             }
         }
     }
@@ -191,11 +265,13 @@ public class Keeper : MonoBehaviour
             {
                 gameObject.transform.parent = demonObject.transform;
                 demonList.Add(gameObject);
+                gameObject.layer = LayerMask.NameToLayer("Blood"); 
             }
             if (!GrantCheckpoint)
             {
                 gameObject.transform.parent = cultistObject.transform;
                 cultistList.Add(gameObject);
+                gameObject.layer = LayerMask.NameToLayer("Blood");
             }
         }
     }
@@ -222,13 +298,13 @@ public class Keeper : MonoBehaviour
         }
     }
 
-    public void ManagerInstance(GameObject manager)
+    public void HorseInstance(GameObject horse)
     {
-        if (!SearchAndDestroy(manager))
+        if (!SearchAndDestroy(horse))
         {
-            systemObject = transform.GetChild(0).gameObject;
+            horseObject = transform.GetChild(1).gameObject;
 
-            manager.transform.parent = systemObject.transform;
+            horse.transform.parent = horseObject.transform;
 
             //cultistList.Add(manager);
         }
@@ -242,22 +318,43 @@ public class Keeper : MonoBehaviour
         Checkpoint = position;
     }
 
+    public void RecieveDeath()
+    {
+        if (currentScene == level1Scene)
+        {
+            deathCount1++;
+            Debug.Log("Deathcount1 is " + deathCount1);
+        }
+        if (currentScene == level2Scene)
+        {
+            deathCount2++;
+            Debug.Log("Deathcount2 is " + deathCount2);
+
+        }
+        if (currentScene == level3Scene)
+        {
+            deathCount3++;
+            Debug.Log("Deathcount3 is " + deathCount3);
+
+        }
+    }
+
     public void NextDialogueObject()
     {
         dialogueLine = 1;
     }
 
+
     public void StageEnd()
     {
         GrantCheckpoint = false;
-        IsLevelCleared = false;
+        //IsLevelCleared = false;
 
         WipeLists(true);
     }
 
     public void WipeLists(bool wipeAll) 
     {
-
         dialogueLine = 1;
 
         // If demonphase is true then wipe all lists from both the cultist and the demonobject
@@ -280,23 +377,22 @@ public class Keeper : MonoBehaviour
                 Destroy(cultistObject.transform.GetChild(i).gameObject);
             }
         }
-
-        /*
+ 
         if (wipeAll)
         {
-            for (int i = 0; i < systemObject.transform.childCount; i++)
+            for (int i = 0; i < horseObject.transform.childCount; i++)
             {
-                Debug.Log("Clearing system objects");
-                Destroy(systemObject.transform.GetChild(i).gameObject);
+                Debug.Log("Clearing horse objects");
+                Destroy(horseObject.transform.GetChild(i).gameObject);
             }
         }
-        */
 
         if (GrantCheckpoint) { return; }
 
         Debug.Log("Clearing all lists");
 
         cultistList.Clear();
+        demonList.Clear();
         weaponProjectiles.Clear();
         bloodManagers.Clear();
         enemyYes.Clear();
@@ -307,6 +403,11 @@ public class Keeper : MonoBehaviour
         for (int i = 0; i < cultistList.Count; i++)
         {
             cultistList.RemoveAt(i);
+        }
+
+        for (int i = 0; i < demonList.Count; i++)
+        {
+            demonList.RemoveAt(i);
         }
 
         for (int i = 0; i < doors.Count; i++)
