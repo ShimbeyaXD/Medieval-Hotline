@@ -41,6 +41,8 @@ public class Artifact : MonoBehaviour
 
         if (other.gameObject.CompareTag("Artifact"))
         {
+            SoundManager.PlaySound("ArtifactPickUp");
+
             artifactImage.enabled = true;
             artifactImage.sprite = artifactSprite;
             keeper.IsLevelCleared = true;
