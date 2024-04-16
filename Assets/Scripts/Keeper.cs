@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +28,15 @@ public class Keeper : MonoBehaviour
     [SerializeField] int level2Scene;
     [SerializeField] int level3Scene;
     [SerializeField] int statScene;
+    [SerializeField] int mainMenuScene;
+    [SerializeField] List<int> popeScenes;
+
+    [SerializeField] AudioClip level1Theme;
+    [SerializeField] AudioClip level2Theme;
+    [SerializeField] AudioClip level3Theme;
+    [SerializeField] AudioClip menuTheme;
+    [SerializeField] AudioClip popeTheme;
+    AudioSource audioStereo;
 
     int duplicates = 0;
     bool destroyMyself = false;
@@ -62,12 +73,10 @@ public class Keeper : MonoBehaviour
         if (keeperInstance != null)
         {
             Destroy(gameObject);
-
         }
         else
         {
             keeperInstance = this;
-
         }
     }
 
@@ -99,6 +108,68 @@ public class Keeper : MonoBehaviour
             deathCount1 = 0;
             deathCount2 = 0;
             deathCount3 = 0;
+        }
+    }
+
+    public void MusicStereo()
+    {
+        audioStereo = transform.GetChild(0).transform.GetChild(0).GetComponent<AudioSource>();
+
+        if (currentScene == level1Scene && audioStereo.clip != level1Theme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = level1Theme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == level2Scene && audioStereo.clip != level2Theme)
+        {
+            audioStereo.clip = level2Theme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == level3Scene && audioStereo.clip != level3Theme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = level3Theme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == mainMenuScene && audioStereo.clip != menuTheme)
+        {
+            Debug.Log("uibrver");
+            audioStereo.Stop();
+            audioStereo.clip = menuTheme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == 1 && audioStereo.clip != popeTheme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = popeTheme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == 3 && audioStereo.clip != popeTheme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = popeTheme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == 5 && audioStereo.clip != popeTheme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = popeTheme;
+            audioStereo.Play();
+            return;
+        }
+        if (currentScene == 7 && audioStereo.clip != popeTheme)
+        {
+            audioStereo.Stop();
+            audioStereo.clip = popeTheme;
+            audioStereo.Play();
+            return;
         }
     }
 
@@ -284,7 +355,6 @@ public class Keeper : MonoBehaviour
 
     public void WipeLists(bool wipeAll) 
     {
-
         dialogueLine = 1;
 
         // If demonphase is true then wipe all lists from both the cultist and the demonobject
