@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8992373538555586658}
   m_Layer: 0
   m_Name: AttackCollider
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 1914502845004002757}
   m_Layer: 0
   m_Name: EnemyLegs
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 8082708912493279657}
   m_Layer: 0
   m_Name: EnemyLights
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 787354966682661739}
   m_Layer: 7
   m_Name: StunAnim
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -535,6 +535,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   detectionAndSightRange: 20
+  cultistChaseTime: 12
+  demonChaseTime: 21
   legAnimator: {fileID: 5446179151447891705}
   torsoAnimator: {fileID: 6803530668277947305}
   agent: {fileID: 8351160350196378964}
@@ -664,7 +666,7 @@ GameObject:
   - component: {fileID: 6803530668277947305}
   m_Layer: 7
   m_Name: EnemySprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

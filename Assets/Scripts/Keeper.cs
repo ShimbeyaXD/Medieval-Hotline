@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -44,6 +45,11 @@ public class Keeper : MonoBehaviour
 
     int duplicates = 0;
     bool destroyMyself = false;
+
+    int deathStage1 = 0;
+    int deathStage2 = 0;
+    int deathStage3 = 0;
+
 
     public List<GameObject> cultistList;
     public List<GameObject> demonList;
@@ -316,6 +322,7 @@ public class Keeper : MonoBehaviour
         Checkpoint = position;
     }
 
+
     public void RecieveDeath()
     {
         if (currentScene == level1Scene)
@@ -429,16 +436,60 @@ public class Keeper : MonoBehaviour
         }
     }
 
+    public void AddDeathCount() 
+    { 
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if(currentScene == SceneManager.GetSceneByName("Level1")) 
+        {
+            deathStage1++;
+        }
+        if (currentScene == SceneManager.GetSceneByName("Level2"))
+        {
+            deathStage2++;
+        }
+        if (currentScene == SceneManager.GetSceneByName("Level3"))
+        {
+            deathStage3++;
+        }
+    }
+    /*
+    public void ClearDeathCount() 
+    { 
+      deathStage1 = 0;
+      deathStage2 = 0;
+      deathStage3 = 0;
+    }
+
+    public int GetDeathStage1() { return deathStage1; }
+    public int GetDeathStage2() { return deathStage2; }
+    public int GetDeathStage3() {  return deathStage3; }
+    */
+
     [Header("Audio")]
+    private float sfxVolumeFactor;
+    [SerializeField] AudioVolumeManager sfxVolumeManager;
+ 
     public AudioFileData[] audioDataArrey;
+
 
     [System.Serializable]
     public class AudioFileData
     {
+        Keeper keeper;
+
+        [Range(0f, 1f)]
+        [SerializeField] float baseVolume;
+        
+      
+
         public string audioName;
         public AudioClip audioClip;
-        [Range(0f, 1f)]
         public float volume;
     }
+
+
+
+
 
 }

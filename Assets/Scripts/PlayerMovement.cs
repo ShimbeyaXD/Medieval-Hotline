@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
-        return;
+        
         if (once)
         {
             once = false;
@@ -106,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.velocity = Vector3.zero;
             newWeaponManager.SetDeadAnimator();
             FindObjectOfType<Extraction>().DeathScreen();
+            FindObjectOfType<Keeper>().AddDeathCount();
 
             /*
             if (GameObject.Find("HellModeManager") != null)

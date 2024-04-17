@@ -258,6 +258,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23591286}
   m_CullTransparentMesh: 1
+--- !u!1001 &42300596
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513121924461553182, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775596220116031331, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
+      propertyPath: m_Name
+      value: AudioHolder
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 25b2a5445fec1a44a810daa77c58e411, type: 3}
 --- !u!1001 &42822414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1736,7 +1793,31 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1354142666}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1354142666}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: LoadMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1216975828}
+        m_TargetAssemblyTypeName: Keeper, Assembly-CSharp
+        m_MethodName: ClearDeathCount
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2541,6 +2622,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1354142666}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1354142666}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -2657,6 +2750,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1216975828 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8859763932378006999, guid: c373af2a9840d984e90e67baf9b6db9e, type: 3}
+  m_PrefabInstance: {fileID: 1771215646}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f1dc3df9352ad40acd61cdf4110a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1245458529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1245458530}
+  - component: {fileID: 1245458531}
+  m_Layer: 0
+  m_Name: DeathCountManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1245458530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245458529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 86.41935, y: 138.59035, z: 0.49505067}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1245458531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245458529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f257d4b315279734f83948b693053779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTexts:
+  - {fileID: 1652526618}
+  - {fileID: 940713865}
+  - {fileID: 134570251}
+  keeper: {fileID: 1216975828}
 --- !u!1 &1251899999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3055,7 +3208,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play Again
+  m_text: 'Main Menu
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8db34c2397e22314e862d29aea96e78a, type: 2}
   m_sharedMaterial: {fileID: -2488748848270140992, guid: 8db34c2397e22314e862d29aea96e78a, type: 2}
@@ -4993,3 +5148,5 @@ SceneRoots:
   - {fileID: 1100457454}
   - {fileID: 1771215646}
   - {fileID: 1644727911}
+  - {fileID: 42300596}
+  - {fileID: 1245458530}

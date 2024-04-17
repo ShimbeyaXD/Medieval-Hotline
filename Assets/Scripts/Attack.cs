@@ -159,9 +159,13 @@ public class Attack : MonoBehaviour
                 {
                     yield break;
                 }
-                else if (collider.gameObject.CompareTag("Enemy"))
+                else if (collider.gameObject.CompareTag("Enemy") )
                 {
-                    collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
+                    if(collider.gameObject.GetComponent<EnemyYEs>()) 
+                    {
+                        collider.gameObject.GetComponent<EnemyYEs>().TakeDamage();
+                    }
+
                     yield return new WaitForEndOfFrame();
                 }
 
@@ -253,6 +257,7 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.name != "Enemy") { return; }
         if (collision.gameObject.tag == "Enemy") 
         { 
             collision.GetComponent<EnemyYEs>().Knockback(); 
