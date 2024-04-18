@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    [SerializeField] LayerMask detectionMask;
     [SerializeField] Transform target;
     [SerializeField] float detectionAndSightRange = 5f;
     [SerializeField] float cultistChaseTime = 12;
@@ -54,7 +55,7 @@ public class EnemyBehavior : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
@@ -103,9 +104,9 @@ public class EnemyBehavior : MonoBehaviour
     {
         Vector2 directionToTarget = (target.position - transform.position).normalized;
 
-        int layerMask = ~(1 << gameObject.layer);
+        // int layerMask = ~(1 << gameObject.layer);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, detectionAndSightRange, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, detectionAndSightRange, detectionMask);
 
         if (hit.collider != null)
         {

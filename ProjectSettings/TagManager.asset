@@ -38,8 +38,8 @@ TagManager:
   - Exit
   - Wall
   - EnemyArrow
-  - 
-  - 
+  - EnemyAttackBox
+  - NoInterfere
   - 
   - 
   - 

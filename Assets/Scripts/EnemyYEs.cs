@@ -198,7 +198,7 @@ public class EnemyYEs : MonoBehaviour
 
             DropWeapon();
 
-            FindObjectOfType<PowerManager>().AddHoliness(20f);
+            FindObjectOfType<PowerManager>().AddHoliness(25f);
 
             powerManager.KillCount = powerManager.KillCount + 1;
             Death();

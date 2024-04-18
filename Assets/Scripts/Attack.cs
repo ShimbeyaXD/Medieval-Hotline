@@ -80,7 +80,6 @@ public class Attack : MonoBehaviour
             {
                 EnableMelee();
                 PlayerIsAttacking = true;
-                //FindObjectOfType<SFXManager>().PlaySFX("slash");
                 newWeaponManager.SetAttackAnimator();
             }
             if (newWeaponManager.HasCrossbow) 

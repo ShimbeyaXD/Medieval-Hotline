@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     NewWeaponManager newWeaponManager;
     Keeper keeper;
 
+
     public bool IsWalking { get; private set; } = false;
     public bool IsOpeningAnim { get; private set; } = false;
 
@@ -38,7 +39,10 @@ public class PlayerMovement : MonoBehaviour
         originalSpeed = movementSpeed;
         newWeaponManager = FindObjectOfType<NewWeaponManager>();
 
+
         keeper = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>();
+
+
 
         if (!keeper.PlayOpeningAnimation)
         {
@@ -72,13 +76,13 @@ public class PlayerMovement : MonoBehaviour
         if (movementVector.magnitude <= Mathf.Epsilon && !IsOpeningAnim)
         {
             myAnimator.SetBool("isWalking", false);
-            //FindObjectOfType<SFXManager>().RunningSFX(false);
+
             IsWalking = false;
         }
         else
         {
             myAnimator.SetBool("isWalking", true);
-            //FindObjectOfType<SFXManager>().RunningSFX(true);
+
             IsWalking = true;
         }
 

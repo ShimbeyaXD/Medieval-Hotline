@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5735317641345986667}
   - component: {fileID: 8760418893553367637}
   - component: {fileID: 6427069420783426803}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3919311077346867782}
   - component: {fileID: 3177252059994631208}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light 2D 360
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.8584906, g: 0.3025005, b: 0.037795104, a: 1}
+  m_Color: {r: 0.8584906, g: 0.18039216, b: 0.043137256, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -253,8 +253,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d7c1c0e8d48f34ab4515e0da6a4242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 16640
   target: {fileID: 0}
   detectionAndSightRange: 50
+  cultistChaseTime: 12
+  demonChaseTime: 21
   legAnimator: {fileID: 3012693387672182182}
   torsoAnimator: {fileID: 6049514800949504783}
   agent: {fileID: 0}
@@ -477,7 +482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7123656068392424940}
   - component: {fileID: 4695715737182745222}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light 2D forward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +520,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.85882354, g: 0.3019608, b: 0.039215688, a: 1}
+  m_Color: {r: 0.85882354, g: 0.17733084, b: 0.03921569, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 0
   m_LightVolumeIntensityEnabled: 0
@@ -770,7 +775,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6919923046688177262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -64,6 +64,7 @@ public class Artifact : MonoBehaviour
             Debug.Log("FOund checkpoiunt");
             once = false;
             Checkpoint(other.gameObject);
+            other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 

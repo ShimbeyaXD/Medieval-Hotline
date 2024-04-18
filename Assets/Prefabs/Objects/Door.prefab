@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6366541783654168771}
   - component: {fileID: 9120427284535301364}
   - component: {fileID: 204675778762236528}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: DoorParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 1735453359219530930}
   - component: {fileID: 1255892025273416772}
   - component: {fileID: 3777208859625312544}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: DoorSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 100145140468330417}
   - component: {fileID: 2546234867403955353}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Door
   m_TagString: Door
   m_Icon: {fileID: 0}

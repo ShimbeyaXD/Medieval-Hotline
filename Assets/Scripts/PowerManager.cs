@@ -8,16 +8,19 @@ public class PowerManager : MonoBehaviour
     [SerializeField] Slider holyometer;
     [SerializeField] Animator animator;
     [SerializeField] TextMeshProUGUI killText;
+    [SerializeField] TextMeshProUGUI chargeText;
     [SerializeField] private float currentHolyness;
     [SerializeField] private float decreaseHolyness = 2.5f;
-    [SerializeField] GameObject glockImage;
+    [SerializeField] private Animator lShiftAnimator;
+
+    //[SerializeField] GameObject glockImage;
 
     GameObject player;
     NewWeaponManager weaponManager;
     PlayerMovement playerMovement;
     Attack playerAttack;
 
-    bool canRecieveGlock = false;
+    bool canDash = false;
 
     public int KillCount { get; set; }
 
@@ -34,8 +37,8 @@ public class PowerManager : MonoBehaviour
         currentHolyness = 0f;
         holyometer.value = currentHolyness;
         killText.gameObject.SetActive(false);
-        //glockImage.gameObject.SetActive(false);
-        StartCoroutine(HolynessFade());
+        StartCoroutine(HolynessDecrease());
+        chargeText.gameObject.SetActive(false);
    }
 
     IEnumerator LookForPlayer()
@@ -71,27 +74,29 @@ public class PowerManager : MonoBehaviour
         if (currentHolyness >= maxHolyness) 
         { 
             currentHolyness = maxHolyness; 
-            canRecieveGlock = true; 
-            glockImage.transform.GetChild(0).GetComponent<Animator>().SetBool("isActive", true);
-            holyometer.transform.parent.gameObject.SetActive(false);
-            glockImage.gameObject.SetActive(true);
-        }
+            canDash = true;
+            lShiftAnimator.SetBool("CanCharge", true);
+            chargeText.gameObject.SetActive(true);
 
+        }
+        /*
         if (currentHolyness < maxHolyness)
         {
             holyometer.transform.parent.gameObject.SetActive(true);
-            glockImage.gameObject.SetActive(false);
         }
+        */
 
-        if (Input.GetButtonDown("Fire3") && !playerAttack.PlayerIsAttacking && playerMovement.IsWalking && canRecieveGlock && !playerMovement.Dead) // Charge
+
+        if (Input.GetButtonDown("Fire3") && !playerAttack.PlayerIsAttacking && playerMovement.IsWalking && canDash && !playerMovement.Dead) // Charge
         {
             playerAttack.EnableCharge();
-            //RecieveGlock();
-            canRecieveGlock = false;
-            glockImage.transform.GetChild(0).GetComponent<Animator>().SetBool("isActive", false);
+            canDash = false;
             animator.SetTrigger("Add");
+            lShiftAnimator.SetBool("CanCharge", false);
+            chargeText.gameObject.SetActive(false);
             currentHolyness = 0;
             holyometer.value = currentHolyness;
+
         }
     }
 
@@ -110,12 +115,8 @@ public class PowerManager : MonoBehaviour
         }
     }
     
-    void RecieveGlock() // OBSELETE
-    {
-        weaponManager.Glock();
-    }
 
-    IEnumerator HolynessFade() 
+    IEnumerator HolynessDecrease() 
     {
         while (alive)
         {

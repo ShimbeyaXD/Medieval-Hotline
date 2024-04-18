@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour
     int d = 0;
 
     string line;
-   
+
     [SerializeField] bool isTalkingToPope = false;
 
     [SerializeField] Animator talkingAnimator;
@@ -42,14 +42,14 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    IEnumerator CallTypeLine() 
+    IEnumerator CallTypeLine()
     {
-        if (gameScene) 
+        if (gameScene)
         {
             StartCoroutine(TypeLine());
             yield return null;
         }
-      
+
         yield return new WaitForSeconds(1f);
         StartCoroutine(TypeLine());
 
@@ -58,16 +58,16 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if(dialog == null) { return; }
+        if (dialog == null) { return; }
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (textComponent.text == dialog.Lines[i]) 
-            { 
-              NextLine();
+            if (textComponent.text == dialog.Lines[i])
+            {
+                NextLine();
             }
-            else 
-            { 
+            else
+            {
                 StopAllCoroutines();
                 talkingAnimator.SetBool("isTalk", false);
                 textComponent.text = dialog.Lines[i];
@@ -77,33 +77,33 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    IEnumerator TypeLine() 
+    IEnumerator TypeLine()
     {
-        if (gameScene) 
+        if (gameScene)
         {
             talkingAnimator.SetBool("isTalk", false);
             talkingAnimator.SetBool("isTalkInGame", true);
         }
-        else 
+        else
         {
             talkingAnimator.SetBool("isTalk", true);
             talkingAnimator.SetBool("isTalkInGame", false);
         }
 
-        
-      foreach (char c in line) 
-      {
+
+        foreach (char c in line)
+        {
             textComponent.text += c;
             yield return new WaitForSecondsRealtime(textSpeed);
-      }
-       
+        }
+
         talkingAnimator.SetBool("isTalk", false);
         talkingAnimator.SetBool("isTalkInGame", false);
     }
 
     private void NextLine()
     {
-        if (!gameScene) 
+        if (!gameScene)
         {
             if (i < dialogs[d].Lines.Count - 1)
             {
@@ -121,7 +121,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if (gameScene) 
+        if (gameScene)
         {
             if (i < dialogs[d].Lines.Count - 1)
             {
@@ -131,16 +131,16 @@ public class DialogueManager : MonoBehaviour
                 StartCoroutine(TypeLine());
 
             }
-            else 
+            else
             {
                 StoppedDialogue();
             }
-                
+
         }
 
     }
 
-    private IEnumerator LoadNextScene() 
+    private IEnumerator LoadNextScene()
     {
         yield return new WaitForSeconds(1.2f);
         SceneManager.LoadScene(levelToLoad);
@@ -154,7 +154,7 @@ public class DialogueManager : MonoBehaviour
         //d = 1;
 
 
-        if (dialog.lastChatBeforeHell == true) 
+        if (dialog.lastChatBeforeHell == true)
         {
             AktivateHellMode();
         }
@@ -168,14 +168,15 @@ public class DialogueManager : MonoBehaviour
         hellModeManager.gameObject.SetActive(true);
     }
 
-    public bool GetIsTalkingToPope() 
+    public bool GetIsTalkingToPope()
     {
         return isTalkingToPope;
     }
 
     private void CheckpointDialogueUpdate() // Calls when player has touched the checkpoint
     {
-        if(gameScene) {
+        if (gameScene)
+        {
 
             d = GameObject.FindGameObjectWithTag("Keeper").GetComponent<Keeper>().dialogueLine;
         }
@@ -187,5 +188,6 @@ public class DialogueManager : MonoBehaviour
 
         dialog = dialogs[d];
     }
-
 }
+
+

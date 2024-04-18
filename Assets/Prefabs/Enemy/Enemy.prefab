@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4817061317448993980}
   - component: {fileID: 5802888100387185103}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Light 2D 360
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3932835758728987901}
   - component: {fileID: 4961834329583639485}
   - component: {fileID: 8992373538555586658}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackCollider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 7724101557578703498}
   - component: {fileID: 5446179151447891705}
   - component: {fileID: 1914502845004002757}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: EnemyLegs
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8082708912493279657}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: EnemyLights
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 762000985386988873}
   - component: {fileID: 638241825025965536}
   - component: {fileID: 787354966682661739}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: StunAnim
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -533,6 +533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d7c1c0e8d48f34ab4515e0da6a4242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 16640
   target: {fileID: 0}
   detectionAndSightRange: 20
   cultistChaseTime: 12
@@ -664,7 +667,7 @@ GameObject:
   - component: {fileID: 545075103557056437}
   - component: {fileID: 2352591468842271814}
   - component: {fileID: 6803530668277947305}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: EnemySprite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -769,7 +772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 980491277023025914}
   - component: {fileID: 6812390731616184993}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Light 2D forward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
